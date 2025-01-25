@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://di8fi8fyt7r2c"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aqaxg"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = 10.0
+rotation = 0.785398
+texture = SubResource("ViewportTexture_aqaxg")
+metadata/_edit_use_anchors_ = true
