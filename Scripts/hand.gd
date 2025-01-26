@@ -1,14 +1,7 @@
 extends Node2D
 
-@export var card_scenes: Array = [
-	{ "id": 1, "scene": "res://Scenes/cards/canon_card.tscn" },
-	{ "id": 2, "scene": "res://Scenes/cards/generator_card.tscn" }
-]
-
-@export var obj_scenes: Array = [
-	{ "id": 1, "scene": "res://Scenes/obj/single_gun_object.tscn"},
-	{ "id": 2, "scene": "res://Scenes/obj/generator_object.tscn"}
-]
+var card_scenes: Array = []
+var obj_scenes: Array = []
 
 var card_count: int = 0
 var max_card_count: int = 5
@@ -23,7 +16,13 @@ var zone_states: Dictionary = {}
 var spawned_objects: Dictionary = {}
 var card_positions: Dictionary = {}
 
-func _ready() -> void:
+func _ready():
+	load_json_data("res://Other/cards_data.json", card_scenes)
+	load_json_data("res://Other/obj_data.json", obj_scenes)
+
+	print(card_scenes)
+	print(obj_scenes)
+	
 	for zone_id in range(1, 61):
 		var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
 		var zone = get_node(zone_path)
@@ -32,8 +31,34 @@ func _ready() -> void:
 		zone.area_entered.connect(_on_zone_area_entered.bind(zone_id))
 		zone.area_exited.connect(_on_zone_area_exited.bind(zone_id))
 
+func load_json_data(file_path: String, target_array: Array):
+	var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
+	if file == null:
+		print("Не удалось открыть файл:", file_path)
+		return
+
+	var json_data = file.get_as_text()
+	file.close()
+
+	var json_parser = JSON.new()
+
+	var result = json_parser.parse(json_data)
+	if result != OK:
+		print("Ошибка парсинга JSON:", json_parser.error_string())
+		return
+
+	for item in json_parser.get_data():
+		target_array.append({
+			"id": item.get("id"),
+			"scene": item.get("path")
+		})
+
 func _on_add_card_pressed():
 	if card_count < max_card_count:
+		if card_scenes.size() == 0:
+			print("card_scenes array is empty.")
+			return
+		
 		var card_data = card_scenes[current_card_index]
 		var card = create_card(unique_card_id, card_data["id"], card_data["scene"])
 		unique_card_id += 1
