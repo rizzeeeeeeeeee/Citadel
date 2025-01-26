@@ -13,9 +13,7 @@ func _process(delta: float) -> void:
 		# Обработка всех пуль в группе "bullet"
 		var bullets = get_tree().get_nodes_in_group("bullet")
 		for bullet in bullets:
-			# Подключаем сигнал deal_damage, если он существует
-			if bullet.has_signal("deal_damage"):
-				bullet.deal_damage.connect(damage)
+			bullet.deal_damage.connect(damage)
 
 func damage(victim: Node2D):
 	if victim == self:

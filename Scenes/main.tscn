@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=8 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
 [ext_resource type="Texture2D" uid="uid://ddtmrel6l3wnw" path="res://Scenes/field.png" id="2_4j8yo"]
 [ext_resource type="Shape2D" uid="uid://cfsibrdw2leda" path="res://Other/Spawnzone_shape/spawnzone.tres" id="3_el2f1"]
 [ext_resource type="PackedScene" uid="uid://bqvrv8o4gqh5g" path="res://Scenes/enemies/base_enemy.tscn" id="5_use53"]
+[ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_253w4"]
 
@@ -40,10 +41,46 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "DELETE"
 
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 143.0
+offset_top = -241.0
+offset_right = 215.0
+offset_bottom = 127.0
+grow_vertical = 2
+size_flags_horizontal = 0
+max_value = 10.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ProgressBar"]
+texture_filter = 1
+position = Vector2(36.375, 186)
+scale = Vector2(6.61667, 5.54286)
+texture = ExtResource("6_mmadu")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Bars/energy_back.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7362a2fbe8c6ad5d7ab35dfe2681ef22"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Hand" parent="." instance=ExtResource("1_8gmms")]
-position = Vector2(0, 232)
+position = Vector2(0, 299)
 
 [node name="TestFeld" type="Sprite2D" parent="."]
 z_index = -10

@@ -16,13 +16,14 @@ var zone_states: Dictionary = {}
 var spawned_objects: Dictionary = {}
 var card_positions: Dictionary = {}
 
+signal card_dropped(value: float)
+
+@onready var energy_bar = $"../CanvasLayer/ProgressBar"
+
 func _ready():
 	load_json_data("res://Other/cards_data.json", card_scenes)
 	load_json_data("res://Other/obj_data.json", obj_scenes)
 
-	print(card_scenes)
-	print(obj_scenes)
-	
 	for zone_id in range(1, 61):
 		var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
 		var zone = get_node(zone_path)
@@ -50,7 +51,8 @@ func load_json_data(file_path: String, target_array: Array):
 	for item in json_parser.get_data():
 		target_array.append({
 			"id": item.get("id"),
-			"scene": item.get("path")
+			"scene": item.get("path"),
+			"value": item.get("value") # добавляем стоимость карты
 		})
 
 func _on_add_card_pressed():
@@ -60,7 +62,7 @@ func _on_add_card_pressed():
 			return
 		
 		var card_data = card_scenes[current_card_index]
-		var card = create_card(unique_card_id, card_data["id"], card_data["scene"])
+		var card = create_card(unique_card_id, card_data["id"], card_data["scene"], card_data["value"]) # передаем стоимость карты
 		unique_card_id += 1
 		cards.append(card)
 		add_child(card)
@@ -68,21 +70,13 @@ func _on_add_card_pressed():
 		current_card_index = (current_card_index + 1) % card_scenes.size()
 		adjust_cards_positions()
 
-func _on_delete_card_pressed():
-	if card_count > 0:
-		card_count -= 1
-		var card = cards.pop_back()
-		card.queue_free()
-		adjust_cards_positions()
-		update_saved_positions()
-
-func create_card(unique_id: int, card_id: int, scene_path: String) -> Node2D:
+func create_card(unique_id: int, card_id: int, scene_path: String, card_value: int) -> Node2D:
 	var card_scene = load(scene_path)
 	if not card_scene:
 		return null
 	
 	var card = card_scene.instantiate()
-	card.set_meta("card_data", { "id": card_id, "type": scene_path })
+	card.set_meta("card_data", { "id": card_id, "type": scene_path, "value": card_value })
 	card.set_meta("unique_id", unique_id)
 	card.card_drag_started.connect(_on_card_drag_started.bind(unique_id))
 	card.card_drag_ended.connect(_on_card_drag_ended.bind(unique_id))
@@ -135,19 +129,27 @@ func _on_card_drag_ended(unique_id: int) -> void:
 		var zone_id = active_zones[0]
 		if spawned_objects[zone_id] == null:  
 			var card_data = card_to_drag.get_meta("card_data")
-			var obj_scene = get_object_scene_by_id(card_data["id"])
-			if obj_scene:
-				var obj = obj_scene.instantiate()
-				var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
-				var zone_node = get_node(zone_path)
-				var spawn_marker = zone_node.get_node("spawn_marker")
-				zone_node.add_child(obj)
-				obj.position = spawn_marker.position
-				card_to_drag.queue_free()  
-				card_count -= 1
-				cards.erase(card_to_drag)
-				update_saved_positions()
-				spawned_objects[zone_id] = obj
+			var card_value = card_data["value"] # получаем стоимость карты
+			var current_energy = energy_bar.value # получаем текущую энергию
+
+			if current_energy >= card_value: # проверка, хватает ли энергии
+				var obj_scene = get_object_scene_by_id(card_data["id"])
+				if obj_scene:
+					var obj = obj_scene.instantiate()
+					var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
+					var zone_node = get_node(zone_path)
+					var spawn_marker = zone_node.get_node("spawn_marker")
+					zone_node.add_child(obj)
+					obj.position = spawn_marker.position
+					card_to_drag.queue_free()  
+					card_count -= 1
+					cards.erase(card_to_drag)
+					update_saved_positions()
+					spawned_objects[zone_id] = obj
+					print(card_value)
+					card_dropped.emit(card_value)
+			else:
+				print("Недостаточно энергии для спавна карты!")
 		else:
 			print("В зоне %d уже находится объект, спавн невозможен." % zone_id)
 
