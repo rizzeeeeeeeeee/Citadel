@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=7 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
-[ext_resource type="Texture2D" uid="uid://bhjuangan4k1j" path="res://Textures/test_feld.png" id="2_dk0yk"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
+[ext_resource type="Texture2D" uid="uid://ddtmrel6l3wnw" path="res://Scenes/field.png" id="2_4j8yo"]
 [ext_resource type="Shape2D" uid="uid://cfsibrdw2leda" path="res://Other/Spawnzone_shape/spawnzone.tres" id="3_el2f1"]
+[ext_resource type="PackedScene" uid="uid://bqvrv8o4gqh5g" path="res://Scenes/enemies/base_enemy.tscn" id="5_use53"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_253w4"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_rmctx")
+spawnpoints = [NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")]
+base_enemy = ExtResource("5_use53")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -38,15 +43,34 @@ text = "DELETE"
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Hand" parent="." instance=ExtResource("1_8gmms")]
-position = Vector2(0, 236)
+position = Vector2(0, 232)
 
 [node name="TestFeld" type="Sprite2D" parent="."]
 z_index = -10
-position = Vector2(-0.999985, -60)
-scale = Vector2(0.771186, 0.771186)
-texture = ExtResource("2_dk0yk")
+texture_filter = 1
+position = Vector2(-1.49996, -59.5)
+scale = Vector2(1.52656, 1.51823)
+texture = ExtResource("2_4j8yo")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/field.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "e4861f2808c3d442bf119d258dc4f1b5"
 
 [node name="SpawnZones" type="Node2D" parent="TestFeld"]
+position = Vector2(0.327516, -0.329323)
+scale = Vector2(0.505178, 0.507951)
 
 [node name="Zone1" type="Area2D" parent="TestFeld/SpawnZones"]
 position = Vector2(-573.143, -321.583)
@@ -80,9 +104,9 @@ position = Vector2(-2.59341, 1.2967)
 [node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone2"]
 visible = false
 self_modulate = Color(1, 1, 1, 0.376471)
-offset_left = -66.0
+offset_left = -67.0
 offset_top = -62.0
-offset_right = 61.0
+offset_right = 60.0
 offset_bottom = 65.0
 texture = SubResource("CanvasTexture_253w4")
 
@@ -101,8 +125,9 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.376471)
 offset_left = -66.0
 offset_top = -62.0
-offset_right = 61.0
-offset_bottom = 65.0
+offset_right = 62.0
+offset_bottom = 66.0
+scale = Vector2(1, 0.993546)
 texture = SubResource("CanvasTexture_253w4")
 
 [node name="Zone4" type="Area2D" parent="TestFeld/SpawnZones"]
@@ -184,7 +209,7 @@ texture = SubResource("CanvasTexture_253w4")
 [node name="Zone8" type="Area2D" parent="TestFeld/SpawnZones"]
 position = Vector2(321.583, -321.583)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone8"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone8" groups=["spawn_zones"]]
 position = Vector2(-2.59339, 1.29672)
 shape = ExtResource("3_el2f1")
 
@@ -237,6 +262,989 @@ offset_top = -62.0
 offset_right = 61.0
 offset_bottom = 65.0
 texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone11" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-573.143, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone11"]
+position = Vector2(-2.59344, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone11"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone11"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone12" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-444.769, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone12"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone12"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone12"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone13" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-317.693, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone13"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone13"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone13"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone14" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-189.319, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone14"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone14"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone14"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone15" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-62.242, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone15"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone15"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone15"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone16" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(66.1317, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone16"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone16"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone16"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone17" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(193.209, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone17"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone17"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone17"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone18" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(321.583, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone18"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone18"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone18"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone19" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(448.66, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone19"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone19"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone19"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone20" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(577.033, -193.209)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone20"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone20"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone20"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone21" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-573.143, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone21"]
+position = Vector2(-2.59344, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone21"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone21"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone22" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-444.769, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone22"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone22"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone22"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone23" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-317.693, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone23"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone23"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone23"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone24" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-189.319, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone24"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone24"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone24"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone25" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-62.242, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone25"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone25"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone25"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone26" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(66.1317, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone26"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone26"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone26"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone27" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(193.209, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone27"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone27"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone27"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone28" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(321.583, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone28"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone28"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone28"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone29" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(448.66, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone29"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone29"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone29"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone30" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(577.033, -64.8352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone30"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone30"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone30"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone31" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-574.44, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone31"]
+position = Vector2(-2.59344, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone31"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone31"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone32" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-446.066, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone32"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone32"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone32"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone33" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-318.99, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone33"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone33"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone33"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone34" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-190.616, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone34"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone34"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone34"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone35" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-63.5385, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone35"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone35"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone35"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone36" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(64.8352, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone36"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone36"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone36"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone37" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(191.912, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone37"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone37"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone37"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone38" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(320.286, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone38"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone38"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone38"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone39" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(447.363, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone39"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone39"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone39"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone40" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(575.736, 62.2418)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone40"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone40"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone40"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone41" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-574.44, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone41"]
+position = Vector2(-2.59344, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone41"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone41"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone42" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-446.066, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone42"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone42"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone42"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone43" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-318.99, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone43"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone43"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone43"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone44" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-190.616, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone44"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone44"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone44"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone45" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-63.5387, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone45"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone45"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone45"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone46" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(64.835, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone46"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone46"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone46"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone47" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(191.912, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone47"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone47"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone47"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone48" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(320.286, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone48"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone48"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone48"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone49" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(447.363, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone49"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone49"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone49"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone50" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(575.736, 190.616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone50"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone50"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone50"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone51" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-574.44, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone51"]
+position = Vector2(-2.59344, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone51"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone51"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone52" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-446.066, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone52"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone52"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone52"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone53" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-318.99, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone53"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone53"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone53"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone54" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-190.616, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone54"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone54"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone54"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone55" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(-63.5387, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone55"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone55"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone55"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone56" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(64.835, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone56"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone56"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone56"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone57" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(191.912, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone57"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone57"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone57"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone58" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(320.286, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone58"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone58"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone58"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone59" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(447.363, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone59"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone59"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone59"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="Zone60" type="Area2D" parent="TestFeld/SpawnZones"]
+position = Vector2(575.736, 318.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFeld/SpawnZones/Zone60"]
+position = Vector2(-2.59339, 1.29672)
+shape = ExtResource("3_el2f1")
+
+[node name="spawn_marker" type="Marker2D" parent="TestFeld/SpawnZones/Zone60"]
+position = Vector2(-2.59341, 1.2967)
+
+[node name="TextureRect" type="TextureRect" parent="TestFeld/SpawnZones/Zone60"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.376471)
+offset_left = -66.0
+offset_top = -62.0
+offset_right = 61.0
+offset_bottom = 65.0
+texture = SubResource("CanvasTexture_253w4")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+position = Vector2(-24, -395)
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-445, -22)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-347, -22)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-248, -22)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-149, -22)
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-51, -22)
+
+[node name="Spawn6" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(48, -22)
+
+[node name="Spawn7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(146, -22)
+
+[node name="Spawn8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(245, -22)
+
+[node name="Spawn9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(343, -22)
+
+[node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(442, -22)
 
 [connection signal="pressed" from="CanvasLayer/Add_card" to="Hand" method="_on_add_card_pressed"]
 [connection signal="pressed" from="CanvasLayer/Delete_card" to="Hand" method="_on_delete_card_pressed"]

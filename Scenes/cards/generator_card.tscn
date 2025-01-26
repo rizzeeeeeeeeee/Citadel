@@ -1,19 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbdv8cp4ed1u8"]
+[gd_scene load_steps=4 format=3 uid="uid://4kg8t83p5ce8"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_l75a1"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_8lqjg"]
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_11rhe"]
+[ext_resource type="Texture2D" uid="uid://d2bii0byiy2jx" path="res://Scenes/cards/generator.png" id="2_jbfix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
 size = Vector2(63, 100)
 
 [node name="card" type="Node2D"]
-script = ExtResource("1_l75a1")
+script = ExtResource("1_11rhe")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 offset_right = 100.0
 offset_bottom = 143.0
-texture = SubResource("CanvasTexture_8lqjg")
+texture = ExtResource("2_jbfix")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Cards/generator.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "65143006153b0ddce6c02a35320ff00c"
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]
 

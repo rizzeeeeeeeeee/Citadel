@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://b522q601qry3i"]
+
+[ext_resource type="Script" path="res://Scripts/objects/single_gun.gd" id="1_0b0c6"]
+[ext_resource type="Texture2D" uid="uid://q4jk3mccggc" path="res://Scenes/obj/single_gun.png" id="1_air1s"]
+[ext_resource type="PackedScene" uid="uid://cuyt5m344pmc3" path="res://Scenes/projct/bullet.tscn" id="2_e0uiu"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0b0c6")
+bullet_scene = ExtResource("2_e0uiu")
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(4.74, 4.74)
+texture = ExtResource("1_air1s")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/single_gun.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "dca2212910fe8d46140d9dc1029065b5"
+
+[node name="Muzzle" type="Marker2D" parent="TextureRect"]
+position = Vector2(0, -79.023)
+scale = Vector2(0.287356, 0.287356)
+
+[node name="RayCast2D" type="RayCast2D" parent="TextureRect"]
+target_position = Vector2(0, -125.527)
+collision_mask = 2

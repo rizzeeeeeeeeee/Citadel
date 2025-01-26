@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://e3rdv08lafpa"
+path="res://.godot/imported/single_gun.aseprite-619f1e0525e09a7b980e209acf3d9acc.res"
+
+[deps]
+
+source_file="res://Textures/Obj/single_gun.aseprite"
+dest_files=["res://.godot/imported/single_gun.aseprite-619f1e0525e09a7b980e209acf3d9acc.res"]
+
+[params]
+

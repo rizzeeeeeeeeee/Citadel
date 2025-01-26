@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ci4t52piyshek"
+path="res://.godot/imported/field.aseprite-7e0204d2bfb8729a4ede0fc59e148939.res"
+
+[deps]
+
+source_file="res://Textures/field.aseprite"
+dest_files=["res://.godot/imported/field.aseprite-7e0204d2bfb8729a4ede0fc59e148939.res"]
+
+[params]
+

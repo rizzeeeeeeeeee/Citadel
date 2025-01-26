@@ -1,21 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://xhx7hm1jxvow"]
+[gd_scene load_steps=4 format=3 uid="uid://bxmi2jljk4igg"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_maldu"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_peyet"]
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_5hk3k"]
+[ext_resource type="Texture2D" uid="uid://c4ac7luntoyh3" path="res://Scenes/cards/single_gun.png" id="2_hq700"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xe1r"]
 size = Vector2(68, 101)
 
 [node name="card" type="Node2D"]
-script = ExtResource("1_maldu")
+script = ExtResource("1_5hk3k")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 offset_right = 100.0
 offset_bottom = 143.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("ViewportTexture_peyet")
+texture = ExtResource("2_hq700")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Cards/single_gun.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "1ba86b371350393c3a299cd7a8e17b68"
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]
 

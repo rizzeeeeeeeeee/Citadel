@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c8pv4yg4tttat"
+path="res://.godot/imported/bullet_projectile.aseprite-e26e479a1a7daa305fd893c9b81f9807.res"
+
+[deps]
+
+source_file="res://Textures/bullet_projectile.aseprite"
+dest_files=["res://.godot/imported/bullet_projectile.aseprite-e26e479a1a7daa305fd893c9b81f9807.res"]
+
+[params]
+

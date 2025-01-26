@@ -1,13 +1,13 @@
 extends Node2D
 
 @export var card_scenes: Array = [
-	{ "id": 1, "scene": "res://Scenes/normal_card.tscn" },
-	{ "id": 2, "scene": "res://Scenes/rare_card.tscn" }
+	{ "id": 1, "scene": "res://Scenes/cards/canon_card.tscn" },
+	{ "id": 2, "scene": "res://Scenes/cards/generator_card.tscn" }
 ]
 
 @export var obj_scenes: Array = [
-	{ "id": 1, "scene": "res://Scenes/normal_object.tscn"},
-	{ "id": 2, "scene": "res://Scenes/rare_object.tscn"}
+	{ "id": 1, "scene": "res://Scenes/obj/single_gun_object.tscn"},
+	{ "id": 2, "scene": "res://Scenes/obj/generator_object.tscn"}
 ]
 
 var card_count: int = 0
@@ -15,15 +15,16 @@ var max_card_count: int = 5
 var card_spacing: float = 5.0
 var cards: Array = []
 var saved_positions: Array = []
+var active_zones: Array = []
 var dragging_card_unique_id: int = -1
 var current_card_index: int = 0
 var unique_card_id: int = 1
-
 var zone_states: Dictionary = {}
 var spawned_objects: Dictionary = {}
+var card_positions: Dictionary = {}
 
 func _ready() -> void:
-	for zone_id in range(1, 11):
+	for zone_id in range(1, 61):
 		var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
 		var zone = get_node(zone_path)
 		zone_states[zone_id] = false
@@ -77,6 +78,11 @@ func adjust_cards_positions(exclude_id: int = -1):
 		card.position = Vector2(offset + position_index * (card_width + card_spacing), 0)
 		position_index += 1
 
+func update_saved_positions():
+	card_positions.clear()
+	for card in cards:
+		card_positions[card.get_meta("unique_id")] = card.position
+
 func _on_card_drag_started(unique_id: int):
 	dragging_card_unique_id = unique_id
 	update_saved_positions()
@@ -97,33 +103,35 @@ func _on_card_drag_ended(unique_id: int) -> void:
 	var card_to_drag = get_card_by_unique_id(unique_id)
 	if card_to_drag:
 		card_to_drag.scale = Vector2(1, 1)
-		var card_size = card_to_drag.get_child(0).get_rect().size
-		card_to_drag.position = card_to_drag.position + card_size / 2 - card_size / 2
+		if card_positions.has(unique_id):
+			card_to_drag.position = card_positions[unique_id]
 
-	for zone_id in zone_states.keys():
-		if zone_states[zone_id]:
-			if spawned_objects[zone_id] == null:
-				var card_data = card_to_drag.get_meta("card_data")
-				var obj_scene = get_object_scene_by_id(card_data["id"])
-				if obj_scene:
-					var obj = obj_scene.instantiate()
-					var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
-					var zone_node = get_node(zone_path)
-					var spawn_marker = zone_node.get_node("spawn_marker")
-					zone_node.add_child(obj)
-					obj.position = spawn_marker.position
-					card_to_drag.queue_free()
-					card_count -= 1
-					cards.erase(card_to_drag)
-					update_saved_positions()
-					spawned_objects[zone_id] = obj
-			else:
-				return
+	if active_zones.size() == 1:
+		var zone_id = active_zones[0]
+		if spawned_objects[zone_id] == null:  
+			var card_data = card_to_drag.get_meta("card_data")
+			var obj_scene = get_object_scene_by_id(card_data["id"])
+			if obj_scene:
+				var obj = obj_scene.instantiate()
+				var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
+				var zone_node = get_node(zone_path)
+				var spawn_marker = zone_node.get_node("spawn_marker")
+				zone_node.add_child(obj)
+				obj.position = spawn_marker.position
+				card_to_drag.queue_free()  
+				card_count -= 1
+				cards.erase(card_to_drag)
+				update_saved_positions()
+				spawned_objects[zone_id] = obj
+		else:
+			print("В зоне %d уже находится объект, спавн невозможен." % zone_id)
 
-	for i in range(card_count):
-		if i < saved_positions.size():
-			cards[i].position = saved_positions[i]
-		dragging_card_unique_id = -1
+	for card in cards:
+		var card_id = card.get_meta("unique_id")
+		if card_positions.has(card_id):
+			card.position = card_positions[card_id]
+	
+	dragging_card_unique_id = -1
 
 func get_card_by_unique_id(unique_id: int) -> Node2D:
 	for card in cards:
@@ -137,17 +145,29 @@ func get_object_scene_by_id(card_id: int) -> PackedScene:
 			return load(obj_data["scene"])
 	return null
 
-func update_saved_positions():
-	saved_positions.clear()
-	for card in cards:
-		saved_positions.append(card.position)
-
 func _on_zone_area_entered(area: Area2D, zone_id: int) -> void:
-	zone_states[zone_id] = true
-	var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % zone_id)
-	texture_rect.visible = true
+	if not active_zones.has(zone_id):
+		active_zones.append(zone_id)
+
+	if active_zones.size() == 1:
+		for other_zone_id in active_zones:
+			var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % other_zone_id)
+			texture_rect.visible = other_zone_id == zone_id
+	else:
+		_hide_all_zones()
 
 func _on_zone_area_exited(area: Area2D, zone_id: int) -> void:
-	zone_states[zone_id] = false
-	var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % zone_id)
-	texture_rect.visible = false
+	if active_zones.has(zone_id):
+		active_zones.erase(zone_id)
+
+	if active_zones.size() == 1:
+		var remaining_zone_id = active_zones[0]
+		var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % remaining_zone_id)
+		texture_rect.visible = true
+	elif active_zones.size() == 0:
+		_hide_all_zones()
+
+func _hide_all_zones() -> void:
+	for other_zone_id in zone_states.keys():
+		var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % other_zone_id)
+		texture_rect.visible = false

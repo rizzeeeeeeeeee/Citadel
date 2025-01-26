@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bfnbtgq1wsi7d"
+path="res://.godot/imported/generator.aseprite-39ca770612f28c74e588b05a18b7204c.res"
+
+[deps]
+
+source_file="res://Textures/Cards/generator.aseprite"
+dest_files=["res://.godot/imported/generator.aseprite-39ca770612f28c74e588b05a18b7204c.res"]
+
+[params]
+
