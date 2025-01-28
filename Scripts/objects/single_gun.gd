@@ -37,3 +37,7 @@ func _shoot() -> void:
 	if bullet and muzzle:
 		bullet.position = muzzle.position
 		get_parent().add_child(bullet)
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		self.queue_free()

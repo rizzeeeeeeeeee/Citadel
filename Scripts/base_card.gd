@@ -41,11 +41,3 @@ func _input(event: InputEvent) -> void:
 			dragging = false
 			position = original_position
 			emit_signal("card_drag_ended")
-
-func change_visibilty():
-	if !dragging:
-		$TextureRect.visible = true
-		$TextureRect2.visible = false
-	else:
-		$TextureRect.visible = false
-		$TextureRect2.visible = true

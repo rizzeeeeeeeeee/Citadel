@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var speed: float = 30.0 
-@export var hp: float = 125.0
+@export var hp: float = 999.0
 
 func _process(delta: float) -> void:
 	if hp <= 0:
@@ -17,4 +17,4 @@ func _process(delta: float) -> void:
 
 func damage(victim: Node2D):
 	if victim == self:
-		hp -= 125
+		hp -= 10

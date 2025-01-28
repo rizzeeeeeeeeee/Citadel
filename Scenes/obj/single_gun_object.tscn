@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b522q601qry3i"]
+[gd_scene load_steps=5 format=3 uid="uid://b522q601qry3i"]
 
 [ext_resource type="Script" path="res://Scripts/objects/single_gun.gd" id="1_0b0c6"]
 [ext_resource type="Texture2D" uid="uid://q4jk3mccggc" path="res://Scenes/obj/single_gun.png" id="1_air1s"]
 [ext_resource type="PackedScene" uid="uid://cuyt5m344pmc3" path="res://Scenes/projct/bullet.tscn" id="2_e0uiu"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
+size = Vector2(86, 107)
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
 script = ExtResource("1_0b0c6")
 bullet_scene = ExtResource("2_e0uiu")
 
@@ -37,3 +40,13 @@ scale = Vector2(0.287356, 0.287356)
 [node name="RayCast2D" type="RayCast2D" parent="TextureRect"]
 target_position = Vector2(0, -125.527)
 collision_mask = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["objects"]]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_umrt8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

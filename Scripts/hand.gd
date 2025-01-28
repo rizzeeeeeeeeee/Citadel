@@ -52,7 +52,7 @@ func load_json_data(file_path: String, target_array: Array):
 		target_array.append({
 			"id": item.get("id"),
 			"scene": item.get("path"),
-			"value": item.get("value") # добавляем стоимость карты
+			"value": item.get("value") 
 		})
 
 func _on_add_card_pressed():
@@ -62,13 +62,21 @@ func _on_add_card_pressed():
 			return
 		
 		var card_data = card_scenes[current_card_index]
-		var card = create_card(unique_card_id, card_data["id"], card_data["scene"], card_data["value"]) # передаем стоимость карты
+		var card = create_card(unique_card_id, card_data["id"], card_data["scene"], card_data["value"])
 		unique_card_id += 1
 		cards.append(card)
 		add_child(card)
 		card_count += 1
 		current_card_index = (current_card_index + 1) % card_scenes.size()
 		adjust_cards_positions()
+
+func _on_delete_card_pressed():
+	if card_count > 0:
+		card_count -= 1
+		var card = cards.pop_back()
+		card.queue_free()
+		adjust_cards_positions()
+		update_saved_positions()
 
 func create_card(unique_id: int, card_id: int, scene_path: String, card_value: int) -> Node2D:
 	var card_scene = load(scene_path)
@@ -129,10 +137,10 @@ func _on_card_drag_ended(unique_id: int) -> void:
 		var zone_id = active_zones[0]
 		if spawned_objects[zone_id] == null:  
 			var card_data = card_to_drag.get_meta("card_data")
-			var card_value = card_data["value"] # получаем стоимость карты
-			var current_energy = energy_bar.value # получаем текущую энергию
+			var card_value = card_data["value"] 
+			var current_energy = energy_bar.value #
 
-			if current_energy >= card_value: # проверка, хватает ли энергии
+			if current_energy >= card_value:
 				var obj_scene = get_object_scene_by_id(card_data["id"])
 				if obj_scene:
 					var obj = obj_scene.instantiate()
