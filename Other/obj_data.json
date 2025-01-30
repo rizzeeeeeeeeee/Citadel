@@ -8,5 +8,10 @@
 		"name": "generator",
 		"id": 2,
 		"path":  "res://Scenes/obj/generator_object.tscn"
+	},
+	{
+		"name": "gatling_gun",
+		"id": 3,
+		"path":  "res://Scenes/obj/gatling_gun_object.tscn"
 	}
 ]

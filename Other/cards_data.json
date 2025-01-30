@@ -10,5 +10,17 @@
 		"id": 2,
 		"path":  "res://Scenes/cards/generator_card.tscn",
 		"value": 5
+	},
+	{
+		"name": "gatling_gun",
+		"id": 3,
+		"path":  "res://Scenes/cards/gatling_gun_card.tscn",
+		"value": 6
+	},
+	{
+		"name": "grenade",
+		"id": 4,
+		"path":  "res://Scenes/cards/grenade_card.tscn",
+		"value": 2
 	}
 ]

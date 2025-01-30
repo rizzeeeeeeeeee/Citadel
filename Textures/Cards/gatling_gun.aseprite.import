@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://70xk7xty1vmx"
+path="res://.godot/imported/gatling_gun.aseprite-6f82d02d2f1c5d6b0187a3c40ed16c81.res"
+
+[deps]
+
+source_file="res://Textures/Cards/gatling_gun.aseprite"
+dest_files=["res://.godot/imported/gatling_gun.aseprite-6f82d02d2f1c5d6b0187a3c40ed16c81.res"]
+
+[params]
+

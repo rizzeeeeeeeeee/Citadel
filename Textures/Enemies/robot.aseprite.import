@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://6atxffqhw172"
+path="res://.godot/imported/robot.aseprite-282d127cf44b2edf4d2a453bc0b7ca07.res"
+
+[deps]
+
+source_file="res://Textures/Enemies/robot.aseprite"
+dest_files=["res://.godot/imported/robot.aseprite-282d127cf44b2edf4d2a453bc0b7ca07.res"]
+
+[params]
+

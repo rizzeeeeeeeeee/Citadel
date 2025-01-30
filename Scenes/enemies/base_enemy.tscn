@@ -1,8 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqvrv8o4gqh5g"]
+[gd_scene load_steps=7 format=3 uid="uid://bqvrv8o4gqh5g"]
 
 [ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_g3myx"]
+[ext_resource type="Texture2D" uid="uid://2prnd3b7fgju" path="res://Scenes/enemies/robot.png" id="2_miaol"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_ye6ka"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_shlhs"]
+atlas = ExtResource("2_miaol")
+region = Rect2(40, 0, 40, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyvlj"]
+atlas = ExtResource("2_miaol")
+region = Rect2(0, 0, 40, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5s08g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shlhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyvlj")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyvlj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
 size = Vector2(1.00631, 1.00126)
@@ -16,10 +45,25 @@ position = Vector2(1.90735e-06, 1.90735e-06)
 collision_layer = 6
 collision_mask = 6
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
 position = Vector2(25, 25)
-scale = Vector2(49.5, 49.5)
-texture = SubResource("CanvasTexture_ye6ka")
+scale = Vector2(2.3175, 2.3175)
+sprite_frames = SubResource("SpriteFrames_5s08g")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/robot.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "d6ff966f012f444622f8d109c5c388f1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(25.0938, 25.2188)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://8ig1rooltk32"
+path="res://.godot/imported/gatling.aseprite-4713bb5e3ba213dc5e6151913f6fd681.res"
+
+[deps]
+
+source_file="res://Textures/Obj/gatling.aseprite"
+dest_files=["res://.godot/imported/gatling.aseprite-4713bb5e3ba213dc5e6151913f6fd681.res"]
+
+[params]
+

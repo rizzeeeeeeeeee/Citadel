@@ -1,8 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://b522q601qry3i"]
+[gd_scene load_steps=9 format=3 uid="uid://b522q601qry3i"]
 
 [ext_resource type="Script" path="res://Scripts/objects/single_gun.gd" id="1_0b0c6"]
 [ext_resource type="Texture2D" uid="uid://q4jk3mccggc" path="res://Scenes/obj/single_gun.png" id="1_air1s"]
 [ext_resource type="PackedScene" uid="uid://cuyt5m344pmc3" path="res://Scenes/projct/bullet.tscn" id="2_e0uiu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lf4k"]
+atlas = ExtResource("1_air1s")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebaii"]
+atlas = ExtResource("1_air1s")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cega5"]
+atlas = ExtResource("1_air1s")
+region = Rect2(0, 30, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hogr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lf4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebaii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cega5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lf4k")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
 size = Vector2(86, 107)
@@ -11,27 +43,28 @@ size = Vector2(86, 107)
 script = ExtResource("1_0b0c6")
 bullet_scene = ExtResource("2_e0uiu")
 
-[node name="TextureRect" type="Sprite2D" parent="."]
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1.19209e-07, -1.19209e-07)
 scale = Vector2(4.74, 4.74)
-texture = ExtResource("1_air1s")
+sprite_frames = SubResource("SpriteFrames_6hogr")
+animation = &"shoot"
+frame = 3
+frame_progress = 1.0
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
 metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
 "layers": [],
 "o_ex_p": "",
 "o_folder": "",
 "o_name": "",
 "only_visible": false,
-"player": "",
+"should_round_fps": true,
 "slice": "",
 "source": "res://Textures/Obj/single_gun.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "dca2212910fe8d46140d9dc1029065b5"
+metadata/_aseprite_wizard_source_file_hash_ = "6b7ddd6bdb50d43ffee9374f0b15b77c"
 
 [node name="Muzzle" type="Marker2D" parent="TextureRect"]
 position = Vector2(0, -79.023)
