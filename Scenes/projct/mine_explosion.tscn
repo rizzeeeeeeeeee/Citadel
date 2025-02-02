@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://brf1jj13o0c37"]
+
+[ext_resource type="Script" path="res://Scripts/proj/grenade_explosion.gd" id="1_spdix"]
+[ext_resource type="Texture2D" uid="uid://dkwwh0j6i6ul5" path="res://Scenes/projct/mine_explosion.png" id="2_s7njn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyb4b"]
+atlas = ExtResource("2_s7njn")
+region = Rect2(0, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb6dt"]
+atlas = ExtResource("2_s7njn")
+region = Rect2(44, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ncut"]
+atlas = ExtResource("2_s7njn")
+region = Rect2(88, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upsg1"]
+atlas = ExtResource("2_s7njn")
+region = Rect2(0, 44, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk7xt"]
+atlas = ExtResource("2_s7njn")
+region = Rect2(44, 44, 44, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_csov4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyb4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb6dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ncut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upsg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk7xt")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["expl"]]
+script = ExtResource("1_spdix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3.84407, 3.84407)
+sprite_frames = SubResource("SpriteFrames_csov4")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/mine_explosion.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "553604ae40e8f73eb4d4787627aaec31"

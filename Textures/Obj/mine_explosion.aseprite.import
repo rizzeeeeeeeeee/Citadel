@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://byeoa7y60xp5f"
+path="res://.godot/imported/mine_explosion.aseprite-e8f73aa6016b774ccb88aafff0ee2fa5.res"
+
+[deps]
+
+source_file="res://Textures/Obj/mine_explosion.aseprite"
+dest_files=["res://.godot/imported/mine_explosion.aseprite-e8f73aa6016b774ccb88aafff0ee2fa5.res"]
+
+[params]
+

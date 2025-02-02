@@ -22,5 +22,17 @@
 		"id": 4,
 		"path":  "res://Scenes/cards/grenade_card.tscn",
 		"value": 2
+	},
+	{
+		"name": "mine",
+		"id": 5,
+		"path":  "res://Scenes/cards/mine_card.tscn",
+		"value": 3
+	},
+	{
+		"name": "railgun",
+		"id": 6,
+		"path":  "res://Scenes/cards/railgun_card.tscn",
+		"value": 4
 	}
 ]

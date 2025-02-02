@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cih621ytpecb6"]
+
+[ext_resource type="Texture2D" uid="uid://bf0vn6dhpjnqe" path="res://Scenes/obj/grenade.png" id="1_3cdro"]
+[ext_resource type="Script" path="res://Scripts/objects/grenade.gd" id="1_ve2xm"]
+[ext_resource type="PackedScene" uid="uid://cpxif8eh5h1q0" path="res://Scenes/projct/grenade_explosion.tscn" id="2_102ur"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ve2xm")
+explosion = ExtResource("2_102ur")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+scale = Vector2(3.54722, 3.54722)
+texture = ExtResource("1_3cdro")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/grenade.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "8728a2898f7c7d0e84c718c7568acb4a"

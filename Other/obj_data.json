@@ -13,5 +13,20 @@
 		"name": "gatling_gun",
 		"id": 3,
 		"path":  "res://Scenes/obj/gatling_gun_object.tscn"
+	},
+	{
+		"name": "grenade",
+		"id": 4,
+		"path":  "res://Scenes/obj/grenade_object.tscn"
+	},
+	{
+		"name": "mine",
+		"id": 5,
+		"path":  "res://Scenes/obj/mine_object.tscn"
+	},
+	{
+		"name": "railgun",
+		"id": 6,
+		"path":  "res://Scenes/obj/railgun_object.tscn"
 	}
 ]

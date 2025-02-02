@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce68tadvqiwrk"]
+
+[ext_resource type="Script" path="res://Scripts/proj/ray.gd" id="1_0yelq"]
+[ext_resource type="Texture2D" uid="uid://dtdwhi7up0vpc" path="res://Scenes/obj/ray.png" id="1_hamha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uj8ej"]
+size = Vector2(25, 642.5)
+
+[node name="Node2D" type="Node2D" groups=["ray"]]
+script = ExtResource("1_0yelq")
+
+[node name="Ray" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, -317)
+scale = Vector2(5.22357, 6.35248)
+texture = ExtResource("1_hamha")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/ray.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "1bbd48a881c4f2f8176f1e92a43046da"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(3.05893, 0.623779)
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(-6.05893, -321.624)
+shape = SubResource("RectangleShape2D_uj8ej")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

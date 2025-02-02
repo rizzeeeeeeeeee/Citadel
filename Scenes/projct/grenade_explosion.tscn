@@ -1,0 +1,114 @@
+[gd_scene load_steps=14 format=3 uid="uid://cpxif8eh5h1q0"]
+
+[ext_resource type="Texture2D" uid="uid://b8dfmailt1ftb" path="res://Scenes/projct/grenade_explosion.png" id="1_h47lj"]
+[ext_resource type="Script" path="res://Scripts/proj/grenade_explosion.gd" id="1_yyn8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4dq5"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(0, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcp37"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(26, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qd2g"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(52, 0, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgqm"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(0, 23, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn4jr"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(26, 23, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bata1"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(52, 23, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kke1y"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(0, 46, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gem6l"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(26, 46, 26, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44sog"]
+atlas = ExtResource("1_h47lj")
+region = Rect2(52, 46, 26, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drsfi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4dq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcp37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qd2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn4jr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bata1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kke1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gem6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44sog")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfid5"]
+size = Vector2(342, 306)
+
+[node name="Node2D" type="Node2D" groups=["expl"]]
+script = ExtResource("1_yyn8u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(13.4295, 13.4295)
+sprite_frames = SubResource("SpriteFrames_drsfi")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/grenade_explosion.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "96422980d227d770a01fd6348f4aa230"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cfid5")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

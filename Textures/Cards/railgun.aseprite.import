@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c6mkbdykudxyt"
+path="res://.godot/imported/railgun.aseprite-4ae2cc952f1bc206f0b364e1f511b929.res"
+
+[deps]
+
+source_file="res://Textures/Cards/railgun.aseprite"
+dest_files=["res://.godot/imported/railgun.aseprite-4ae2cc952f1bc206f0b364e1f511b929.res"]
+
+[params]
+

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://tmf5ylo8aw6b"]
+
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_8apct"]
+[ext_resource type="Texture2D" uid="uid://b64e8lbjbgdw4" path="res://Scenes/cards/railgun.png" id="2_lgf0h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
+size = Vector2(63, 100)
+
+[node name="card" type="Node2D"]
+script = ExtResource("1_8apct")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 100.0
+offset_bottom = 143.0
+texture = ExtResource("2_lgf0h")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Cards/railgun.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "558fd5f61e40efa5799817c1b6a5f3da"
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="TextureRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(50.5, 72)
+shape = SubResource("RectangleShape2D_gk1my")
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]
+[connection signal="input_event" from="TextureRect/Area2D" to="." method="_on_area_2d_input_event"]

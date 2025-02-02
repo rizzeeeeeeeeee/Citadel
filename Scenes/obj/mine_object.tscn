@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpni2qudgaqeh"]
+
+[ext_resource type="Texture2D" uid="uid://c4dec5nje2ayo" path="res://Scenes/obj/mine.png" id="1_71xq0"]
+[ext_resource type="Script" path="res://Scripts/objects/mine.gd" id="1_yicqe"]
+[ext_resource type="PackedScene" uid="uid://brf1jj13o0c37" path="res://Scenes/projct/mine_explosion.tscn" id="2_ljsks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx3v4"]
+size = Vector2(46, 42)
+
+[node name="Node2D" type="Node2D" groups=["mine"]]
+script = ExtResource("1_yicqe")
+explosion = ExtResource("2_ljsks")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.92144, 2.92144)
+texture = ExtResource("1_71xq0")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/mine.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f9244d1c5083763bd4fed5bc2f33179b"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_nx3v4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
