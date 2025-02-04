@@ -34,5 +34,11 @@
 		"id": 6,
 		"path":  "res://Scenes/cards/railgun_card.tscn",
 		"value": 4
+	},
+	{
+		"name": "blast",
+		"id": 7,
+		"path":  "res://Scenes/cards/blast_card.tscn",
+		"value": 7
 	}
 ]

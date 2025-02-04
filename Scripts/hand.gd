@@ -4,7 +4,7 @@ var card_scenes: Array = []
 var obj_scenes: Array = []
 
 var card_count: int = 0
-var max_card_count: int = 5
+var max_card_count: int = 7
 var card_spacing: float = 5.0
 var cards: Array = []
 var saved_positions: Array = []

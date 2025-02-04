@@ -1573,11 +1573,5 @@ position = Vector2(343, -22)
 [node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(442, -22)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("5_use53")]
-position = Vector2(-469, -391)
-
-[node name="BaseEnemy2" parent="." instance=ExtResource("5_use53")]
-position = Vector2(-465, -480)
-
 [connection signal="pressed" from="CanvasLayer/Add_card" to="Hand" method="_on_add_card_pressed"]
 [connection signal="pressed" from="CanvasLayer/Delete_card" to="Hand" method="_on_delete_card_pressed"]

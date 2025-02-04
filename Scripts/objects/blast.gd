@@ -1,0 +1,52 @@
+extends Node2D
+
+@export var bullet_scene: PackedScene # Сцена пули, должна быть назначена в инспекторе
+@export var fire_rate: float = 0.5 # Скорость стрельбы (выстрелы в секунду)
+
+@onready var muzzle: Marker2D = $TextureRect/Muzzle # Точка выхода пуль
+@onready var raycast: RayCast2D = $TextureRect/RayCast2D
+
+var _fire_timer: Timer
+var _is_timer_active: bool = false
+var _can_shoot: bool = true
+
+
+func _ready() -> void:
+	_fire_timer = Timer.new()
+	_fire_timer.wait_time = 1.0 / fire_rate
+	_fire_timer.one_shot = false
+	_fire_timer.timeout.connect(_shoot)
+	add_child(_fire_timer)
+
+func _process(delta: float) -> void:
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		if collider and collider.is_in_group("enemy"):
+			if _can_shoot: # Первый выстрел
+				_shoot()
+				_can_shoot = false
+			if not _is_timer_active:
+				_fire_timer.start()
+				_is_timer_active = true
+	else:
+		_fire_timer.stop()
+		_is_timer_active = false
+		_can_shoot = true
+		
+# Логика выстрела
+func _shoot() -> void:
+	$TextureRect.play("load")
+	await $TextureRect.animation_finished
+	$TextureRect.play("shoot")
+	var bullet = bullet_scene.instantiate()
+	if bullet and muzzle:
+		bullet.position = muzzle.position
+		get_parent().add_child(bullet)
+	await $TextureRect.animation_finished
+	$TextureRect.play("unload")
+	await $TextureRect.animation_finished
+
+# Обработка столкновения с врагом
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		self.queue_free()

@@ -129,7 +129,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
-size = Vector2(86, 107)
+size = Vector2(86, 101)
 
 [node name="Node2D" type="Node2D" groups=["objects"]]
 script = ExtResource("1_s15py")
@@ -164,7 +164,7 @@ scale = Vector2(0.287356, 0.287356)
 
 [node name="RayCast2D" type="RayCast2D" parent="TextureRect"]
 position = Vector2(0.502649, -1.78577e-15)
-target_position = Vector2(0, -125.527)
+target_position = Vector2(-5.99204e-08, -152.805)
 collision_mask = 2
 
 [node name="Area2D" type="Area2D" parent="." groups=["objects"]]

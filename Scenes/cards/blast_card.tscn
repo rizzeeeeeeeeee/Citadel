@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://787h4oobmsps"]
+[gd_scene load_steps=4 format=3 uid="uid://esd288rvwnd2"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_pdv0s"]
-[ext_resource type="Texture2D" uid="uid://cwxrpchte3wpd" path="res://Scenes/cards/gatling_gun.png" id="2_wmvsb"]
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_8hxdn"]
+[ext_resource type="Texture2D" uid="uid://dnpwsnmgbm2is" path="res://Scenes/cards/blast.png" id="2_ke1kx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
 size = Vector2(63, 100)
 
 [node name="card" type="Node2D"]
-script = ExtResource("1_pdv0s")
+script = ExtResource("1_8hxdn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 offset_right = 100.0
 offset_bottom = 143.0
-texture = ExtResource("2_wmvsb")
+texture = ExtResource("2_ke1kx")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -27,9 +27,9 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "",
 "slice": "",
-"source": "res://Textures/Cards/gatling_gun.aseprite"
+"source": "res://Textures/Cards/blast.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "6a9f6b91b23d66ba131a24bf8e984905"
+metadata/_aseprite_wizard_source_file_hash_ = "208ba058c5deda9362daa45256fb5efe"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

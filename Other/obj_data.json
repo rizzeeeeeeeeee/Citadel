@@ -28,5 +28,10 @@
 		"name": "railgun",
 		"id": 6,
 		"path":  "res://Scenes/obj/railgun_object.tscn"
+	},
+	{
+		"name": "blast",
+		"id": 7,
+		"path":  "res://Scenes/obj/blast_object.tscn"
 	}
 ]

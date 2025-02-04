@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if hp <= 0:
-		die()
+		die() 
 	else:
 		time += delta
 
@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 		var mines = get_tree().get_nodes_in_group("mine")
 		var expls = get_tree().get_nodes_in_group("expl")
 		var rays = get_tree().get_nodes_in_group("ray")
+		var blasts = get_tree().get_nodes_in_group("blast")
 		for bullet in bullets:
 			bullet.deal_damage.connect(bullet_damage)
 		for expl in expls:
@@ -46,7 +47,9 @@ func _process(delta: float) -> void:
 		for mine in mines:
 			mine.on_mine_step.connect(mine_damage)
 		for ray in rays:
-			ray.ray_collide.connect(mine_damage)
+			ray.ray_collide.connect(ray_damage)
+		for blast in blasts:
+			blast.blast_damage.connect(mine_damage)
 
 func bullet_damage(victim: Node2D):
 	if victim == self:
@@ -58,7 +61,7 @@ func explosion_damage(victim: Node2D):
 
 func ray_damage(victim: Node2D):
 	if victim == self:
-		take_damage(999)
+		take_damage(20)
 
 func mine_damage(victim: Node2D):
 	if victim == self:

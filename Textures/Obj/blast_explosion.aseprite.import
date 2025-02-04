@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dcy60c2pcu8oc"
+path="res://.godot/imported/blast_explosion.aseprite-773c83a61e0842033d99f5f0a60840b3.res"
+
+[deps]
+
+source_file="res://Textures/Obj/blast_explosion.aseprite"
+dest_files=["res://.godot/imported/blast_explosion.aseprite-773c83a61e0842033d99f5f0a60840b3.res"]
+
+[params]
+

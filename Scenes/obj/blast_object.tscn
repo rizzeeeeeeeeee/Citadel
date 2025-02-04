@@ -1,0 +1,147 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8r7oefh07ksn"]
+
+[ext_resource type="Texture2D" uid="uid://b0shhotm35ekf" path="res://Scenes/obj/blast.png" id="1_n2h7f"]
+[ext_resource type="Script" path="res://Scripts/objects/blast.gd" id="1_rdsvp"]
+[ext_resource type="PackedScene" uid="uid://ud33kavdlvrf" path="res://Scenes/projct/blast_plasma.tscn" id="2_7oewr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5b47"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(0, 0, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nlqa"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(35, 0, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jbop"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(70, 0, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whb8e"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(105, 0, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slwll"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(0, 44, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhu8p"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(35, 44, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wj6r"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(70, 44, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x70ot"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(0, 88, 35, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s8bk"]
+atlas = ExtResource("1_n2h7f")
+region = Rect2(35, 88, 35, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_re1oh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5b47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nlqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jbop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whb8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slwll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhu8p")
+}],
+"loop": false,
+"name": &"load",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhu8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wj6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhu8p")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhu8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whb8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x70ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s8bk")
+}],
+"loop": false,
+"name": &"unload",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
+size = Vector2(86, 101)
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+script = ExtResource("1_rdsvp")
+bullet_scene = ExtResource("2_7oewr")
+fire_rate = 0.1
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -7)
+scale = Vector2(3.14309, 3.14309)
+sprite_frames = SubResource("SpriteFrames_re1oh")
+animation = &"load"
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": false,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/blast.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "0f06fde5b6147fd114e9046b6cf0bfac"
+
+[node name="Muzzle" type="Marker2D" parent="TextureRect"]
+position = Vector2(0.0101393, -78.893)
+scale = Vector2(0.287356, 0.287356)
+
+[node name="RayCast2D" type="RayCast2D" parent="TextureRect"]
+position = Vector2(0.0101393, 0.0228948)
+target_position = Vector2(-5.99204e-08, -152.805)
+collision_mask = 2
+
+[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["objects"]]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_umrt8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

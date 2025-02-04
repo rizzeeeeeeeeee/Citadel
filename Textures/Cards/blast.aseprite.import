@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cxlrkffboaxk5"
+path="res://.godot/imported/blast.aseprite-4ce3fbb654187f8da43d24e52c424499.res"
+
+[deps]
+
+source_file="res://Textures/Cards/blast.aseprite"
+dest_files=["res://.godot/imported/blast.aseprite-4ce3fbb654187f8da43d24e52c424499.res"]
+
+[params]
+
