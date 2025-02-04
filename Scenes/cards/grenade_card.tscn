@@ -29,7 +29,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/grenade.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9489882bfed37ef280198dd3143374a1"
+metadata/_aseprite_wizard_source_file_hash_ = "4e5c8b5b8de0ae683a930c2d4e1778b6"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

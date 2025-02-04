@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckkly8dmri8mw"
+path="res://.godot/imported/Remove.aseprite-ce3f2b72f7897a24b9afc33fe4b0cfee.res"
+
+[deps]
+
+source_file="res://Textures/UI/Remove.aseprite"
+dest_files=["res://.godot/imported/Remove.aseprite-ce3f2b72f7897a24b9afc33fe4b0cfee.res"]
+
+[params]
+

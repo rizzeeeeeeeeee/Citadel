@@ -1,21 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxmi2jljk4igg"]
+[gd_scene load_steps=4 format=3 uid="uid://com8bx8r16gc2"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_mth65"]
-[ext_resource type="Texture2D" uid="uid://c4ac7luntoyh3" path="res://Scenes/cards/single_gun.png" id="2_re70w"]
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_kepi1"]
+[ext_resource type="Texture2D" uid="uid://dwprcndc1hwrx" path="res://Scenes/cards/poison.png" id="2_xvvui"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xe1r"]
-size = Vector2(68, 101)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
+size = Vector2(63, 100)
 
 [node name="card" type="Node2D"]
-script = ExtResource("1_mth65")
+script = ExtResource("1_kepi1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 offset_right = 100.0
 offset_bottom = 143.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_re70w")
+texture = ExtResource("2_xvvui")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -29,19 +27,18 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "",
 "slice": "",
-"source": "res://Textures/Cards/single_gun.aseprite"
+"source": "res://Textures/Cards/poison.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9533ec11e54c615b0fef97efc7e81a8a"
+metadata/_aseprite_wizard_source_file_hash_ = "3b18afa301a8fba54e3e598598a66ff3"
+metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Area2D"]
-position = Vector2(50, 71.5)
-shape = SubResource("RectangleShape2D_6xe1r")
+position = Vector2(50.5, 72)
+shape = SubResource("RectangleShape2D_gk1my")
 
 [connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]
-[connection signal="area_entered" from="TextureRect/Area2D" to="." method="_on_field_collider_area_entered"]
-[connection signal="area_exited" from="TextureRect/Area2D" to="." method="_on_field_collider_area_exited"]
 [connection signal="input_event" from="TextureRect/Area2D" to="." method="_on_area_2d_input_event"]

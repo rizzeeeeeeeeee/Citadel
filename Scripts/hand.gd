@@ -4,7 +4,7 @@ var card_scenes: Array = []
 var obj_scenes: Array = []
 
 var card_count: int = 0
-var max_card_count: int = 7
+var max_card_count: int = 8
 var card_spacing: float = 5.0
 var cards: Array = []
 var saved_positions: Array = []
@@ -15,9 +15,12 @@ var unique_card_id: int = 1
 var zone_states: Dictionary = {}
 var spawned_objects: Dictionary = {}
 var card_positions: Dictionary = {}
+var remover_dragging: bool = false
+var active_zones_remover: Array = []
 
 signal card_dropped(value: float)
 
+@onready var remover = $"../Remove"
 @onready var energy_bar = $"../CanvasLayer/ProgressBar"
 
 func _ready():
@@ -31,6 +34,10 @@ func _ready():
 		spawned_objects[zone_id] = null
 		zone.area_entered.connect(_on_zone_area_entered.bind(zone_id))
 		zone.area_exited.connect(_on_zone_area_exited.bind(zone_id))
+	
+	remover.set_meta("is_remover", true)  # Добавляем метку для идентификации
+	remover.remover_drag_started.connect(_on_remover_drag_started)
+	remover.remover_drag_ended.connect(_on_remover_drag_ended)
 
 func load_json_data(file_path: String, target_array: Array):
 	var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
@@ -181,6 +188,11 @@ func get_object_scene_by_id(card_id: int) -> PackedScene:
 	return null
 
 func _on_zone_area_entered(area: Area2D, zone_id: int) -> void:
+	if area.get_parent().has_meta("is_remover"):
+		if remover_dragging and not active_zones_remover.has(zone_id):
+			active_zones_remover.append(zone_id)
+		return
+	
 	if not active_zones.has(zone_id):
 		active_zones.append(zone_id)
 
@@ -192,6 +204,11 @@ func _on_zone_area_entered(area: Area2D, zone_id: int) -> void:
 		_hide_all_zones()
 
 func _on_zone_area_exited(area: Area2D, zone_id: int) -> void:
+	if area.get_parent().has_meta("is_remover"):
+		if active_zones_remover.has(zone_id):
+			active_zones_remover.erase(zone_id)
+		return
+	
 	if active_zones.has(zone_id):
 		active_zones.erase(zone_id)
 
@@ -206,3 +223,17 @@ func _hide_all_zones() -> void:
 	for other_zone_id in zone_states.keys():
 		var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % other_zone_id)
 		texture_rect.visible = false
+
+func _on_remover_drag_started():
+	remover_dragging = true
+	active_zones_remover.clear()
+
+func _on_remover_drag_ended():
+	remover_dragging = false
+	if active_zones_remover.size() == 1:
+		var zone_id = active_zones_remover[0]
+		if spawned_objects[zone_id] != null:
+			spawned_objects[zone_id].queue_free()
+			spawned_objects[zone_id] = null
+			print("Объект в зоне %d удален" % zone_id)
+	active_zones_remover.clear()

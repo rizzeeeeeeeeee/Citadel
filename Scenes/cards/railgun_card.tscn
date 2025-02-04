@@ -29,7 +29,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/railgun.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "558fd5f61e40efa5799817c1b6a5f3da"
+metadata/_aseprite_wizard_source_file_hash_ = "092b336b7dec68cad0b23dae654f7c41"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

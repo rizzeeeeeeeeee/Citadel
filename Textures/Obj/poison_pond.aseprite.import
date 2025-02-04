@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://0pgx45in2q4b"
+path="res://.godot/imported/poison_pond.aseprite-984f458b0bb2f2a90f60f9e41db2309b.res"
+
+[deps]
+
+source_file="res://Textures/Obj/poison_pond.aseprite"
+dest_files=["res://.godot/imported/poison_pond.aseprite-984f458b0bb2f2a90f60f9e41db2309b.res"]
+
+[params]
+

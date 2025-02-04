@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=12 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
 [ext_resource type="Texture2D" uid="uid://ddtmrel6l3wnw" path="res://Scenes/field.png" id="2_4j8yo"]
 [ext_resource type="Shape2D" uid="uid://cfsibrdw2leda" path="res://Other/Spawnzone_shape/spawnzone.tres" id="3_el2f1"]
+[ext_resource type="Texture2D" uid="uid://drrtthuf3b48w" path="res://Scenes/Remove.png" id="4_r1qmy"]
+[ext_resource type="Script" path="res://Scripts/ui/remove.gd" id="5_4gl0d"]
 [ext_resource type="PackedScene" uid="uid://bqvrv8o4gqh5g" path="res://Scenes/enemies/base_enemy.tscn" id="5_use53"]
 [ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
 
@@ -286,10 +288,14 @@ cache/0/56/0/scale = 1.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_253w4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2hvt"]
+size = Vector2(16.8393, 16.5803)
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_rmctx")
 spawnpoints = Array[NodePath]([NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")])
 base_enemy = ExtResource("5_use53")
+energy = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1573,5 +1579,37 @@ position = Vector2(343, -22)
 [node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(442, -22)
 
+[node name="Remove" type="Sprite2D" parent="." groups=["remover"]]
+texture_filter = 1
+position = Vector2(558, -305)
+scale = Vector2(3.86, 3.86)
+texture = ExtResource("4_r1qmy")
+script = ExtResource("5_4gl0d")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/Remove.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "a36744c3210999403afbd3abe827b731"
+
+[node name="Area2D" type="Area2D" parent="Remove"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Remove/Area2D"]
+position = Vector2(0.38858, -0.518143)
+shape = SubResource("RectangleShape2D_k2hvt")
+
 [connection signal="pressed" from="CanvasLayer/Add_card" to="Hand" method="_on_add_card_pressed"]
 [connection signal="pressed" from="CanvasLayer/Delete_card" to="Hand" method="_on_delete_card_pressed"]
+[connection signal="area_entered" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_exited"]
+[connection signal="input_event" from="Remove/Area2D" to="Remove" method="_on_area_2d_input_event"]

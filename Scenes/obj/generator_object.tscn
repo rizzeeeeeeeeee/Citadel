@@ -42,7 +42,7 @@ offset_top = -56.0
 offset_right = 36.0
 offset_bottom = -29.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
 collision_layer = 4
 collision_mask = 4
 

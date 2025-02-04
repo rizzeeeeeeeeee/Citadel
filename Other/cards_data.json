@@ -40,5 +40,11 @@
 		"id": 7,
 		"path":  "res://Scenes/cards/blast_card.tscn",
 		"value": 7
+	},
+	{
+		"name": "poison",
+		"id": 8,
+		"path":  "res://Scenes/cards/poison_card.tscn",
+		"value": 2
 	}
 ]

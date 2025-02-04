@@ -89,7 +89,7 @@ scale = Vector2(0.287356, 0.287356)
 target_position = Vector2(0, -125.527)
 collision_mask = 2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
 collision_layer = 4
 collision_mask = 4
 
