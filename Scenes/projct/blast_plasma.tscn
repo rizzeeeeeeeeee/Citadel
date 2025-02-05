@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwartymfmphx5" path="res://Scenes/projct/blast_explosion.tscn" id="2_myi30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md542"]
-size = Vector2(55, 95)
+size = Vector2(97, 95)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_sg4xc")

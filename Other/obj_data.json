@@ -33,5 +33,20 @@
 		"name": "blast",
 		"id": 7,
 		"path":  "res://Scenes/obj/blast_object.tscn"
+	},
+	{
+		"name": "poison",
+		"id": 8,
+		"path":  "res://Scenes/obj/poison_object.tscn"
+	},
+	{
+		"name": "tesla",
+		"id": 9,
+		"path":  "res://Scenes/obj/tesla_object.tscn"
+	},
+	{
+		"name": "enade",
+		"id": 10,
+		"path":  "res://Scenes/obj/enade_object.tscn"
 	}
 ]

@@ -1547,7 +1547,7 @@ offset_bottom = 65.0
 texture = SubResource("CanvasTexture_253w4")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
-position = Vector2(-24, -395)
+position = Vector2(0, -396)
 
 [node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(-445, -22)

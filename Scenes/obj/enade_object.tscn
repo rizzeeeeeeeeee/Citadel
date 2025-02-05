@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2v1quy4aax7o"]
+
+[ext_resource type="Script" path="res://Scripts/objects/enade.gd" id="1_nglpl"]
+[ext_resource type="PackedScene" uid="uid://dfxtdg3glvlwb" path="res://Scenes/projct/lightning.tscn" id="2_3hb4v"]
+[ext_resource type="Texture2D" uid="uid://b88xsx34j76c0" path="res://Scenes/obj/enade.png" id="3_aftqw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0jx7"]
+size = Vector2(99.7964, 96.4135)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nglpl")
+lightning = ExtResource("2_3hb4v")
+
+[node name="Attack Area" type="Area2D" parent="."]
+position = Vector2(-9.53674e-07, -1.13687e-13)
+scale = Vector2(3.54722, 3.54722)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_p0jx7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(-9.53674e-07, -1.13687e-13)
+scale = Vector2(3.54722, 3.54722)
+texture = ExtResource("3_aftqw")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/enade.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "896723cd2fc6f7bd62dd62e290fbeb58"
+
+[connection signal="body_entered" from="Attack Area" to="." method="_on_attack_area_body_entered"]

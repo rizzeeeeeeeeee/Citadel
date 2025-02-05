@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://bindnwiq447dd"]
+
+[ext_resource type="Texture2D" uid="uid://dfc1yf08r3m43" path="res://Scenes/obj/tesla.png" id="1_q8v2m"]
+[ext_resource type="Script" path="res://Scripts/objects/tesla.gd" id="1_rqgs6"]
+[ext_resource type="PackedScene" uid="uid://dfxtdg3glvlwb" path="res://Scenes/projct/lightning.tscn" id="2_llaxf"]
+[ext_resource type="Texture2D" uid="uid://caubtybyhoe51" path="res://Scenes/obj/tesla_area.png" id="2_q4j0o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o542i"]
+atlas = ExtResource("1_q8v2m")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_invjr"]
+atlas = ExtResource("1_q8v2m")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcbbj"]
+atlas = ExtResource("1_q8v2m")
+region = Rect2(0, 22, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aclv"]
+atlas = ExtResource("1_q8v2m")
+region = Rect2(22, 22, 22, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u0mi7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o542i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_invjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcbbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aclv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r32xl"]
+size = Vector2(67.0886, 67.5105)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
+size = Vector2(86, 95)
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+script = ExtResource("1_rqgs6")
+lightning = ExtResource("2_llaxf")
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(4.74, 4.74)
+sprite_frames = SubResource("SpriteFrames_u0mi7")
+autoplay = "default"
+frame_progress = 0.440887
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/tesla.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4fdf63a92d6df9743f04b754f7880a72"
+
+[node name="Sprite2D" type="Sprite2D" parent="TextureRect"]
+visible = false
+texture_filter = 1
+position = Vector2(0.21097, 2.51496e-08)
+scale = Vector2(1.35824, 1.35824)
+texture = ExtResource("2_q4j0o")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/tesla_area.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "64a0b7fc250b822363830d14b8da9664"
+
+[node name="Attack Area" type="Area2D" parent="TextureRect"]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Attack Area"]
+shape = SubResource("RectangleShape2D_r32xl")
+
+[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["objects"]]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_umrt8")
+
+[connection signal="body_entered" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

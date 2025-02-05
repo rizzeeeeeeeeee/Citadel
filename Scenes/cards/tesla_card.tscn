@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmcr8s1j2414u"]
+
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_h41u2"]
+[ext_resource type="Texture2D" uid="uid://crv6lgx3okw4f" path="res://Scenes/cards/tesla.png" id="2_y3rew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
+size = Vector2(63, 100)
+
+[node name="card" type="Node2D"]
+script = ExtResource("1_h41u2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 100.0
+offset_bottom = 143.0
+texture = ExtResource("2_y3rew")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Cards/tesla.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7a430a40de18fb79ee641f6aadc8c295"
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="TextureRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(50.5, 72)
+shape = SubResource("RectangleShape2D_gk1my")
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]
+[connection signal="input_event" from="TextureRect/Area2D" to="." method="_on_area_2d_input_event"]

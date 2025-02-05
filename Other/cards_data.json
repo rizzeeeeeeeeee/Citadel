@@ -46,5 +46,17 @@
 		"id": 8,
 		"path":  "res://Scenes/cards/poison_card.tscn",
 		"value": 2
+	},
+	{
+		"name": "tesla",
+		"id": 9,
+		"path":  "res://Scenes/cards/tesla_card.tscn",
+		"value": 5
+	},
+	{
+		"name": "enade",
+		"id": 10,
+		"path":  "res://Scenes/cards/enade_card.tscn",
+		"value": 1
 	}
 ]
