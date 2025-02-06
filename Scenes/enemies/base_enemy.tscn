@@ -40,8 +40,8 @@ size = Vector2(1.00631, 1.00126)
 script = ExtResource("1_g3myx")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
-collision_layer = 1022
-collision_mask = 1022
+collision_layer = 2147484670
+collision_mask = 2147484670
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://yi21qyydiy4o"
+path="res://.godot/imported/energy_yellow.aseprite-6b7970ff81dc684573df1d1b764a1ddc.res"
+
+[deps]
+
+source_file="res://Textures/Bars/energy_yellow.aseprite"
+dest_files=["res://.godot/imported/energy_yellow.aseprite-6b7970ff81dc684573df1d1b764a1ddc.res"]
+
+[params]
+

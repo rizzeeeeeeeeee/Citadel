@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://coxnia6nkqcyq"
+path="res://.godot/imported/heart.aseprite-04ada4acb19ce41ca13ea6f5e9570c29.res"
+
+[deps]
+
+source_file="res://Textures/UI/heart.aseprite"
+dest_files=["res://.godot/imported/heart.aseprite-04ada4acb19ce41ca13ea6f5e9570c29.res"]
+
+[params]
+

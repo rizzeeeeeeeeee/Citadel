@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cypxixor7iey3"]
+
+[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_2khsf"]
+[ext_resource type="Texture2D" uid="uid://djxi0xt30ao6c" path="res://Scenes/enemies/tank.png" id="2_eq6cx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt7ig"]
+atlas = ExtResource("2_eq6cx")
+region = Rect2(0, 0, 40, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_phwt1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt7ig")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
+size = Vector2(1.00631, 1.00126)
+
+[node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_2khsf")
+base_speed = 10.0
+step_frequency = 0.5
+hp = 400.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+collision_layer = 2147484670
+collision_mask = 2147484670
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(2.3175, 2.3175)
+sprite_frames = SubResource("SpriteFrames_phwt1")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/tank.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "0117e0b4dae09b947437b3e317e39cc2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(49.5, 49.5)
+shape = SubResource("RectangleShape2D_yhtg3")

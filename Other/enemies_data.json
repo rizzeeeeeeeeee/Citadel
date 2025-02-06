@@ -1,0 +1,24 @@
+{
+	"wave_settings": {
+		"base_spawn_count": 1,
+		"wave_duration": 120,
+		"rest_time": 40
+	},
+	"enemies": {
+		"basic": {
+			"scene_path": "res://Scenes/enemies/base_enemy.tscn",
+			"base_spawn_weight": 8,
+			"difficulty_multiplier": 1.2
+		},
+		"fast": {
+			"scene_path": "res://Scenes/enemies/fast_enemy.tscn",
+			"base_spawn_weight": 3,
+			"difficulty_multiplier": 2.0
+		},
+		"tank": {
+			"scene_path": "res://Scenes/enemies/tank_enemy.tscn",
+			"base_spawn_weight": 0.5,
+			"difficulty_multiplier": 1.5
+		}
+	}
+}

@@ -1,0 +1,8 @@
+[
+	{
+		"name": "shield",
+		"id": 1,
+		"path":  "res://Scenes/enemies/shield.tscn",
+		"hp": 50
+	}
+]

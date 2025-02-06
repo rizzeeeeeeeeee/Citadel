@@ -4,7 +4,7 @@ var card_scenes: Array = []
 var obj_scenes: Array = []
 
 var card_count: int = 0
-var max_card_count: int = 10
+var max_card_count: int = 5
 var card_spacing: float = 5.0
 var cards: Array = []
 var saved_positions: Array = []
@@ -38,6 +38,8 @@ func _ready():
 	remover.set_meta("is_remover", true)  # Добавляем метку для идентификации
 	remover.remover_drag_started.connect(_on_remover_drag_started)
 	remover.remover_drag_ended.connect(_on_remover_drag_ended)
+	
+	_on_retake_pressed()
 
 func load_json_data(file_path: String, target_array: Array):
 	var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
@@ -62,28 +64,27 @@ func load_json_data(file_path: String, target_array: Array):
 			"value": item.get("value") 
 		})
 
-func _on_add_card_pressed():
-	if card_count < max_card_count:
+func _on_retake_pressed():
+	# Удаляем все карты, если они есть
+	for card in cards:
+		card.queue_free()
+	cards.clear()
+	card_count = 0
+
+	# Заполняем руку случайными картами
+	while card_count < max_card_count:
 		if card_scenes.size() == 0:
 			print("card_scenes array is empty.")
 			return
 		
-		var card_data = card_scenes[current_card_index]
+		var random_index = randi() % card_scenes.size()
+		var card_data = card_scenes[random_index]
 		var card = create_card(unique_card_id, card_data["id"], card_data["scene"], card_data["value"])
 		unique_card_id += 1
 		cards.append(card)
 		add_child(card)
 		card_count += 1
-		current_card_index = (current_card_index + 1) % card_scenes.size()
 		adjust_cards_positions()
-
-func _on_delete_card_pressed():
-	if card_count > 0:
-		card_count -= 1
-		var card = cards.pop_back()
-		card.queue_free()
-		adjust_cards_positions()
-		update_saved_positions()
 
 func create_card(unique_id: int, card_id: int, scene_path: String, card_value: int) -> Node2D:
 	var card_scene = load(scene_path)
@@ -109,7 +110,9 @@ func adjust_cards_positions(exclude_id: int = -1):
 		var card_unique_id = card.get_meta("unique_id")
 		if card_unique_id == exclude_id:
 			continue
-		card.position = Vector2(offset + position_index * (card_width + card_spacing), 0)
+		var target_position = Vector2(offset + position_index * (card_width + card_spacing), 0)
+		var tween = create_tween()
+		tween.tween_property(card, "position", target_position, 0.1)
 		position_index += 1
 
 func update_saved_positions():

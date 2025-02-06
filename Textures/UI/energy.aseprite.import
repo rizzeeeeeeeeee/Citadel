@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ds6v7bvei24ey"
+path="res://.godot/imported/energy.aseprite-f12d75e61c5667f9b74eb3044659cad1.res"
+
+[deps]
+
+source_file="res://Textures/UI/energy.aseprite"
+dest_files=["res://.godot/imported/energy.aseprite-f12d75e61c5667f9b74eb3044659cad1.res"]
+
+[params]
+

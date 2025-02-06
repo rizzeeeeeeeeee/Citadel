@@ -1,13 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=17 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
 [ext_resource type="Texture2D" uid="uid://ddtmrel6l3wnw" path="res://Scenes/field.png" id="2_4j8yo"]
+[ext_resource type="Texture2D" uid="uid://bek28ys1dx1gn" path="res://Scenes/energy_yellow.png" id="3_5ppc3"]
 [ext_resource type="Shape2D" uid="uid://cfsibrdw2leda" path="res://Other/Spawnzone_shape/spawnzone.tres" id="3_el2f1"]
 [ext_resource type="Texture2D" uid="uid://drrtthuf3b48w" path="res://Scenes/Remove.png" id="4_r1qmy"]
+[ext_resource type="Texture2D" uid="uid://bcgjwc85pdkxg" path="res://Scenes/energy.png" id="4_xgyrk"]
 [ext_resource type="Script" path="res://Scripts/ui/remove.gd" id="5_4gl0d"]
-[ext_resource type="PackedScene" uid="uid://bqvrv8o4gqh5g" path="res://Scenes/enemies/base_enemy.tscn" id="5_use53"]
+[ext_resource type="Texture2D" uid="uid://bqj1aqqlbvo7y" path="res://Scenes/heart.png" id="5_vx4ei"]
 [ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
+[ext_resource type="Script" path="res://Scripts/lose_zone.gd" id="11_ip45t"]
+
+[sub_resource type="Curve" id="Curve_e0cep"]
+_data = [Vector2(0.0105263, 0), 0.0, 0.0, 0, 0, Vector2(0.194737, 0.153846), -0.119309, -0.119309, 0, 0, Vector2(0.357895, 0.230769), 1.90635, 1.90635, 0, 0, Vector2(0.51579, 0.56044), 0.0, 0.0, 0, 0, Vector2(0.689474, 0.120879), 0.0, 0.0, 0, 0, Vector2(0.810526, 0.483516), 7.88767, 7.88767, 0, 0, Vector2(0.973684, 0.923077), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="FontFile" id="FontFile_81lb2"]
 cache/0/16/0/ascent = 0.0
@@ -291,57 +298,43 @@ cache/0/56/0/scale = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2hvt"]
 size = Vector2(16.8393, 16.5803)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akh6f"]
+size = Vector2(1012, 38)
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_rmctx")
 spawnpoints = Array[NodePath]([NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")])
-base_enemy = ExtResource("5_use53")
-energy = 10.0
+wave_curve = SubResource("Curve_e0cep")
+energy_rate = 0.5
+health_icons = Array[NodePath]([NodePath("Health/Heart1"), NodePath("Health/Heart2"), NodePath("Health/Heart3"), NodePath("Health/Heart4")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Add_card" type="Button" parent="CanvasLayer"]
-anchors_preset = 2
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 143.0
-offset_top = -104.0
-offset_right = 255.0
-offset_bottom = -48.0
+offset_left = 278.0
+offset_top = -193.0
+offset_right = 299.0
+offset_bottom = 357.0
+grow_horizontal = 2
 grow_vertical = 0
-text = "ADD"
-
-[node name="Delete_card" type="Button" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -204.0
-offset_top = -104.0
-offset_right = -92.0
-offset_bottom = -48.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "DELETE"
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 143.0
-offset_top = -241.0
-offset_right = 215.0
-offset_bottom = 127.0
-grow_vertical = 2
+rotation = 1.57079
 size_flags_horizontal = 0
 max_value = 10.0
+step = 0.01
+value = 10.0
 fill_mode = 3
-show_percentage = false
+texture_progress = ExtResource("3_5ppc3")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ProgressBar"]
 texture_filter = 1
-position = Vector2(36.375, 186)
-scale = Vector2(6.61667, 5.54286)
+position = Vector2(10.9994, 275.881)
+rotation = -1.57079
+scale = Vector2(3.93077, 3.36557)
 texture = ExtResource("6_mmadu")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
@@ -358,14 +351,23 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Bars/energy_back.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "7362a2fbe8c6ad5d7ab35dfe2681ef22"
+metadata/_aseprite_wizard_source_file_hash_ = "633fae0e02cf66607e31a0efcc948363"
 
 [node name="Label" type="Label" parent="CanvasLayer/ProgressBar"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 375.0
-offset_right = 66.0
-offset_bottom = 451.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_top = -556.0
+offset_right = 37.5
+offset_bottom = -480.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.57079
+scale = Vector2(0.534018, 0.534018)
 theme_override_constants/outline_size = 27
 theme_override_fonts/font = SubResource("FontFile_81lb2")
 theme_override_font_sizes/font_size = 56
@@ -373,15 +375,107 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ProgressBar/Label"]
+texture_filter = 1
+position = Vector2(97.375, 39.3245)
+scale = Vector2(11.0671, 11.0671)
+texture = ExtResource("4_xgyrk")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/energy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c1d444c62fc339dd891ff95fe058742f"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "v0.2.0
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Retake" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = -195.0
+offset_right = 545.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RETAKE"
+
+[node name="Label" type="Label" parent="CanvasLayer/Retake"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -37.0
+offset_right = 124.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.534018, 0.534018)
+theme_override_constants/outline_size = 27
+theme_override_fonts/font = SubResource("FontFile_81lb2")
+theme_override_font_sizes/font_size = 56
+text = "1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Retake/Label"]
+texture_filter = 1
+position = Vector2(97.375, 39.3245)
+scale = Vector2(11.0671, 11.0671)
+texture = ExtResource("4_xgyrk")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/energy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c1d444c62fc339dd891ff95fe058742f"
+
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, 450)
 
 [node name="Hand" parent="." instance=ExtResource("1_8gmms")]
-position = Vector2(0, 299)
+position = Vector2(2, 755)
 
 [node name="TestFeld" type="Sprite2D" parent="."]
 z_index = -10
 texture_filter = 1
-position = Vector2(-1.49996, -59.5)
+position = Vector2(-1.50081, 396.5)
 scale = Vector2(1.52656, 1.51823)
 texture = ExtResource("2_4j8yo")
 metadata/_aseprite_wizard_interface_config_ = {
@@ -1547,7 +1641,7 @@ offset_bottom = 65.0
 texture = SubResource("CanvasTexture_253w4")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
-position = Vector2(0, -396)
+position = Vector2(-0.000854492, 60)
 
 [node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(-445, -22)
@@ -1581,7 +1675,7 @@ position = Vector2(442, -22)
 
 [node name="Remove" type="Sprite2D" parent="." groups=["remover"]]
 texture_filter = 1
-position = Vector2(558, -305)
+position = Vector2(574, 150)
 scale = Vector2(3.86, 3.86)
 texture = ExtResource("4_r1qmy")
 script = ExtResource("5_4gl0d")
@@ -1608,8 +1702,106 @@ metadata/_aseprite_wizard_source_file_hash_ = "a36744c3210999403afbd3abe827b731"
 position = Vector2(0.38858, -0.518143)
 shape = SubResource("RectangleShape2D_k2hvt")
 
-[connection signal="pressed" from="CanvasLayer/Add_card" to="Hand" method="_on_add_card_pressed"]
-[connection signal="pressed" from="CanvasLayer/Delete_card" to="Hand" method="_on_delete_card_pressed"]
+[node name="Health" type="Node2D" parent="."]
+position = Vector2(-719, 616)
+
+[node name="Heart1" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(4.5, 22)
+texture = ExtResource("5_vx4ei")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/heart.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "be1b23de9191e489769cde054eff1426"
+
+[node name="Heart2" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(55.5, 22)
+texture = ExtResource("5_vx4ei")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/heart.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "be1b23de9191e489769cde054eff1426"
+
+[node name="Heart3" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(105.5, 22)
+texture = ExtResource("5_vx4ei")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/heart.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "be1b23de9191e489769cde054eff1426"
+
+[node name="Heart4" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(154.5, 22)
+texture = ExtResource("5_vx4ei")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/heart.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "be1b23de9191e489769cde054eff1426"
+
+[node name="Lose Zone" type="Area2D" parent="." groups=["lose_zone"]]
+position = Vector2(1, 755)
+collision_layer = 2147483648
+collision_mask = 2147483648
+script = ExtResource("11_ip45t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lose Zone"]
+shape = SubResource("RectangleShape2D_akh6f")
+
+[connection signal="pressed" from="CanvasLayer/Retake" to="." method="_on_retake_pressed"]
+[connection signal="pressed" from="CanvasLayer/Retake" to="Hand" method="_on_retake_pressed"]
 [connection signal="area_entered" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_exited"]
 [connection signal="input_event" from="Remove/Area2D" to="Remove" method="_on_area_2d_input_event"]
+[connection signal="body_entered" from="Lose Zone" to="." method="_on_lose_zone_body_entered"]
+[connection signal="body_entered" from="Lose Zone" to="Lose Zone" method="_on_body_entered"]

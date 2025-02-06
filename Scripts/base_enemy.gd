@@ -15,6 +15,9 @@ var is_dead: bool = false
 var current_tween: Tween = null
 var poison_timer: Timer
 
+# Загрузка данных о баффах из JSON файла
+var buff_data: Array = []
+
 func _ready():
 	original_scale = sprite.scale
 
@@ -24,6 +27,42 @@ func _ready():
 	poison_timer.one_shot = false
 	poison_timer.timeout.connect(_on_poison_timer_timeout)
 	add_child(poison_timer)
+
+	# Загрузка данных о баффах из JSON файла
+	load_buff_data()
+
+	# Проверка на шанс получения баффа при спавне
+	if randi() % 4 == 0:  # Шанс 1 из 4
+		apply_random_buff()
+
+func load_buff_data():
+	var file = FileAccess.open("res://Other/buff_data.json", FileAccess.READ)
+	if file:
+		var json_data = file.get_as_text()
+		var json = JSON.new()  # Создаем экземпляр класса JSON
+		var result = json.parse(json_data)  # Используем метод parse экземпляра
+		if result == OK:
+			buff_data = json.get_data()  # Получаем данные
+		else:
+			print("Failed to parse JSON: ", json.get_error_message())
+		file.close()
+	else:
+		print("Failed to load buff data.")
+
+func apply_random_buff():
+	if buff_data.size() > 0:
+		var random_index = randi() % buff_data.size()
+		var buff = buff_data[random_index]
+		var buff_scene = load(buff["path"])
+		if buff_scene:
+			var buff_instance = buff_scene.instantiate()
+			buff_instance.position = position  # Спавн бафа по центру врага
+			add_child(buff_instance)  # Добавляем бафф как дочернюю ноду
+			hp += buff.get("hp", 0)  # Увеличиваем HP на значение из баффа
+		else:
+			print("Failed to load buff scene: ", buff["path"])
+	else:
+		print("No buff data available.")
 
 func _process(delta: float) -> void:
 	if is_dead:
@@ -50,6 +89,8 @@ func _process(delta: float) -> void:
 		var blasts = get_tree().get_nodes_in_group("blast")
 		var poisons = get_tree().get_nodes_in_group("poison")
 		var teslas = get_tree().get_nodes_in_group("tesla")
+		var lose_zone = get_tree().get_first_node_in_group("lose_zone")
+		lose_zone.enemy_reach_end.connect(reach_end)
 		for bullet in bullets:
 			bullet.deal_damage.connect(bullet_damage)
 		for expl in expls:
@@ -65,6 +106,10 @@ func _process(delta: float) -> void:
 			poison.unpoisoned.connect(on_poison_exited)
 		for tesla in teslas:
 			tesla.lightning_attack.connect(on_tesla_attack)
+
+func reach_end(victim: Node2D):
+	if victim == self:
+		queue_free()
 
 func on_tesla_attack(victim: Node2D):
 	if victim == self:

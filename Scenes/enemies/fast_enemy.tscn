@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://brk7nh6xb3jfm"]
+
+[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_3gcjl"]
+[ext_resource type="Texture2D" uid="uid://d2j0fsje63fp1" path="res://Scenes/enemies/fast.png" id="2_se268"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i7eo"]
+atlas = ExtResource("2_se268")
+region = Rect2(0, 0, 40, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gf8x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i7eo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
+size = Vector2(1.00631, 1.00126)
+
+[node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_3gcjl")
+base_speed = 50.0
+step_speed_variation = 5.0
+step_scale_variation = 0.05
+step_frequency = 0.4
+hp = 100.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+collision_layer = 2147484670
+collision_mask = 2147484670
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(2.3175, 2.3175)
+sprite_frames = SubResource("SpriteFrames_6gf8x")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/fast.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "2a37671d5bbfa78ac9317f9883edb565"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(49.5, 49.5)
+shape = SubResource("RectangleShape2D_yhtg3")
