@@ -2,7 +2,7 @@ extends Node2D
  
 @onready var local_enegy_bar = $ProgressBar
 var local_energy: float = 0.0
-var local_energy_rate: float = 10.0
+var local_energy_rate: float = 20.0
 signal energy_plus
 
 # Called when the node enters the scene tree for the first time.

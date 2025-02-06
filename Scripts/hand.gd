@@ -140,15 +140,15 @@ func _on_card_drag_ended(unique_id: int) -> void:
 	var card_to_drag = get_card_by_unique_id(unique_id)
 	if card_to_drag:
 		card_to_drag.scale = Vector2(1, 1)
-		if card_positions.has(unique_id):
-			card_to_drag.position = card_positions[unique_id]
-
+	
+	var should_remove_card = false
+	
 	if active_zones.size() == 1:
 		var zone_id = active_zones[0]
 		if spawned_objects[zone_id] == null:  
 			var card_data = card_to_drag.get_meta("card_data")
 			var card_value = card_data["value"] 
-			var current_energy = energy_bar.value #
+			var current_energy = energy_bar.value 
 
 			if current_energy >= card_value:
 				var obj_scene = get_object_scene_by_id(card_data["id"])
@@ -159,23 +159,23 @@ func _on_card_drag_ended(unique_id: int) -> void:
 					var spawn_marker = zone_node.get_node("spawn_marker")
 					zone_node.add_child(obj)
 					obj.position = spawn_marker.position
-					card_to_drag.queue_free()  
-					card_count -= 1
-					cards.erase(card_to_drag)
-					update_saved_positions()
+					should_remove_card = true
 					spawned_objects[zone_id] = obj
-					print(card_value)
 					card_dropped.emit(card_value)
 			else:
 				print("Недостаточно энергии для спавна карты!")
 		else:
 			print("В зоне %d уже находится объект, спавн невозможен." % zone_id)
-
-	for card in cards:
-		var card_id = card.get_meta("unique_id")
-		if card_positions.has(card_id):
-			card.position = card_positions[card_id]
 	
+	if should_remove_card:
+		card_to_drag.queue_free()  
+		card_count -= 1
+		cards.erase(card_to_drag)
+		update_saved_positions()
+	else:
+		adjust_cards_positions()
+	
+	adjust_cards_positions()
 	dragging_card_unique_id = -1
 
 func get_card_by_unique_id(unique_id: int) -> Node2D:

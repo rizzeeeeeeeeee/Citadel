@@ -136,7 +136,7 @@ func explosion_damage(victim: Node2D):
 
 func ray_damage(victim: Node2D):
 	if victim == self:
-		take_damage(20)
+		take_damage(40)
 
 func mine_damage(victim: Node2D):
 	if victim == self:
