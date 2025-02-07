@@ -67,7 +67,7 @@ func _create_lightning(enemy: Node2D) -> void:
 		
 		# Масштабируем молнию в зависимости от расстояния до врага
 		var distance = direction.length()
-		var base_length = 150.0
+		var base_length = 190.0
 		var scale_factor = distance / base_length
 		lightning_instance.scale.x = scale_factor
 

@@ -53,7 +53,7 @@ func _update_lightning(enemy: Node2D):
 		lightning_instance.rotation = angle
 		lightning_instance.z_index = 1
 		lightning_instance.z_as_relative = false
-		var base_length = 150.0
+		var base_length = 190.0
 		var scale_factor = distance / base_length
 		lightning_instance.scale.x = scale_factor  
 

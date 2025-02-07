@@ -34,7 +34,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
-size = Vector2(1.00631, 1.00126)
+size = Vector2(1.25253, 1.21212)
 
 [node name="BaseEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_g3myx")
@@ -45,8 +45,8 @@ collision_mask = 2147484670
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-position = Vector2(2.98023e-08, 0)
-scale = Vector2(2.3175, 2.3175)
+position = Vector2(2, 0)
+scale = Vector2(2.67972, 2.67972)
 sprite_frames = SubResource("SpriteFrames_5s08g")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
@@ -64,5 +64,6 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "d6ff966f012f444622f8d109c5c388f1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -2)
 scale = Vector2(49.5, 49.5)
 shape = SubResource("RectangleShape2D_yhtg3")

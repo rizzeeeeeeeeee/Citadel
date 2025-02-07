@@ -299,7 +299,7 @@ cache/0/56/0/scale = 1.0
 size = Vector2(16.8393, 16.5803)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akh6f"]
-size = Vector2(1012, 38)
+size = Vector2(1300, 38)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_rmctx")
@@ -316,10 +316,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 278.0
-offset_top = -193.0
-offset_right = 299.0
-offset_bottom = 357.0
+offset_left = 277.0
+offset_top = -210.0
+offset_right = 298.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 1.57079
@@ -414,10 +414,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 417.0
-offset_top = -195.0
-offset_right = 545.0
-offset_bottom = -164.0
+offset_left = 519.0
+offset_top = -215.0
+offset_right = 647.0
+offset_bottom = -184.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "RETAKE"
@@ -470,13 +470,13 @@ metadata/_aseprite_wizard_source_file_hash_ = "c1d444c62fc339dd891ff95fe058742f"
 position = Vector2(2, 450)
 
 [node name="Hand" parent="." instance=ExtResource("1_8gmms")]
-position = Vector2(2, 755)
+position = Vector2(0, 836)
 
 [node name="TestFeld" type="Sprite2D" parent="."]
 z_index = -10
 texture_filter = 1
 position = Vector2(-1.50081, 396.5)
-scale = Vector2(1.52656, 1.51823)
+scale = Vector2(1.89535, 1.885)
 texture = ExtResource("2_4j8yo")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
@@ -1641,41 +1641,41 @@ offset_bottom = 65.0
 texture = SubResource("CanvasTexture_253w4")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
-position = Vector2(-0.000854492, 60)
+position = Vector2(0, -33)
 
 [node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-445, -22)
+position = Vector2(-552, -22)
 
 [node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-347, -22)
+position = Vector2(-429, -22)
 
 [node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-248, -22)
+position = Vector2(-308, -22)
 
 [node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-149, -22)
+position = Vector2(-185, -22)
 
 [node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-51, -22)
+position = Vector2(-63, -22)
 
 [node name="Spawn6" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(48, -22)
+position = Vector2(60, -22)
 
 [node name="Spawn7" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(146, -22)
+position = Vector2(182, -22)
 
 [node name="Spawn8" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(245, -22)
+position = Vector2(305, -22)
 
 [node name="Spawn9" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(343, -22)
+position = Vector2(426, -22)
 
 [node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(442, -22)
+position = Vector2(550, -22)
 
 [node name="Remove" type="Sprite2D" parent="." groups=["remover"]]
 texture_filter = 1
-position = Vector2(574, 150)
+position = Vector2(724, 87)
 scale = Vector2(3.86, 3.86)
 texture = ExtResource("4_r1qmy")
 script = ExtResource("5_4gl0d")
@@ -1703,7 +1703,7 @@ position = Vector2(0.38858, -0.518143)
 shape = SubResource("RectangleShape2D_k2hvt")
 
 [node name="Health" type="Node2D" parent="."]
-position = Vector2(-719, 616)
+position = Vector2(-847, 645)
 
 [node name="Heart1" type="Sprite2D" parent="Health"]
 texture_filter = 1
@@ -1790,12 +1790,13 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "be1b23de9191e489769cde054eff1426"
 
 [node name="Lose Zone" type="Area2D" parent="." groups=["lose_zone"]]
-position = Vector2(1, 755)
+position = Vector2(1, 801)
 collision_layer = 2147483648
 collision_mask = 2147483648
 script = ExtResource("11_ip45t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lose Zone"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_akh6f")
 
 [connection signal="pressed" from="CanvasLayer/Retake" to="." method="_on_retake_pressed"]
