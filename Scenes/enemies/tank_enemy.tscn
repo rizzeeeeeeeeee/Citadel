@@ -27,6 +27,7 @@ base_speed = 14.0
 step_speed_variation = 4.0
 step_frequency = 0.5
 hp = 600.0
+enemy_type = "tank"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670

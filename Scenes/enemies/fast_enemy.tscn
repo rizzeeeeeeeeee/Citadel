@@ -28,6 +28,7 @@ step_speed_variation = 5.0
 step_scale_variation = 0.05
 step_frequency = 0.4
 hp = 100.0
+enemy_type = "fast"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670

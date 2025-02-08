@@ -2,6 +2,7 @@ extends Node2D
 
 var card_scenes: Array = []
 var obj_scenes: Array = []
+var preview_scenes: Array = []
 
 var card_count: int = 0
 var max_card_count: int = 5
@@ -17,6 +18,7 @@ var spawned_objects: Dictionary = {}
 var card_positions: Dictionary = {}
 var remover_dragging: bool = false
 var active_zones_remover: Array = []
+var preview_objects: Dictionary = {}  # Для хранения превью объектов
 
 signal card_dropped(value: float)
 
@@ -26,16 +28,17 @@ signal card_dropped(value: float)
 func _ready():
 	load_json_data("res://Other/cards_data.json", card_scenes)
 	load_json_data("res://Other/obj_data.json", obj_scenes)
+	load_json_data("res://Other/prv_obj_data.json", preview_scenes)
 
 	for zone_id in range(1, 61):
 		var zone_path = "../TestFeld/SpawnZones/Zone%d" % zone_id
 		var zone = get_node(zone_path)
 		zone_states[zone_id] = false
 		spawned_objects[zone_id] = null
-		zone.area_entered.connect(_on_zone_area_entered.bind(zone_id))
-		zone.area_exited.connect(_on_zone_area_exited.bind(zone_id))
+		zone.mouse_entered.connect(_on_zone_mouse_entered.bind(zone_id))
+		zone.mouse_exited.connect(_on_zone_mouse_exited.bind(zone_id))
 	
-	remover.set_meta("is_remover", true)  # Добавляем метку для идентификации
+	remover.set_meta("is_remover", true)
 	remover.remover_drag_started.connect(_on_remover_drag_started)
 	remover.remover_drag_ended.connect(_on_remover_drag_ended)
 	
@@ -63,6 +66,12 @@ func load_json_data(file_path: String, target_array: Array):
 			"scene": item.get("path"),
 			"value": item.get("value") 
 		})
+
+func get_preview_scene_by_id(card_id: int) -> PackedScene:
+	for preview_data in preview_scenes:
+		if preview_data["id"] == card_id:
+			return load(preview_data["scene"])
+	return null
 
 func _on_retake_pressed():
 	# Удаляем все карты, если они есть
@@ -126,11 +135,13 @@ func _on_card_drag_started(unique_id: int):
 	
 	var card_to_drag = get_card_by_unique_id(unique_id)
 	if card_to_drag:
+		# Устанавливаем прозрачность карты
+		card_to_drag.modulate.a = 0.3
 		var card_size = card_to_drag.get_child(0).get_rect().size
 		var center_offset = card_to_drag.position + card_size / 2
-		card_to_drag.scale = Vector2(0.65, 0.65)
+		card_to_drag.scale = Vector2(0.85, 0.85)
 		card_to_drag.position = center_offset - card_size * 0.65 / 2
-
+	
 	adjust_cards_positions(unique_id)
 
 func _on_card_drag_ended(unique_id: int) -> void:
@@ -139,6 +150,8 @@ func _on_card_drag_ended(unique_id: int) -> void:
 	
 	var card_to_drag = get_card_by_unique_id(unique_id)
 	if card_to_drag:
+		# Возвращаем непрозрачность карты
+		card_to_drag.modulate.a = 1.0
 		card_to_drag.scale = Vector2(1, 1)
 	
 	var should_remove_card = false
@@ -175,6 +188,11 @@ func _on_card_drag_ended(unique_id: int) -> void:
 	else:
 		adjust_cards_positions()
 	
+	# Удаляем все превью
+	for zone_id in preview_objects:
+		preview_objects[zone_id].queue_free()
+	preview_objects.clear()
+	
 	adjust_cards_positions()
 	dragging_card_unique_id = -1
 
@@ -190,35 +208,63 @@ func get_object_scene_by_id(card_id: int) -> PackedScene:
 			return load(obj_data["scene"])
 	return null
 
-func _on_zone_area_entered(area: Area2D, zone_id: int) -> void:
-	if area.get_parent().has_meta("is_remover"):
-		if remover_dragging and not active_zones_remover.has(zone_id):
+func _on_zone_mouse_entered(zone_id: int) -> void:
+	if remover_dragging:
+		if not active_zones_remover.has(zone_id):
 			active_zones_remover.append(zone_id)
 		return
-	
+
 	if not active_zones.has(zone_id):
 		active_zones.append(zone_id)
+	
+	# Создаем превью объекта при перетаскивании карты
+	if dragging_card_unique_id != -1:
+		var card = get_card_by_unique_id(dragging_card_unique_id)
+		if card:
+			var card_data = card.get_meta("card_data")
+			var preview_scene = get_preview_scene_by_id(card_data["id"])
+			if preview_scene:
+				# Удаляем старое превью, если есть
+				if preview_objects.has(zone_id):
+					preview_objects[zone_id].queue_free()
+				# Создаем новое превью
+				var preview = preview_scene.instantiate()
+				preview.modulate.a = 0.6  # Устанавливаем полупрозрачность
+				var zone_node = get_node("../TestFeld/SpawnZones/Zone%d" % zone_id)
+				var spawn_marker = zone_node.get_node("spawn_marker")
+				zone_node.add_child(preview)
+				preview.position = spawn_marker.position
+				preview_objects[zone_id] = preview
 
 	if active_zones.size() == 1:
 		for other_zone_id in active_zones:
 			var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % other_zone_id)
 			texture_rect.visible = other_zone_id == zone_id
+			if preview_objects.has(other_zone_id):
+				preview_objects[other_zone_id].visible = other_zone_id == zone_id
 	else:
 		_hide_all_zones()
 
-func _on_zone_area_exited(area: Area2D, zone_id: int) -> void:
-	if area.get_parent().has_meta("is_remover"):
+func _on_zone_mouse_exited(zone_id: int) -> void:
+	if remover_dragging:
 		if active_zones_remover.has(zone_id):
 			active_zones_remover.erase(zone_id)
 		return
-	
+
 	if active_zones.has(zone_id):
 		active_zones.erase(zone_id)
-
+	
+	# Удаляем превью при выходе из зоны
+	if preview_objects.has(zone_id):
+		preview_objects[zone_id].queue_free()
+		preview_objects.erase(zone_id)
+	
 	if active_zones.size() == 1:
 		var remaining_zone_id = active_zones[0]
 		var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % remaining_zone_id)
 		texture_rect.visible = true
+		if preview_objects.has(remaining_zone_id):
+			preview_objects[remaining_zone_id].visible = true
 	elif active_zones.size() == 0:
 		_hide_all_zones()
 
@@ -226,6 +272,8 @@ func _hide_all_zones() -> void:
 	for other_zone_id in zone_states.keys():
 		var texture_rect = get_node("../TestFeld/SpawnZones/Zone%d/TextureRect" % other_zone_id)
 		texture_rect.visible = false
+		if preview_objects.has(other_zone_id):
+			preview_objects[other_zone_id].visible = false
 
 func _on_remover_drag_started():
 	remover_dragging = true

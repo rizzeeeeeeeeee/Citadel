@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxkw01l0a3grr"]
+
+[ext_resource type="Texture2D" uid="uid://bmxevpmd4ohsm" path="res://Scenes/obj/poison.png" id="3_3bq6d"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+scale = Vector2(3.54722, 3.54722)
+texture = ExtResource("3_3bq6d")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/poison.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "9b941a448100c1f4dd335063b0938e7f"

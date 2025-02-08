@@ -1,0 +1,52 @@
+[
+	{
+		"name": "single_gun",
+		"id": 1,
+		"path":  "res://Scenes/obj/preview/single_gun_object.tscn"
+	},
+	{
+		"name": "generator",
+		"id": 2,
+		"path":  "res://Scenes/obj/preview/generator_object.tscn"
+	},
+	{
+		"name": "gatling_gun",
+		"id": 3,
+		"path":  "res://Scenes/obj/preview/gatling_gun_object.tscn"
+	},
+	{
+		"name": "grenade",
+		"id": 4,
+		"path":  "res://Scenes/obj/preview/grenade_object.tscn"
+	},
+	{
+		"name": "mine",
+		"id": 5,
+		"path":  "res://Scenes/obj/preview/mine_object.tscn"
+	},
+	{
+		"name": "railgun",
+		"id": 6,
+		"path":  "res://Scenes/obj/preview/railgun_object.tscn"
+	},
+	{
+		"name": "blast",
+		"id": 7,
+		"path":  "res://Scenes/obj/preview/blast_object.tscn"
+	},
+	{
+		"name": "poison",
+		"id": 8,
+		"path":  "res://Scenes/obj/preview/poison_object.tscn"
+	},
+	{
+		"name": "tesla",
+		"id": 9,
+		"path":  "res://Scenes/obj/preview/tesla_object.tscn"
+	},
+	{
+		"name": "enade",
+		"id": 10,
+		"path":  "res://Scenes/obj/preview/enade_object.tscn"
+	}
+]

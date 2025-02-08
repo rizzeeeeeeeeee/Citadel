@@ -1,10 +1,13 @@
 extends Node2D
 
+signal died
+
 @export var base_speed: float = 20.0
 @export var step_speed_variation: float = 10.0
 @export var step_scale_variation: float = 0.03
 @export var step_frequency: float = 0.3
 @export var hp: float = 150.0
+@export var enemy_type: String
 
 @onready var sprite: AnimatedSprite2D = $CharacterBody2D/Sprite2D
 @onready var collision_shape: CollisionShape2D = $CharacterBody2D/CollisionShape2D
@@ -201,6 +204,7 @@ func die():
 	collision_shape.set_deferred("disabled", true)
 
 	set_process(false)
-
+	
 	await get_tree().create_timer(1.0).timeout
+	emit_signal("died")
 	queue_free()

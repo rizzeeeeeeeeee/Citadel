@@ -1,7 +1,5 @@
-[gd_scene load_steps=11 format=3 uid="uid://cii5n62rk04w6"]
+[gd_scene load_steps=8 format=3 uid="uid://kyy5o8abn1pa"]
 
-[ext_resource type="Script" path="res://Scripts/objects/gatling_gun_object.gd" id="1_03six"]
-[ext_resource type="PackedScene" uid="uid://cuyt5m344pmc3" path="res://Scenes/projct/bullet.tscn" id="2_xnd3k"]
 [ext_resource type="Texture2D" uid="uid://d244uffcouvlx" path="res://Scenes/obj/gatling.png" id="2_xu6bs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldsc4"]
@@ -45,18 +43,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ldsc4")
 }],
-"loop": false,
+"loop": true,
 "name": &"shoot",
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
-size = Vector2(86, 107)
-
-[node name="Node2D" type="Node2D" groups=["objects"]]
-script = ExtResource("1_03six")
-bullet_scene = ExtResource("2_xnd3k")
-fire_rate = 1.0
+[node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -64,8 +56,8 @@ position = Vector2(-2, 0)
 scale = Vector2(4.74, 4.74)
 sprite_frames = SubResource("SpriteFrames_lk2s1")
 animation = &"shoot"
-frame = 5
-frame_progress = 1.0
+autoplay = "shoot"
+frame_progress = 0.134824
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -80,22 +72,3 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://Textures/Obj/gatling.aseprite"
 }
 metadata/_aseprite_wizard_source_file_hash_ = "c06ccfedb75d3cd15867da70f304ad62"
-
-[node name="Muzzle" type="Marker2D" parent="TextureRect"]
-position = Vector2(0.421941, -79.1139)
-scale = Vector2(0.287356, 0.287356)
-
-[node name="RayCast2D" type="RayCast2D" parent="TextureRect"]
-position = Vector2(0.421941, 0)
-target_position = Vector2(0, -125.527)
-collision_mask = 2
-
-[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["objects"]]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_umrt8")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

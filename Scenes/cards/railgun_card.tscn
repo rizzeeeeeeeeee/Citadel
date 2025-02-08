@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b64e8lbjbgdw4" path="res://Scenes/cards/railgun.png" id="2_lgf0h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
-size = Vector2(63, 100)
+size = Vector2(59, 102)
 
 [node name="card" type="Node2D"]
 script = ExtResource("1_8apct")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn82gy5la243n"]
+
+[ext_resource type="Texture2D" uid="uid://b88xsx34j76c0" path="res://Scenes/obj/enade.png" id="3_aftqw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(-9.53674e-07, -1.13687e-13)
+scale = Vector2(3.54722, 3.54722)
+texture = ExtResource("3_aftqw")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Obj/enade.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "896723cd2fc6f7bd62dd62e290fbeb58"

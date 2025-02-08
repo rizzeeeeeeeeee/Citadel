@@ -1,0 +1,152 @@
+[gd_scene load_steps=17 format=3 uid="uid://bvrp0dcb7pdli"]
+
+[ext_resource type="Texture2D" uid="uid://b0a8tubqftuw7" path="res://Scenes/obj/railgun.png" id="1_a65ni"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sslt3"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(0, 0, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev8lg"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(25, 0, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n6pg"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(50, 0, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85fsh"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(75, 0, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql6kv"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(0, 45, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymx4c"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(25, 45, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmei0"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(50, 45, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skqrk"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(75, 45, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtb5g"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(0, 90, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns5ss"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(25, 90, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8gb3"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(50, 90, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcccx"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(75, 90, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu7bh"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(0, 135, 25, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyegr"]
+atlas = ExtResource("1_a65ni")
+region = Rect2(25, 135, 25, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vl3bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sslt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev8lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n6pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85fsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql6kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymx4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmei0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skqrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtb5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns5ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8gb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcccx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu7bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyegr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8gb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtb5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmei0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85fsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev8lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sslt3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, 0)
+scale = Vector2(3.97892, 3.97892)
+sprite_frames = SubResource("SpriteFrames_vl3bi")
+autoplay = "default"
+frame = 18
+frame_progress = 0.54972
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/railgun.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4240d261bf323289eafdee70a19ca454"

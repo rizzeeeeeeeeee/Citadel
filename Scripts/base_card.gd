@@ -9,15 +9,16 @@ var dragging : bool = false  # Флаг для отслеживания сост
 var drag_offset : Vector2  # Смещение между позицией мыши и позицией объекта при начале перетаскивания
 var hand_node : Node  # Ссылка на родительский узел, который управляет картами (например, hand)
 
+@onready var sprite = $TextureRect
+
 func _ready():
-	# Получаем текстуру (или Sprite) для изменения позиции
-	var sprite = $TextureRect  # Предполагаем, что у нас есть узел TextureRect
 	original_position = sprite.position  # Сохраняем исходную позицию
 	hand_node = get_parent()  # Получаем родительский узел, которым управляется список карт
 
 func _on_texture_rect_mouse_entered() -> void:
-	var sprite = $TextureRect
-	sprite.position = original_position + hover_offset  # Поднимаем объект вверх
+	if not dragging:
+		var sprite = $TextureRect
+		sprite.position = original_position + hover_offset  # Поднимаем объект вверх
 
 func _on_texture_rect_mouse_exited() -> void:
 	if not dragging:  # Возвращаем объект в исходную позицию только если не перетаскиваем

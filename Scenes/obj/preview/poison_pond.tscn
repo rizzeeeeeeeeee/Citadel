@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://du8p7gsh1te3n"]
+
+[ext_resource type="Script" path="res://Scripts/objects/poison_pond.gd" id="1_kru5w"]
+[ext_resource type="Texture2D" uid="uid://cxpqd3uqjhnsa" path="res://Scenes/obj/poison_pond.png" id="1_rvhm3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui3r6"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owo5q"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mika3"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmocr"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y56xg"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t22oj"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(80, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2j6x"]
+atlas = ExtResource("1_rvhm3")
+region = Rect2(0, 80, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnt6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ui3r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owo5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mika3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmocr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y56xg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t22oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2j6x")
+}],
+"loop": false,
+"name": &"end",
+"speed": 25.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tiuaw"]
+radius = 138.13
+
+[node name="Node2D" type="Node2D" groups=["poison"]]
+script = ExtResource("1_kru5w")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.19209e-07, 0)
+scale = Vector2(6.86138, 6.86138)
+sprite_frames = SubResource("SpriteFrames_vnt6h")
+animation = &"end"
+autoplay = "default"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/poison_pond.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "45d8164c5b723d3715f4fe08a122f6ba"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tiuaw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
