@@ -49,10 +49,12 @@ func _ready():
 	set_invisible()
 
 func set_invisible():
+	$CharacterBody2D.set_collision_layer_value(2, false)
 	sprite.modulate.a = 0.5  # Полупрозрачный
 	$CharacterBody2D.remove_from_group("enemy")
 
 func _set_visible():
+	$CharacterBody2D.set_collision_layer_value(2, true)
 	sprite.modulate.a = 1.0  # Полностью видимый
 	$CharacterBody2D.add_to_group("enemy")
 

@@ -397,7 +397,7 @@ func _on_retake_pressed() -> void:
 	energy -= 1.0
 
 func _on_lose_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
 		# Уменьшаем здоровье
 		health -= 1.0
 
