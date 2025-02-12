@@ -1,0 +1,159 @@
+[gd_scene load_steps=18 format=3 uid="uid://bti47k12514ll"]
+
+[ext_resource type="Script" path="res://Scripts/enemies/builder_enemy.gd" id="1_gv2fn"]
+[ext_resource type="Texture2D" uid="uid://bbippu2imvlbr" path="res://Scenes/enemies/builder.png" id="2_6dd32"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arxa0"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(225, 90, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm5wf"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(0, 135, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qolxb"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(0, 0, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppqdo"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(75, 0, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnxg8"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(150, 0, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmqy5"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(225, 0, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u767a"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(0, 45, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6asc"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(75, 45, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crf1b"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(150, 45, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgv42"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(225, 45, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3xsq"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(0, 90, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgelo"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(75, 90, 75, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbsx7"]
+atlas = ExtResource("2_6dd32")
+region = Rect2(150, 90, 75, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei0aw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arxa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bm5wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arxa0")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qolxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppqdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnxg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmqy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u767a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6asc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crf1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgv42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3xsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgelo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbsx7")
+}],
+"loop": false,
+"name": &"build",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arxa0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
+size = Vector2(1.21212, 1.00126)
+
+[node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_gv2fn")
+base_speed = 30.0
+hp = 250.0
+enemy_type = "builder"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+collision_layer = 2147484670
+collision_mask = 2147484670
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(0, 26)
+scale = Vector2(2.86377, 2.86377)
+sprite_frames = SubResource("SpriteFrames_ei0aw")
+animation = &"attack"
+autoplay = "default"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/builder.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "dd6def2b29009694a705379f92563759"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-9.53674e-07, -2)
+scale = Vector2(49.5, 49.5)
+shape = SubResource("RectangleShape2D_yhtg3")

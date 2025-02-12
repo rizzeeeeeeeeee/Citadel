@@ -74,11 +74,11 @@ scale = Vector2(0.287356, 0.287356)
 target_position = Vector2(0, -125.527)
 collision_mask = 2
 
-[node name="Area2D" type="Area2D" parent="." groups=["objects"]]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["objects"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_umrt8")
 

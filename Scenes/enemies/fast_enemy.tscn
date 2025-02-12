@@ -1,17 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://brk7nh6xb3jfm"]
+[gd_scene load_steps=7 format=3 uid="uid://brk7nh6xb3jfm"]
 
-[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_3gcjl"]
+[ext_resource type="Script" path="res://Scripts/enemies/base_enemy.gd" id="1_3gcjl"]
 [ext_resource type="Texture2D" uid="uid://d2j0fsje63fp1" path="res://Scenes/enemies/fast.png" id="2_se268"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8i7eo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_752ql"]
 atlas = ExtResource("2_se268")
 region = Rect2(0, 0, 40, 25)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6gf8x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k35un"]
+atlas = ExtResource("2_se268")
+region = Rect2(40, 0, 40, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tanv1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8i7eo")
+"texture": SubResource("AtlasTexture_752ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k35un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_752ql")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_752ql")
 }],
 "loop": true,
 "name": &"default",
@@ -29,6 +47,7 @@ step_scale_variation = 0.05
 step_frequency = 0.4
 hp = 100.0
 enemy_type = "fast"
+attack_speed = 2.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670
@@ -38,7 +57,11 @@ collision_mask = 2147484670
 texture_filter = 1
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(2.3175, 2.3175)
-sprite_frames = SubResource("SpriteFrames_6gf8x")
+sprite_frames = SubResource("SpriteFrames_tanv1")
+animation = &"attack"
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -52,7 +75,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Enemies/fast.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "2a37671d5bbfa78ac9317f9883edb565"
+metadata/_aseprite_wizard_source_file_hash_ = "40afbf2643b68bae1700d762bc7c0b15"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(49.5, 49.5)

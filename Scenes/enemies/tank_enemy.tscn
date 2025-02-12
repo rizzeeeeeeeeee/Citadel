@@ -1,17 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://cypxixor7iey3"]
+[gd_scene load_steps=7 format=3 uid="uid://cypxixor7iey3"]
 
-[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_2khsf"]
+[ext_resource type="Script" path="res://Scripts/enemies/base_enemy.gd" id="1_2khsf"]
 [ext_resource type="Texture2D" uid="uid://djxi0xt30ao6c" path="res://Scenes/enemies/tank.png" id="2_eq6cx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lt7ig"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvovt"]
 atlas = ExtResource("2_eq6cx")
 region = Rect2(0, 0, 40, 25)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_phwt1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln2d8"]
+atlas = ExtResource("2_eq6cx")
+region = Rect2(40, 0, 40, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tm84k"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lt7ig")
+"texture": SubResource("AtlasTexture_tvovt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln2d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvovt")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvovt")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +37,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
-size = Vector2(1.25253, 1.33333)
+size = Vector2(1.41414, 1.53535)
 
 [node name="BaseEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_2khsf")
@@ -28,6 +46,7 @@ step_speed_variation = 4.0
 step_frequency = 0.5
 hp = 600.0
 enemy_type = "tank"
+attack_speed = 0.5
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670
@@ -37,7 +56,8 @@ collision_mask = 2147484670
 texture_filter = 1
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(2.73908, 2.73908)
-sprite_frames = SubResource("SpriteFrames_phwt1")
+sprite_frames = SubResource("SpriteFrames_tm84k")
+animation = &"attack"
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -51,7 +71,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Enemies/tank.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "0117e0b4dae09b947437b3e317e39cc2"
+metadata/_aseprite_wizard_source_file_hash_ = "90fb7ef0b8b2c1eeef156d6d8edbfefb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(49.5, 49.5)

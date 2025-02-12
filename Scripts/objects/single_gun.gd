@@ -1,14 +1,20 @@
 extends Node2D
 
-@export var bullet_scene: PackedScene # Сцена пули, должна быть назначена в инспекторе
-@export var fire_rate: float = 0.5 # Скорость стрельбы (выстрелы в секунду)
+signal enemy_collide
+signal object_destroyed
 
-@onready var muzzle: Marker2D = $TextureRect/Muzzle # Точка выхода пуль
+@export var bullet_scene: PackedScene  # Сцена пули, должна быть назначена в инспекторе
+@export var fire_rate: float = 0.5  # Скорость стрельбы (выстрелы в секунду)
+@export var hp: float = 100.0  # Здоровье пушки
+
+@onready var muzzle: Marker2D = $TextureRect/Muzzle  # Точка выхода пуль
 @onready var raycast: RayCast2D = $TextureRect/RayCast2D
 
 var _fire_timer: Timer
 var _is_timer_active: bool = false
 var _can_shoot: bool = true
+var current_body: Node2D = null
+var is_body_alive: bool = true
 
 func _ready() -> void:
 	_fire_timer = Timer.new()
@@ -21,7 +27,7 @@ func _process(delta: float) -> void:
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider and collider.is_in_group("enemy"):
-			if _can_shoot: # Первый выстрел
+			if _can_shoot:  # Первый выстрел
 				_shoot()
 				_can_shoot = false
 			if not _is_timer_active:
@@ -31,7 +37,7 @@ func _process(delta: float) -> void:
 		_fire_timer.stop()
 		_is_timer_active = false
 		_can_shoot = true
-		
+
 func _shoot() -> void:
 	$TextureRect.play("shoot")
 	var bullet = bullet_scene.instantiate()
@@ -41,5 +47,18 @@ func _shoot() -> void:
 		get_parent().add_child(bullet)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		self.queue_free()
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
+		body.get_parent().attack(self)  # Вызываем метод атаки у врага
+
+func take_damage(amount: float) -> void:
+	if hp <= 0:
+		return  # Если пушка уже уничтожена, ничего не делаем
+
+	hp -= amount
+	if hp <= 0:
+		destroy()
+
+func destroy() -> void:
+	if is_instance_valid(self):  # Проверяем, что объект всё ещё существует
+		emit_signal("object_destroyed")
+		queue_free()

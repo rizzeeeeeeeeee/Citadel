@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5goorfpw7jhq"]
+
+[ext_resource type="Script" path="res://Scripts/enemies/invisible_enemy.gd" id="1_0uk51"]
+[ext_resource type="Texture2D" uid="uid://by2kn1k7fb0gr" path="res://Scenes/enemies/invisible.png" id="2_ek7rh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u4gs"]
+atlas = ExtResource("2_ek7rh")
+region = Rect2(0, 0, 19, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rocb6"]
+atlas = ExtResource("2_ek7rh")
+region = Rect2(19, 0, 19, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hea7i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u4gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rocb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u4gs")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u4gs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
+size = Vector2(1.41414, 1.53535)
+
+[node name="BaseEnemy" type="Node2D" groups=["enemy", "invisible_enemy"]]
+script = ExtResource("1_0uk51")
+base_speed = 40.0
+step_speed_variation = 30.0
+hp = 75.0
+enemy_type = "basic"
+attack_speed = 2.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy", "invisible_enemy"]]
+collision_layer = 2147484670
+collision_mask = 2147484670
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(5.00037, 5.00037)
+sprite_frames = SubResource("SpriteFrames_hea7i")
+animation = &"attack"
+frame = 2
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/invisible.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "c3b8376628beb21762d6057c53df2391"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(49.5, 49.5)
+shape = SubResource("RectangleShape2D_yhtg3")

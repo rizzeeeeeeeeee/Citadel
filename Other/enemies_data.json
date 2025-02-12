@@ -19,6 +19,16 @@
 			"scene_path": "res://Scenes/enemies/tank_enemy.tscn",
 			"base_spawn_weight": 0.5,
 			"difficulty_multiplier": 1.5
+		},
+		"builder": {
+			"scene_path": "res://Scenes/enemies/builder_enemy.tscn",
+			"base_spawn_weight": 2,
+			"difficulty_multiplier": 2.0
+		},
+		"invisible": {
+			"scene_path": "res://Scenes/enemies/invisible_enemy.tscn",
+			"base_spawn_weight": 3,
+			"difficulty_multiplier": 2.0
 		}
 	}
 }

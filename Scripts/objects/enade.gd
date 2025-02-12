@@ -48,7 +48,7 @@ func _attack_all_enemies_in_range() -> void:
 	# Получаем все тела в зоне атаки
 	var bodies = $"Attack Area".get_overlapping_bodies()
 	for body in bodies:
-		if body.is_in_group("enemy"):  # Проверяем, что тело — враг
+		if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):  # Проверяем, что тело — враг
 			_create_lightning(body)
 
 # Создание молнии для атаки врага

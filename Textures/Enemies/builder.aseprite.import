@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bxjmfw0qkypc1"
+path="res://.godot/imported/builder.aseprite-8fe14a8034f865709d86c28469874f81.res"
+
+[deps]
+
+source_file="res://Textures/Enemies/builder.aseprite"
+dest_files=["res://.godot/imported/builder.aseprite-8fe14a8034f865709d86c28469874f81.res"]
+
+[params]
+

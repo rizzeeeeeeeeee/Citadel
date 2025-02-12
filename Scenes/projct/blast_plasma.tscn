@@ -31,7 +31,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/blast_projectile.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "bda012b276f0f6bd920ce376e61ea9c5"
+metadata/_aseprite_wizard_source_file_hash_ = "cd202e35e28c374c17c8e09938ab108b"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 64

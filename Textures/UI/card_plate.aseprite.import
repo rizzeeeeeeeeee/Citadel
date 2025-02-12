@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c3qcldns0re5x"
+path="res://.godot/imported/card_plate.aseprite-2fc552dad794e5ce0e943b318a4351e4.res"
+
+[deps]
+
+source_file="res://Textures/UI/card_plate.aseprite"
+dest_files=["res://.godot/imported/card_plate.aseprite-2fc552dad794e5ce0e943b318a4351e4.res"]
+
+[params]
+

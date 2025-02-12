@@ -3,7 +3,8 @@ extends Node2D
 @export var lightning: PackedScene  
 
 var enemies_in_range: Array = []  
-var lightning_instances: Dictionary = {}  
+var lightning_instances: Dictionary = {}
+var hp : float = 200.0  
 
 enum State { IDLE, ATTACKING }
 var current_state: State = State.IDLE  
@@ -22,6 +23,7 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 		_stop_attack(body)
 
 func _process(delta: float) -> void:
+	$Label.text = str(hp)
 	for enemy in enemies_in_range:
 		_update_lightning(enemy)
 
@@ -76,5 +78,18 @@ func _on_cooldown_timer_timeout(enemy: Node2D):
 		_start_attack(enemy)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		self.queue_free()
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
+		body.get_parent().attack(self)  # Вызываем метод атаки у врага
+
+func take_damage(amount: float) -> void:
+	if hp <= 0:
+		return  # Если пушка уже уничтожена, ничего не делаем
+
+	hp -= amount
+	if hp <= 0:
+		destroy()
+
+func destroy() -> void:
+	if is_instance_valid(self):  # Проверяем, что объект всё ещё существует
+		emit_signal("object_destroyed")
+		queue_free()

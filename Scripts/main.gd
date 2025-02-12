@@ -6,6 +6,7 @@ extends Node2D
 @export var energy_rate: float = 1.0
 @export var health: float = 4.0
 @export var health_icons: Array[NodePath]
+@export var wave_display: WaveCurveDisplay
 
 @onready var energy_bar = $CanvasLayer/ProgressBar
 @onready var energy_label = $CanvasLayer/ProgressBar/Label
@@ -45,7 +46,7 @@ const EVENT_DURATIONS = {
 }
 
 # Настройки для случайного появления ивентов
-@export var min_event_delay: float = 10.0  # Минимальная задержка перед первым ивентом
+@export var min_event_delay: float = 50.0  # Минимальная задержка перед первым ивентом
 @export var max_event_delay: float = 30.0  # Максимальная задержка между ивентами
 var event_timer: Timer  # Таймер для запуска ивентов
 var available_events: Array  # Доступные для активации ивенты
@@ -111,30 +112,22 @@ func start_next_wave():
 	first_spawn = true
 	active_events.clear()
 	dead_enemies.clear()
-	available_events = EventType.values().duplicate()  # Сбрасываем доступные ивенты
+	available_events = EventType.values().duplicate()
 
-	# Останавливаем все таймеры ивентов
+	# Инициализация отображения кривой
+	var curve_index = (current_wave - 1) % wave_curves.size()
+	if wave_display:
+		wave_display.setup(wave_curves[curve_index])
+
+	# Остальной код остается без изменений...
 	event_timer.stop()
-
 	print("Начало волны ", current_wave)
-
-	# Обновляем wave_label
 	wave_label.text = "Wave " + str(current_wave)
-
-	# Настраиваем wave_bar
-	wave_bar.max_value = wave_settings.wave_duration  # Общая длительность волны
-	wave_bar.value = 0  # Сбрасываем прогресс
-
-	# Запуск таймера волны
+	wave_bar.max_value = wave_settings.wave_duration
+	wave_bar.value = 0
 	wave_timer.start(wave_settings.wave_duration)
-
-	# Запуск таймера для первого ивента
 	start_next_event_timer()
-
-	# Инициализация весов для спавна врагов
 	update_spawn_weights(0.0)
-
-	# Первый спавн сразу
 	_on_spawn_timeout()
 	
 # Запуск таймера для следующего ивента
@@ -384,9 +377,14 @@ func _process(delta: float) -> void:
 	energy_bar.value = energy
 	energy_label.text = str(int(energy))
 
-	# Обновляем прогресс волны в wave_bar
 	if not is_resting:
+		var wave_progress = 1.0 - (wave_timer.time_left / wave_settings.wave_duration)
 		wave_bar.value = wave_settings.wave_duration - wave_timer.time_left
+		
+		# Обновляем отображение кривой
+		if wave_display:
+			wave_display.update_progress(wave_progress)
+
 
 func update_bar(value):
 	energy -= value
