@@ -31,5 +31,5 @@ func start_fade_out() -> void:
 	tween.tween_callback(self.queue_free) 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"): 
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"): 
 		ray_collide.emit(body.get_parent())

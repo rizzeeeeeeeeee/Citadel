@@ -85,7 +85,7 @@ func _on_node_added(node: Node):
 	elif node.is_in_group("ray"):
 		node.ray_collide.connect(ray_damage)
 	elif node.is_in_group("blast"):
-		node.blast_damage.connect(mine_damage)
+		node.blast_damage.connect(blast_damage)
 	elif node.is_in_group("poison"):
 		node.poisoned.connect(on_poison_entered)
 		node.unpoisoned.connect(on_poison_exited)
@@ -221,26 +221,34 @@ func take_electric_damage(amount: float, freeze_time: float = 0.0):
 	hp -= amount
 	if hp <= 0:
 		die()
-	else:
-		if current_tween:
-			current_tween.kill()
+		return  # Важно: немедленный выход после die()
 
-		# Эффект синего цвета
-		sprite.modulate = Color(0.5, 0.5, 1)  # Синий оттенок
-		current_tween = create_tween()
-		current_tween.tween_property(sprite, "modulate", Color(1, 1, 1), 1.5)
+	# Полностью очищаем предыдущий Tween
+	if current_tween:
+		current_tween.stop()
+		current_tween.kill()
+		current_tween = null  # Явный сброс ссылки
 
-		# Остановка на указанное время
-		if freeze_time > 0:
-			set_process(false)  # Останавливаем обработку логики
-			set_physics_process(false)  # Останавливаем физику
-			await get_tree().create_timer(freeze_time).timeout # Ждем указанное время
-			set_process(true)  # Возобновляем обработку логики
-			set_physics_process(true)  # Возобновляем физику
+	# Создаем абсолютно новый Tween
+	current_tween = create_tween().set_parallel(true)  # Параллельные анимации
 
-		var knockback = Vector2(0, -2)
-		current_tween.parallel().tween_property(self, "position", position + knockback, 0.1)
-		current_tween.parallel().tween_property(self, "position", position, 0.1)
+	# Эффект синего цвета
+	current_tween.tween_property(sprite, "modulate", Color(0.5, 0.5, 1), 0.1)
+	current_tween.tween_property(sprite, "modulate", Color.WHITE, 1.4).set_delay(0.1)
+
+	# Knockback эффект
+	var original_pos = position
+	current_tween.tween_property(self, "position", original_pos + Vector2(0, -2), 0.1)
+	current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
+
+	# Заморозка (если нужно)
+	if freeze_time > 0:
+		set_process(false)
+		set_physics_process(false)
+		await get_tree().create_timer(freeze_time).timeout
+		if not is_dead:  # Проверка на случай смерти во время заморозки
+			set_process(true)
+			set_physics_process(true)
 
 func take_damage(amount: float):
 	if is_dead:
@@ -249,31 +257,37 @@ func take_damage(amount: float):
 	hp -= amount
 	if hp <= 0:
 		die()
-	else:
-		if current_tween:
-			current_tween.kill()
-
-		# Эффект покраснения
-		sprite.modulate = Color(1, 0.5, 0.5)
-		current_tween = create_tween()
-		current_tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.5)
-
-		var knockback = Vector2(0, -2)
-		current_tween.parallel().tween_property(self, "position", position + knockback, 0.1)
-		current_tween.parallel().tween_property(self, "position", position, 0.1)
-
-func die():
-	if is_dead:
 		return
 
-	is_dead = true
+	# Очистка предыдущего Tween
+	if current_tween:
+		current_tween.stop()
+		current_tween.kill()
+		current_tween = null
+
+	# Новый Tween с параллельными анимациями
+	current_tween = create_tween().set_parallel(true)
+
+	# Эффекты
+	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
+	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)
+	
+	var original_pos = position
+	current_tween.tween_property(self, "position", original_pos + Vector2(0, -2), 0.1)
+	current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
+
+func die():
+	if is_dead:  # Добавлена проверка на is_dead
+		return
+
+	is_dead = true  # Устанавливаем флаг is_dead
 
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 
 	$CharacterBody2D/Sprite2D.stop()
 	collision_shape.set_deferred("disabled", true)
 
-	set_process(false)
+	set_process(false)  # Отключаем обработку
 	
 	if is_instance_valid(self):
 		await get_tree().create_timer(1.0).timeout

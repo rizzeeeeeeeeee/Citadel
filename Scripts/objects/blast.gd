@@ -8,7 +8,6 @@ extends Node2D
 
 var _fire_timer: Timer
 var _is_timer_active: bool = false
-var _can_shoot: bool = true
 var hp: float = 150.0
 
 func _ready() -> void:
@@ -22,16 +21,12 @@ func _process(delta: float) -> void:
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider and collider.is_in_group("enemy"):
-			if _can_shoot: # Первый выстрел
-				_shoot()
-				_can_shoot = false
 			if not _is_timer_active:
 				_fire_timer.start()
 				_is_timer_active = true
 	else:
 		_fire_timer.stop()
 		_is_timer_active = false
-		_can_shoot = true
 		
 # Логика выстрела
 func _shoot() -> void:

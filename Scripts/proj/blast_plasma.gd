@@ -11,19 +11,22 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"): # Проверяем, принадлежит ли объект группе врагов
-		var explosion_instance = explosion.instantiate()
-		# Устанавливаем Z-index для взрыва, чтобы он отрисовывался выше других объектов
-		explosion_instance.z_index = 1
-		explosion_instance.z_as_relative = false
-		add_child(explosion_instance)
-		sprite.visible = false
-		is_hit = true
+		call_deferred("_handle_explosion", body)
 
-		# Плавное появление и исчезновение взрыва
-		animate_explosion(explosion_instance)
+func _handle_explosion(body: Node2D) -> void:
+	var explosion_instance = explosion.instantiate()
+	# Устанавливаем Z-index для взрыва, чтобы он отрисовывался выше других объектов
+	explosion_instance.z_index = 1
+	explosion_instance.z_as_relative = false
+	add_child(explosion_instance)
+	sprite.visible = false
+	is_hit = true
 
-		await get_tree().create_timer(1.5).timeout # Ждем завершения анимации
-		queue_free() # Удаляем пулю
+	# Плавное появление и исчезновение взрыва
+	animate_explosion(explosion_instance)
+
+	await get_tree().create_timer(1.5).timeout # Ждем завершения анимации
+	queue_free() # Удаляем пулю
 
 func animate_explosion(explosion_instance: Node2D) -> void:
 	# Создаем Tween для анимации

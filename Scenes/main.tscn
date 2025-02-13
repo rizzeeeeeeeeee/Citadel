@@ -366,6 +366,7 @@ step = 0.01
 value = 10.0
 fill_mode = 3
 texture_progress = ExtResource("3_5ppc3")
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ProgressBar"]
 texture_filter = 1
@@ -434,6 +435,7 @@ theme_override_font_sizes/font_size = 56
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Version" type="Label" parent="CanvasLayer"]
 anchors_preset = 2
@@ -442,7 +444,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.2.5
+text = "v0.2.6
 "
 metadata/_edit_use_anchors_ = true
 
@@ -459,6 +461,7 @@ offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "RETAKE"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/Retake"]
 layout_mode = 1
@@ -481,6 +484,7 @@ text = "1
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Retake/Label"]
 texture_filter = 1
@@ -1891,6 +1895,7 @@ offset_bottom = 680.0
 theme_override_font_sizes/font_size = 27
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Left_Tab/Event"]
 layout_mode = 0
@@ -1908,6 +1913,7 @@ offset_bottom = 111.0
 theme_override_font_sizes/font_size = 33
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="WaveBar" type="ProgressBar" parent="Left_Tab/Wave"]
 layout_mode = 0
@@ -1924,6 +1930,7 @@ offset_top = 166.0
 offset_right = -681.0
 offset_bottom = 295.0
 script = ExtResource("12_u45cj")
+metadata/_edit_use_anchors_ = true
 
 [node name="Bot_Tab" type="Node2D" parent="."]
 position = Vector2(0, 860)

@@ -28,10 +28,11 @@ var spawn_weights: Dictionary  # Текущие веса для спавна в�
 var first_spawn: bool = true  # Флаг для первого спавна в волне
 
 # Настройки ивентов
-@export var max_events_per_wave: int = 2  # Только 1 ивент за волну
+@export var max_events_per_wave: int = 1  # Только 1 ивент за волну
 @export var extra_spawn_chance: float = 0.3  # 30% шанс дополнительного спавна
 var active_events: Dictionary = {}
 var dead_enemies: Array = []  # Хранит информацию о умерших врагах
+var active_enemies: int = 0  # Счетчик активных врагов
 
 # Типы ивентов и их настройки
 enum EventType { CENTRAL_LANES, SINGLE_TYPE, RESURRECT }
@@ -46,7 +47,7 @@ const EVENT_DURATIONS = {
 }
 
 # Настройки для случайного появления ивентов
-@export var min_event_delay: float = 50.0  # Минимальная задержка перед первым ивентом
+@export var min_event_delay: float = 80.0  # Минимальная задержка перед первым ивентом
 @export var max_event_delay: float = 30.0  # Максимальная задержка между ивентами
 var event_timer: Timer  # Таймер для запуска ивентов
 var available_events: Array  # Доступные для активации ивенты
@@ -119,24 +120,27 @@ func start_next_wave():
 	if wave_display:
 		wave_display.setup(wave_curves[curve_index])
 
-	# Остальной код остается без изменений...
-	event_timer.stop()
 	print("Начало волны ", current_wave)
 	wave_label.text = "Wave " + str(current_wave)
 	wave_bar.max_value = wave_settings.wave_duration
 	wave_bar.value = 0
 	wave_timer.start(wave_settings.wave_duration)
+
+	# Запускаем таймер спавна и ивентов
 	start_next_event_timer()
 	update_spawn_weights(0.0)
 	_on_spawn_timeout()
-	
+
 # Запуск таймера для следующего ивента
 func start_next_event_timer():
 	var delay = randf_range(min_event_delay, max_event_delay)
 	event_timer.start(delay)
 
-# Обработка таймера ивентов
 func _on_event_timer_timeout():
+	# Ивенты активируются только во время волны (не в фазе отдыха)
+	if is_resting:
+		return
+
 	# Проверяем, можем ли активировать новый ивент
 	if active_events.size() >= max_events_per_wave:
 		return
@@ -151,6 +155,7 @@ func _on_event_timer_timeout():
 	# Останавливаем таймер ивентов, если достигнут лимит
 	if active_events.size() >= max_events_per_wave:
 		event_timer.stop()
+
 
 # Активация ивента
 func activate_event(event_type: EventType):
@@ -227,7 +232,7 @@ func update_spawn_interval():
 
 # Обработка спавна врагов
 func _on_spawn_timeout():
-	if is_resting:
+	if is_resting:  # Не спавним врагов, если волна завершена
 		return
 
 	# Обработка воскрешения
@@ -302,6 +307,7 @@ func spawn_enemy(enemy_scene: PackedScene, enemy_id: String):
 		enemy_instance.connect("died", _on_enemy_died.bind(enemy_instance))
 		add_child(enemy_instance)
 		enemy_instance.position = spawnpoint.global_position
+		active_enemies += 1  # Увеличиваем счетчик активных врагов
 
 # Получение допустимых спавнпоинтов
 func get_valid_spawnpoints():
@@ -312,6 +318,7 @@ func get_valid_spawnpoints():
 
 # Обработка смерти врага
 func _on_enemy_died(enemy):
+	active_enemies -= 1  # Уменьшаем счетчик активных врагов
 	# Сохраняем информацию об умершем враге
 	dead_enemies.append({
 		"position": enemy.position,
@@ -363,6 +370,10 @@ func _on_wave_finished():
 	is_resting = true
 	print("Волна ", current_wave, " завершена. Отдых...")
 
+	# Останавливаем таймер спавна и ивентов
+	spawn_timer.stop()
+	event_timer.stop()
+
 	# Пауза перед следующей волной
 	await get_tree().create_timer(wave_settings.rest_time).timeout
 	start_next_wave()
@@ -371,7 +382,7 @@ func _on_wave_finished():
 func _process(delta: float) -> void:
 	var generators = get_tree().get_nodes_in_group("generator")
 	for generator in generators:
-		generator.energy_plus.connect(energy_plus)
+		call_deferred("_connect_generator_signal", generator)
 
 	energy = clamp(energy + energy_rate * delta, 0.0, 10.0)
 	energy_bar.value = energy
@@ -385,6 +396,9 @@ func _process(delta: float) -> void:
 		if wave_display:
 			wave_display.update_progress(wave_progress)
 
+func _connect_generator_signal(generator):
+	if not generator.energy_plus.is_connected(energy_plus):
+		generator.energy_plus.connect(energy_plus)
 
 func update_bar(value):
 	energy -= value
