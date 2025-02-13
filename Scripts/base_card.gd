@@ -8,6 +8,7 @@ var hover_offset : Vector2 = Vector2(0, -20)  # Смещение по оси Y �
 var dragging : bool = false  # Флаг для отслеживания состояния перетаскивания
 var drag_offset : Vector2  # Смещение между позицией мыши и позицией объекта при начале перетаскивания
 var hand_node : Node  # Ссылка на родительский узел, который управляет картами (например, hand)
+var tween: Tween
 
 @onready var sprite = $TextureRect
 
@@ -16,14 +17,22 @@ func _ready():
 	hand_node = get_parent()  # Получаем родительский узел, которым управляется список карт
 
 func _on_texture_rect_mouse_entered() -> void:
+	z_index = 5
 	if not dragging:
 		var sprite = $TextureRect
-		sprite.position = original_position + hover_offset  # Поднимаем объект вверх
+		if tween:
+			tween.kill()  # Останавливаем предыдущий твин, если он был
+		tween = create_tween()
+		tween.tween_property(sprite, "position", original_position + hover_offset, 0.03)  # Плавное перемещение за 0.2 секунды
 
 func _on_texture_rect_mouse_exited() -> void:
-	if not dragging:  # Возвращаем объект в исходную позицию только если не перетаскиваем
+	z_index = 0
+	if not dragging:
 		var sprite = $TextureRect
-		sprite.position = original_position
+		if tween:
+			tween.kill()  # Останавливаем предыдущий твин, если он был
+		tween = create_tween()
+		tween.tween_property(sprite, "position", original_position, 0.03)  # Плавное возвращение за 0.2 секунды
 
 func _on_area_2d_input_event(viewport, event: InputEvent, shape_idx: int) -> void:
 	# Обрабатываем начало перетаскивания, когда мышь находится внутри `Area2D`

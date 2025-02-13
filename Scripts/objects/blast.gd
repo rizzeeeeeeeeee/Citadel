@@ -56,5 +56,4 @@ func take_damage(amount: float) -> void:
 
 func destroy() -> void:
 	if is_instance_valid(self):  # Проверяем, что объект всё ещё существует
-		emit_signal("object_destroyed")
 		queue_free()

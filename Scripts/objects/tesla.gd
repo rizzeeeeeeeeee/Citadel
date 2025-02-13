@@ -105,5 +105,4 @@ func destroy() -> void:
 			lightning_instances[enemy].queue_free()
 		lightning_instances.clear()
 
-		emit_signal("object_destroyed")
 		queue_free()

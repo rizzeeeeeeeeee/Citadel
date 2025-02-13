@@ -380,6 +380,10 @@ func _on_wave_finished():
 
 # Остальные функции
 func _process(delta: float) -> void:
+	if health <= 0:
+		$CanvasLayer/Death.visible = true
+		get_tree().paused = true
+	
 	var generators = get_tree().get_nodes_in_group("generator")
 	for generator in generators:
 		call_deferred("_connect_generator_signal", generator)

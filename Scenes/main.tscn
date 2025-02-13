@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=29 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://drrtthuf3b48w" path="res://Scenes/Remove.png" id="4_r1qmy"]
 [ext_resource type="Texture2D" uid="uid://bcgjwc85pdkxg" path="res://Scenes/energy.png" id="4_xgyrk"]
 [ext_resource type="Script" path="res://Scripts/ui/remove.gd" id="5_4gl0d"]
-[ext_resource type="Texture2D" uid="uid://8r4u7dbohwrl" path="res://Scenes/card_back.png" id="5_rgyyv"]
+[ext_resource type="PackedScene" uid="uid://c3qaf0qvq6god" path="res://Scenes/UI/cards_pile.tscn" id="5_uygol"]
 [ext_resource type="Texture2D" uid="uid://bqj1aqqlbvo7y" path="res://Scenes/heart.png" id="5_vx4ei"]
 [ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
+[ext_resource type="Script" path="res://Scripts/ui/pause.gd" id="6_yjq5g"]
 [ext_resource type="Script" path="res://Scripts/lose_zone.gd" id="11_ip45t"]
 [ext_resource type="Script" path="res://Scripts/ui/wave_curve_display.gd" id="12_u45cj"]
+[ext_resource type="Script" path="res://Scripts/director.gd" id="14_vm76a"]
 
 [sub_resource type="Curve" id="Curve_taepo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.228814, 0.131868), -0.887218, -0.887218, 0, 0, Vector2(0.59322, 0.362637), 3.89011, 3.89011, 0, 0, Vector2(0.779661, 0.637363), -3.89011, -3.89011, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -444,7 +446,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.2.6
+text = "v0.2.7
 "
 metadata/_edit_use_anchors_ = true
 
@@ -462,6 +464,10 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "RETAKE"
 metadata/_edit_use_anchors_ = true
+
+[node name="Cards" parent="CanvasLayer/Retake" instance=ExtResource("5_uygol")]
+position = Vector2(93, 120)
+scale = Vector2(1, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer/Retake"]
 layout_mode = 1
@@ -508,49 +514,156 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "c1d444c62fc339dd891ff95fe058742f"
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Retake"]
-texture_filter = 1
-position = Vector2(95, 122)
-scale = Vector2(3.29183, 3.29183)
-texture = ExtResource("5_rgyyv")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Textures/Cards/card_back.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "4de41f435296957b73f655c88578ad9d"
+[node name="Pause" type="Control" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -116.0
+offset_right = 40.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_yjq5g")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Retake/Sprite2D"]
-texture_filter = 1
-position = Vector2(7.59959e-06, 3.03783)
-scale = Vector2(0.998714, 0.998714)
-texture = ExtResource("5_rgyyv")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Textures/Cards/card_back.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "4de41f435296957b73f655c88578ad9d"
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -247.0
+offset_right = -205.0
+offset_bottom = -207.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(12.3551, 12.3551)
+color = Color(0.13, 0.13, 0.13, 0.647059)
+
+[node name="Label" type="Label" parent="CanvasLayer/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -225.0
+offset_right = 82.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="To Menu" type="Button" parent="CanvasLayer/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = 128.0
+offset_right = 90.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Main Menu
+"
+
+[node name="Death" type="Control" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -116.0
+offset_right = 40.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -247.0
+offset_right = -205.0
+offset_bottom = -207.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(12.3551, 12.3551)
+color = Color(0.13, 0.13, 0.13, 0.647059)
+
+[node name="Label" type="Label" parent="CanvasLayer/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -225.0
+offset_right = 82.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Dead"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="To Menu" type="Button" parent="CanvasLayer/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = 129.0
+offset_right = 90.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Main Menu
+"
+
+[node name="Retry" type="Button" parent="CanvasLayer/Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -79.0
+offset_right = -15.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.40965, 2.40965)
+text = "RETRY"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, 450)
@@ -1935,8 +2048,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Bot_Tab" type="Node2D" parent="."]
 position = Vector2(0, 860)
 
+[node name="Director" type="Node" parent="."]
+script = ExtResource("14_vm76a")
+
 [connection signal="pressed" from="CanvasLayer/Retake" to="." method="_on_retake_pressed"]
 [connection signal="pressed" from="CanvasLayer/Retake" to="Hand" method="_on_retake_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/To Menu" to="CanvasLayer/Pause" method="_on_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Death/To Menu" to="CanvasLayer/Pause" method="_on_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Death/Retry" to="CanvasLayer/Pause" method="_on_retry_pressed"]
 [connection signal="area_entered" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Remove/Area2D" to="Hand" method="_on_area_2d_area_exited"]
 [connection signal="input_event" from="Remove/Area2D" to="Remove" method="_on_area_2d_input_event"]
