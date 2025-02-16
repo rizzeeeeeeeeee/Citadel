@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bou0mp776gl"]
+
+[ext_resource type="Script" path="res://Scripts/ui/cards_pack.gd" id="1_27206"]
+[ext_resource type="Texture2D" uid="uid://ctsbprnb8tmud" path="res://Scenes/UI/cards_pack.png" id="1_y7ie8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tm41"]
+size = Vector2(184, 304)
+
+[node name="Card Pack" type="Node2D"]
+script = ExtResource("1_27206")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3.47702, 3.47702)
+texture = ExtResource("1_y7ie8")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/cards_pack.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4f86f229d70c6cd9d7229adf0fed1100"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_6tm41")
+
+[node name="Control" type="Node2D" parent="."]
+position = Vector2(-380, -161)
+scale = Vector2(1.90857, 1.95329)
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

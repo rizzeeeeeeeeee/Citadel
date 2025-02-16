@@ -2,6 +2,8 @@ extends Node2D
 
 signal card_drag_started
 signal card_drag_ended
+signal card_clicked
+
 
 var original_position : Vector2
 var hover_offset : Vector2 = Vector2(0, -20)  # Смещение по оси Y при наведении
@@ -37,6 +39,7 @@ func _on_texture_rect_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport, event: InputEvent, shape_idx: int) -> void:
 	# Обрабатываем начало перетаскивания, когда мышь находится внутри `Area2D`
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		emit_signal("card_clicked")
 		dragging = true
 		drag_offset = global_position - event.global_position
 		emit_signal("card_drag_started")
@@ -51,3 +54,6 @@ func _input(event: InputEvent) -> void:
 			dragging = false
 			position = original_position
 			emit_signal("card_drag_ended")
+
+func _on_texture_rect_gui_input(event: InputEvent) -> void:
+	pass # Replace with function body.

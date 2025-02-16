@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3qijtii1jyvu"]
+
+[ext_resource type="Script" path="res://Scripts/ui/shop.gd" id="1_45wwk"]
+[ext_resource type="PackedScene" uid="uid://bou0mp776gl" path="res://Scenes/UI/cards_pack.tscn" id="1_dr2c0"]
+
+[node name="Shop" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_45wwk")
+
+[node name="Card Pack" parent="." instance=ExtResource("1_dr2c0")]

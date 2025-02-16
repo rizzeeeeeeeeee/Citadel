@@ -19,6 +19,9 @@ func _process(delta: float) -> void:
 			is_paused = false
 
 func _on_to_menu_pressed() -> void:
+	var file_path = "user://run_cards_data.json"
+	DirAccess.remove_absolute(file_path)
+
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/UI/main_menu.tscn")
 

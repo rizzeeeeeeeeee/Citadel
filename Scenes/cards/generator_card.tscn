@@ -29,7 +29,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/generator.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "5d31b9331168cd0812fadc2e9c07d745"
+metadata/_aseprite_wizard_source_file_hash_ = "002a9e44d7b3550a8a95f26e61a39ab8"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

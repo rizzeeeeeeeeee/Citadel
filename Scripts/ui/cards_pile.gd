@@ -9,7 +9,7 @@ func _ready() -> void:
 	load_cards_data()
 
 func load_cards_data():
-	var file = FileAccess.open("res://Other/cards_data.json", FileAccess.READ)
+	var file = FileAccess.open("user://run_cards_data.json", FileAccess.READ)
 	if file:
 		var json_data = file.get_as_text()
 		file.close()
@@ -17,10 +17,16 @@ func load_cards_data():
 		var parse_result = json.parse(json_data)  # Парсим данные
 		if parse_result == OK:  # Проверяем успешность парсинга
 			cards_data = json.get_data()  # Получаем данные
+			print("JSON data loaded successfully")
 		else:
 			print("Failed to parse JSON: ", json.get_error_message())
 	else:
 		print("Failed to open JSON file.")
+
+func reload_cards_data():
+	cards_data.clear() 
+	await get_tree().create_timer(0.1).timeout
+	load_cards_data()
 
 func _on_area_2d_mouse_entered() -> void:
 	$AnimationPlayer.play("mouse_enter")

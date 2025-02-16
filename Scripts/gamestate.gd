@@ -1,14 +1,15 @@
-extends Control
+extends Node
 
+
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	create_run_cards_data()
-
-func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	#create_run_cards_data()
+	pass
 
 
-func _on_exit_pressed() -> void:
-	get_tree().quit()
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
 
 func create_run_cards_data():
 	var file_path = "user://run_cards_data.json"
@@ -25,15 +26,13 @@ func create_run_cards_data():
 				"id": 1,
 				"name": "single_gun",
 				"path": "res://Scenes/cards/single_gun_card.tscn",
-				"value": 3,
-				"rarity": "common"
+				"value": 3
 			},
 			{
 				"id": 2,
 				"name": "generator",
 				"path": "res://Scenes/cards/generator_card.tscn",
-				"value": 5,
-				"rarity": "common"
+				"value": 5
 			}
 		]
 		

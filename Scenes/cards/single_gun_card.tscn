@@ -31,7 +31,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/single_gun.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9533ec11e54c615b0fef97efc7e81a8a"
+metadata/_aseprite_wizard_source_file_hash_ = "8cb98f867844949679d03a67d9a88725"
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]
 

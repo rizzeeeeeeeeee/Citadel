@@ -5,7 +5,7 @@ var obj_scenes: Array = []
 var preview_scenes: Array = []
 
 var card_count: int = 0
-var max_card_count: int = 5
+var max_card_count: int = 4
 var card_spacing: float = 5.0
 var cards: Array = []
 var saved_positions: Array = []
@@ -26,7 +26,7 @@ signal card_dropped(value: float)
 @onready var energy_bar = $"../CanvasLayer/ProgressBar"
 
 func _ready():
-	load_json_data("res://Other/cards_data.json", card_scenes)
+	load_json_data("user://run_cards_data.json", card_scenes)
 	load_json_data("res://Other/obj_data.json", obj_scenes)
 	load_json_data("res://Other/prv_obj_data.json", preview_scenes)
 
@@ -66,6 +66,10 @@ func load_json_data(file_path: String, target_array: Array):
 			"scene": item.get("path"),
 			"value": item.get("value") 
 		})
+
+func reload_cards_data():
+	card_scenes.clear() 
+	load_json_data("user://run_cards_data.json", card_scenes) 
 
 func get_preview_scene_by_id(card_id: int) -> PackedScene:
 	for preview_data in preview_scenes:

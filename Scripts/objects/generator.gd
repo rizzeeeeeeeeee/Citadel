@@ -4,7 +4,7 @@ signal energy_plus
 
 @onready var local_enegy_bar = $ProgressBar
 var local_energy: float = 0.0
-var local_energy_rate: float = 20.0
+var local_energy_rate: float = 10.0
 var hp : float = 50.0
 
 func _process(delta: float) -> void:
@@ -31,5 +31,4 @@ func take_damage(amount: float) -> void:
 
 func destroy() -> void:
 	if is_instance_valid(self):  # Проверяем, что объект всё ещё существует
-		emit_signal("object_destroyed")
 		queue_free()

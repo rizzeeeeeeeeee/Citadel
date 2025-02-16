@@ -29,7 +29,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/poison.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "3b18afa301a8fba54e3e598598a66ff3"
+metadata/_aseprite_wizard_source_file_hash_ = "854f342a220db21dc40f0819ae196b0d"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

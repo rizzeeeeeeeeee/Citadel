@@ -29,7 +29,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Cards/tesla.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "7a430a40de18fb79ee641f6aadc8c295"
+metadata/_aseprite_wizard_source_file_hash_ = "a03c3b32bae667523e73972923e37250"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]
