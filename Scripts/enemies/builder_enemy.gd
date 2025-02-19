@@ -22,6 +22,7 @@ var current_target: Node2D = null
 var is_attacking: bool = false
 var build_timer: Timer
 var is_building: bool = false  # Флаг для отслеживания состояния строительства
+var should_stop_attack: bool = false
 
 # Загрузка данных о врагах и баффах из JSON файлов
 var enemies_data: Dictionary = {}
@@ -172,8 +173,9 @@ func attack(target: Node2D) -> void:
 
 	current_target = target
 	is_attacking = true 
+	should_stop_attack = false  # Сбрасываем флаг остановки атаки
 
-	while current_target and not is_dead:
+	while current_target and not is_dead and not should_stop_attack:
 		if not is_instance_valid(current_target) or not current_target.has_method("take_damage"):
 			break
 
@@ -197,7 +199,10 @@ func attack(target: Node2D) -> void:
 	current_target = null
 
 	if not is_dead:
-		set_process(true)  
+		set_process(true)
+
+func stop_attack(target: Node2D) -> void:
+	should_stop_attack = true
 
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):

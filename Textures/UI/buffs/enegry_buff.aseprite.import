@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bhdemjoaaoqhg"
+path="res://.godot/imported/enegry_buff.aseprite-fd976ebe1edc0766e4fdf17cedee2bcc.res"
+
+[deps]
+
+source_file="res://Textures/UI/buffs/enegry_buff.aseprite"
+dest_files=["res://.godot/imported/enegry_buff.aseprite-fd976ebe1edc0766e4fdf17cedee2bcc.res"]
+
+[params]
+

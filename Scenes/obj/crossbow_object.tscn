@@ -98,3 +98,4 @@ position = Vector2(-1, 8.5)
 shape = SubResource("RectangleShape2D_umrt8")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

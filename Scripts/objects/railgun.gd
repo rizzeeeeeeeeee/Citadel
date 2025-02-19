@@ -45,6 +45,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
 		body.get_parent().attack(self)  # Вызываем метод атаки у врага
 
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
+		body.get_parent().stop_attack(self)  # Вызываем метод атаки у врага
+
 func take_damage(amount: float) -> void:
 	if hp <= 0:
 		return  # Если пушка уже уничтожена, ничего не делаем

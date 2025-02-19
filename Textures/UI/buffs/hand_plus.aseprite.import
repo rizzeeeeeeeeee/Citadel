@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c4hkl6b0ernja"
+path="res://.godot/imported/hand_plus.aseprite-3ea3b3db2b00876d9f7b66e6a999f0ee.res"
+
+[deps]
+
+source_file="res://Textures/UI/buffs/hand_plus.aseprite"
+dest_files=["res://.godot/imported/hand_plus.aseprite-3ea3b3db2b00876d9f7b66e6a999f0ee.res"]
+
+[params]
+

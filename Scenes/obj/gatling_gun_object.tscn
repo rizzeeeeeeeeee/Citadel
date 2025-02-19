@@ -51,7 +51,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
-size = Vector2(86, 107)
+size = Vector2(86, 90)
 
 [node name="Node2D" type="Node2D" groups=["objects"]]
 script = ExtResource("1_03six")
@@ -99,3 +99,4 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_umrt8")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -22,6 +22,7 @@ var current_target: Node2D = null
 var is_attacking: bool = false
 var is_buff_immune: bool = false  # Добавлено: флаг иммунитета к баффам
 var received_damage_timer: Timer = Timer.new()  # Таймер для отслеживания времени без получения урона
+var should_stop_attack: bool = false
 
 # Загрузка данных о баффах из JSON файла
 var buff_data: Array = []
@@ -63,15 +64,16 @@ func _set_visible():
 func set_buff_immune(value: bool):
 	is_buff_immune = value
 
+
 func attack(target: Node2D) -> void:
 	if is_dead or is_attacking:
 		return  
 
 	current_target = target
 	is_attacking = true 
-	_set_visible()  # Делаем врага видимым и включаем коллизию
+	should_stop_attack = false  # Сбрасываем флаг остановки атаки
 
-	while current_target and not is_dead:
+	while current_target and not is_dead and not should_stop_attack:
 		if not is_instance_valid(current_target) or not current_target.has_method("take_damage"):
 			break
 
@@ -93,10 +95,12 @@ func attack(target: Node2D) -> void:
 
 	is_attacking = false
 	current_target = null
-	set_invisible()  # Возвращаем врага в невидимое состояние
 
 	if not is_dead:
-		set_process(true)  
+		set_process(true)
+
+func stop_attack(target: Node2D) -> void:
+	should_stop_attack = true
 
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):

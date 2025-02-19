@@ -121,3 +121,4 @@ offset_bottom = -52.0
 [connection signal="body_entered" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

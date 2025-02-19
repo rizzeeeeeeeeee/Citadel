@@ -84,9 +84,12 @@ func _update_lightning(enemy: Node2D) -> void:
 		lightning_instance.scale.x = scale_factor
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	# Обработка попадания врага в зону урона
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
 		body.get_parent().attack(self)  # Вызываем метод атаки у врага
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
+		body.get_parent().stop_attack(self)  # Вызываем метод атаки у врага
 
 func take_damage(amount: float) -> void:
 	# Обработка получения урона

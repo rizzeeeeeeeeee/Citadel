@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bqvm7h7yu7ek8"
+path="res://.godot/imported/ban_invis.aseprite-055bf08849213f5c8cc6ced779d64e72.res"
+
+[deps]
+
+source_file="res://Textures/UI/buffs/ban_invis.aseprite"
+dest_files=["res://.godot/imported/ban_invis.aseprite-055bf08849213f5c8cc6ced779d64e72.res"]
+
+[params]
+

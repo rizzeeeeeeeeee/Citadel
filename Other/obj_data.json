@@ -53,5 +53,10 @@
 		"name": "crossbow",
 		"id": 11,
 		"path":  "res://Scenes/obj/crossbow_object.tscn"
+	},
+	{
+		"name": "block",
+		"id": 12,
+		"path":  "res://Scenes/obj/block_object.tscn"
 	}
 ]

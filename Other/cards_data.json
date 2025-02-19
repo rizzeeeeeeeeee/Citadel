@@ -75,5 +75,12 @@
 		"path":  "res://Scenes/cards/crossbow_card.tscn",
 		"value": 4,
 		"rarity": "epic"
+	},
+	{
+		"name": "block",
+		"id": 12,
+		"path":  "res://Scenes/cards/block_card.tscn",
+		"value": 2,
+		"rarity": "uncommon"
 	}
 ]
