@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuyt5m344pmc3"]
+[gd_scene load_steps=4 format=3 uid="uid://b378qdmjolp7s"]
 
-[ext_resource type="Texture2D" uid="uid://bx3r2pwxcodoe" path="res://Scenes/projct/bullet_projectile.png" id="1_bit8d"]
-[ext_resource type="Script" path="res://Scripts/proj/bullet.gd" id="1_sr0e5"]
+[ext_resource type="Script" path="res://Scripts/proj/bullet.gd" id="1_2x65x"]
+[ext_resource type="Texture2D" uid="uid://b7r2f2uf2om67" path="res://Scenes/projct/bolt.png" id="2_al4rb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ikwa"]
-size = Vector2(18, 40)
+size = Vector2(18, 41)
 
-[node name="Bullet" type="Node2D" groups=["bullet"]]
-script = ExtResource("1_sr0e5")
+[node name="Bullet" type="Node2D" groups=["bolt"]]
+script = ExtResource("1_2x65x")
+speed = 700.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-7.15256e-07, 0)
-scale = Vector2(3.91667, 3.91667)
-texture = ExtResource("1_bit8d")
+scale = Vector2(6.3129, 6.3129)
+texture = ExtResource("2_al4rb")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -27,15 +28,16 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "",
 "slice": "",
-"source": "res://Textures/bullet_projectile.aseprite"
+"source": "res://Textures/bolt.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "db4a34356dca2132317999fb6b0ad089"
+metadata/_aseprite_wizard_source_file_hash_ = "740a76378dc540027bc415a2a75d0477"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 25.5)
 shape = SubResource("RectangleShape2D_8ikwa")
 
 [connection signal="deal_damage" from="." to="." method="_on_deal_damage"]

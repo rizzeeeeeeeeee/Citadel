@@ -24,9 +24,11 @@ signal card_dropped(value: float)
 
 @onready var remover = $"../Remove"
 @onready var energy_bar = $"../CanvasLayer/ProgressBar"
+@onready var no_energy_label = $"../CanvasLayer/No Energy"
 
 func _ready():
-	load_json_data("user://run_cards_data.json", card_scenes)
+	#load_json_data("user://run_cards_data.json", card_scenes)
+	load_json_data("res://Other/cards_data.json", card_scenes)
 	load_json_data("res://Other/obj_data.json", obj_scenes)
 	load_json_data("res://Other/prv_obj_data.json", preview_scenes)
 
@@ -180,6 +182,7 @@ func _on_card_drag_ended(unique_id: int) -> void:
 					spawned_objects[zone_id] = obj
 					card_dropped.emit(card_value)
 			else:
+				no_energy_label.animate_label(no_energy_label)
 				print("Недостаточно энергии для спавна карты!")
 		else:
 			print("В зоне %d уже находится объект, спавн невозможен." % zone_id)

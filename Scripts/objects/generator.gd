@@ -4,7 +4,7 @@ signal energy_plus
 
 @onready var local_enegy_bar = $ProgressBar
 var local_energy: float = 0.0
-var local_energy_rate: float = 10.0
+var local_energy_rate: float = 5.0
 var hp : float = 50.0
 
 func _process(delta: float) -> void:

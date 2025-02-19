@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://clwsnwjf080oo"
+path="res://.godot/imported/crossbow.aseprite-1a764033d2f8f1ecac254e60db325b27.res"
+
+[deps]
+
+source_file="res://Textures/Obj/crossbow.aseprite"
+dest_files=["res://.godot/imported/crossbow.aseprite-1a764033d2f8f1ecac254e60db325b27.res"]
+
+[params]
+

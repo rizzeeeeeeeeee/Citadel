@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://t5byytv7nlwt"]
+[gd_scene load_steps=4 format=3 uid="uid://bma1atne3yemo"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_wol3e"]
-[ext_resource type="Texture2D" uid="uid://3imui0n3f3a8" path="res://Scenes/cards/enade.png" id="2_ka47g"]
+[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_875xj"]
+[ext_resource type="Texture2D" uid="uid://cox38q6a3o1s1" path="res://Scenes/cards/crossbow.png" id="2_2eptj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]
 size = Vector2(63, 100)
 
 [node name="card" type="Node2D"]
-script = ExtResource("1_wol3e")
+script = ExtResource("1_875xj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 offset_right = 100.0
 offset_bottom = 143.0
-texture = ExtResource("2_ka47g")
+texture = ExtResource("2_2eptj")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -27,9 +27,9 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "",
 "slice": "",
-"source": "res://Textures/Cards/enade.aseprite"
+"source": "res://Textures/Cards/crossbow.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "daa5275ef40348452fcb7ff18c411644"
+metadata/_aseprite_wizard_source_file_hash_ = "ba1f076d8ff7844ebe38dc1980c278c4"
 metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="TextureRect"]

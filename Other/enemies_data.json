@@ -8,27 +8,32 @@
 		"basic": {
 			"scene_path": "res://Scenes/enemies/base_enemy.tscn",
 			"base_spawn_weight": 8,
-			"difficulty_multiplier": 1.2
+			"difficulty_multiplier": 1.2,
+			"first_wave": 1
 		},
 		"fast": {
 			"scene_path": "res://Scenes/enemies/fast_enemy.tscn",
 			"base_spawn_weight": 3,
-			"difficulty_multiplier": 2.0
+			"difficulty_multiplier": 2.0,
+			"first_wave": 2
 		},
 		"tank": {
 			"scene_path": "res://Scenes/enemies/tank_enemy.tscn",
 			"base_spawn_weight": 0.5,
-			"difficulty_multiplier": 1.5
+			"difficulty_multiplier": 1.5,
+			"first_wave": 3
 		},
 		"builder": {
 			"scene_path": "res://Scenes/enemies/builder_enemy.tscn",
 			"base_spawn_weight": 2,
-			"difficulty_multiplier": 2.0
+			"difficulty_multiplier": 2.0,
+			"first_wave": 4
 		},
 		"invisible": {
 			"scene_path": "res://Scenes/enemies/invisible_enemy.tscn",
 			"base_spawn_weight": 3,
-			"difficulty_multiplier": 2.0
+			"difficulty_multiplier": 2.0,
+			"first_wave": 4
 		}
 	}
 }

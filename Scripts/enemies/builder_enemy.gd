@@ -215,6 +215,12 @@ func _on_node_added(node: Node):
 		node.unpoisoned.connect(on_poison_exited)
 	elif node.is_in_group("tesla"):
 		node.lightning_attack.connect(on_tesla_attack)
+	elif node.is_in_group("bolt"):
+		node.deal_damage.connect(bolt_damage)
+
+func bolt_damage(victim: Node2D):
+	if victim == self:
+		take_bolt_damage(40)
 
 func reach_end(victim: Node2D):
 	if victim == self:
@@ -288,6 +294,11 @@ func connect_signals():
 	var teslas = get_tree().get_nodes_in_group("tesla")
 	for tesla in teslas:
 		tesla.lightning_attack.connect(on_tesla_attack)
+	
+	var bolts = get_tree().get_nodes_in_group("bolt")
+	for bolt in bolts:
+		bolt.deal_damage.connect(bolt_damage)
+
 
 func take_electric_damage(amount: float, freeze_time: float = 0.0):
 	if is_dead:
@@ -350,6 +361,29 @@ func take_damage(amount: float):
 	var original_pos = position
 	current_tween.tween_property(self, "position", original_pos + Vector2(0, -2), 0.1)
 	current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
+
+func take_bolt_damage(amount: float):
+	if is_dead:
+		return
+
+	hp -= amount
+	if hp <= 0:
+		die()
+		return
+
+	if current_tween:
+		current_tween.stop()
+		current_tween.kill()
+		current_tween = null
+
+	current_tween = create_tween().set_parallel(true)
+
+	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
+	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)
+	
+	var original_pos = position
+	current_tween.tween_property(self, "position", original_pos + Vector2(0, -50), 0.2)
+	#current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
 
 func die():
 	if is_dead:  # Добавлена проверка на is_dead

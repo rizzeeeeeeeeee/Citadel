@@ -48,5 +48,10 @@
 		"name": "enade",
 		"id": 10,
 		"path":  "res://Scenes/obj/enade_object.tscn"
+	},
+	{
+		"name": "crossbow",
+		"id": 11,
+		"path":  "res://Scenes/obj/crossbow_object.tscn"
 	}
 ]

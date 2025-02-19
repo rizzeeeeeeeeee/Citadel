@@ -20,9 +20,8 @@ var current_tween: Tween = null
 var poison_timer: Timer
 var current_target: Node2D = null
 var is_attacking: bool = false
-var is_buff_immune: bool = false  # Добавлено: флаг иммунитета к баффам
+var is_buff_immune: bool = false  
 
-# Загрузка данных о баффах из JSON файла
 var buff_data: Array = []
 
 func _ready():
@@ -38,7 +37,6 @@ func _ready():
 	connect_signals()
 	get_tree().node_added.connect(_on_node_added)
 
-# Добавлено: метод для установки иммунитета к баффам
 func set_buff_immune(value: bool):
 	is_buff_immune = value
 
@@ -91,15 +89,17 @@ func _on_node_added(node: Node):
 		node.unpoisoned.connect(on_poison_exited)
 	elif node.is_in_group("tesla"):
 		node.lightning_attack.connect(on_tesla_attack)
+	elif node.is_in_group("bolt"):
+		node.deal_damage.connect(bolt_damage)
 
 func load_buff_data():
 	var file = FileAccess.open("res://Other/buff_data.json", FileAccess.READ)
 	if file:
 		var json_data = file.get_as_text()
-		var json = JSON.new()  # Создаем экземпляр класса JSON
-		var result = json.parse(json_data)  # Используем метод parse экземпляра
+		var json = JSON.new() 
+		var result = json.parse(json_data)  
 		if result == OK:
-			buff_data = json.get_data()  # Получаем данные
+			buff_data = json.get_data() 
 		else:
 			print("Failed to parse JSON: ", json.get_error_message())
 		file.close()
@@ -107,7 +107,7 @@ func load_buff_data():
 		print("Failed to load buff data.")
 
 func apply_random_buff():
-	if is_buff_immune:  # Добавлено: проверка на иммунитет к баффам
+	if is_buff_immune:  
 		return
 
 	if buff_data.size() > 0:
@@ -116,9 +116,9 @@ func apply_random_buff():
 		var buff_scene = load(buff["path"])
 		if buff_scene:
 			var buff_instance = buff_scene.instantiate()
-			buff_instance.position = position  # Спавн бафа по центру врага
-			add_child(buff_instance)  # Добавляем бафф как дочернюю ноду
-			hp += buff.get("hp", 0)  # Увеличиваем HP на значение из баффа
+			buff_instance.position = position 
+			add_child(buff_instance) 
+			hp += buff.get("hp", 0)
 		else:
 			print("Failed to load buff scene: ", buff["path"])
 	else:
@@ -174,6 +174,14 @@ func connect_signals():
 	var teslas = get_tree().get_nodes_in_group("tesla")
 	for tesla in teslas:
 		tesla.lightning_attack.connect(on_tesla_attack)
+		
+	var bolts = get_tree().get_nodes_in_group("bolt")
+	for bolt in bolts:
+		bolt.deal_damage.connect(bolt_damage)
+
+func bolt_damage(victim: Node2D):
+	if victim == self:
+		take_bolt_damage(40)
 
 func reach_end(victim: Node2D):
 	if victim == self:
@@ -221,34 +229,52 @@ func take_electric_damage(amount: float, freeze_time: float = 0.0):
 	hp -= amount
 	if hp <= 0:
 		die()
-		return  # Важно: немедленный выход после die()
+		return  
 
-	# Полностью очищаем предыдущий Tween
 	if current_tween:
 		current_tween.stop()
 		current_tween.kill()
-		current_tween = null  # Явный сброс ссылки
+		current_tween = null  
 
-	# Создаем абсолютно новый Tween
-	current_tween = create_tween().set_parallel(true)  # Параллельные анимации
+	current_tween = create_tween().set_parallel(true) 
 
-	# Эффект синего цвета
 	current_tween.tween_property(sprite, "modulate", Color(0.5, 0.5, 1), 0.1)
 	current_tween.tween_property(sprite, "modulate", Color.WHITE, 1.4).set_delay(0.1)
 
-	# Knockback эффект
 	var original_pos = position
 	current_tween.tween_property(self, "position", original_pos + Vector2(0, -2), 0.1)
 	current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
 
-	# Заморозка (если нужно)
 	if freeze_time > 0:
 		set_process(false)
 		set_physics_process(false)
 		await get_tree().create_timer(freeze_time).timeout
-		if not is_dead:  # Проверка на случай смерти во время заморозки
+		if not is_dead:  
 			set_process(true)
 			set_physics_process(true)
+
+func take_bolt_damage(amount: float):
+	if is_dead:
+		return
+
+	hp -= amount
+	if hp <= 0:
+		die()
+		return
+
+	if current_tween:
+		current_tween.stop()
+		current_tween.kill()
+		current_tween = null
+
+	current_tween = create_tween().set_parallel(true)
+
+	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
+	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)
+	
+	var original_pos = position
+	current_tween.tween_property(self, "position", original_pos + Vector2(0, -50), 0.2)
+	#current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
 
 func take_damage(amount: float):
 	if is_dead:
@@ -259,16 +285,13 @@ func take_damage(amount: float):
 		die()
 		return
 
-	# Очистка предыдущего Tween
 	if current_tween:
 		current_tween.stop()
 		current_tween.kill()
 		current_tween = null
 
-	# Новый Tween с параллельными анимациями
 	current_tween = create_tween().set_parallel(true)
 
-	# Эффекты
 	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
 	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)
 	
@@ -277,17 +300,17 @@ func take_damage(amount: float):
 	current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
 
 func die():
-	if is_dead:  # Добавлена проверка на is_dead
+	if is_dead: 
 		return
 
-	is_dead = true  # Устанавливаем флаг is_dead
+	is_dead = true  
 
 	sprite.modulate = Color(0.5, 0.5, 0.5)
 
 	$CharacterBody2D/Sprite2D.stop()
 	collision_shape.set_deferred("disabled", true)
 
-	set_process(false)  # Отключаем обработку
+	set_process(false)  
 	
 	if is_instance_valid(self):
 		await get_tree().create_timer(1.0).timeout

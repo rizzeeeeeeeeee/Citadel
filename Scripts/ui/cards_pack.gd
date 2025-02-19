@@ -2,9 +2,14 @@ extends Node2D
 
 @onready var pack_sprite := $Sprite2D
 @onready var selection_container := $Control
+@onready var sprite = $Sprite2D
 
 var cards_data = []
+var original_position : Vector2
 var chosen_cards = []
+var tween: Tween
+var hover_offset : Vector2 = Vector2(0, -20) 
+
 
 # Веса для каждой редкости
 var rarity_weights = {
@@ -15,7 +20,8 @@ var rarity_weights = {
 }
 
 func _ready() -> void:
-	selection_container.hide() # Скрываем контейнер выбора карт
+	original_position = sprite.position  
+	selection_container.hide() 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -120,3 +126,15 @@ func _add_card_to_current_run(card_data: Dictionary) -> void:
 	file = FileAccess.open("user://run_cards_data.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(current_cards, "\t"))
 	file.close()
+
+func _on_area_2d_mouse_exited() -> void:
+	if tween:
+		tween.kill()  
+	tween = create_tween()
+	tween.tween_property(sprite, "position", original_position, 0.03) 
+
+func _on_area_2d_mouse_entered() -> void:
+	if tween:
+		tween.kill()  
+	tween = create_tween()
+	tween.tween_property(sprite, "position", original_position + hover_offset, 0.03)  

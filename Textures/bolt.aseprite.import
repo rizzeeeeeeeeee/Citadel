@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://boh51qesa5y6j"
+path="res://.godot/imported/bolt.aseprite-f1bbc65fdfad15d052fb8daac34c7b73.res"
+
+[deps]
+
+source_file="res://Textures/bolt.aseprite"
+dest_files=["res://.godot/imported/bolt.aseprite-f1bbc65fdfad15d052fb8daac34c7b73.res"]
+
+[params]
+

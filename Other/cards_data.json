@@ -68,5 +68,12 @@
 		"path":  "res://Scenes/cards/enade_card.tscn",
 		"value": 1,
 		"rarity": "common"
+	},
+	{
+		"name": "crossbow",
+		"id": 11,
+		"path":  "res://Scenes/cards/crossbow_card.tscn",
+		"value": 4,
+		"rarity": "epic"
 	}
 ]

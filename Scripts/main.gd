@@ -93,7 +93,13 @@ func start_next_wave():
 	active_events.clear()
 	dead_enemies.clear()
 	available_events = EventType.values().duplicate()
+
 	var curve_index = (current_wave - 1) % wave_curves.size()
+	if current_wave == 1:  # Первая волна
+		curve_index = 2  # Используем третий Curve для первой волны
+	elif curve_index >= wave_curves.size():
+		curve_index = wave_curves.size() - 1
+
 	if wave_display:
 		wave_display.setup(wave_curves[curve_index])
 	print("Начало волны ", current_wave)
@@ -104,6 +110,7 @@ func start_next_wave():
 	start_next_event_timer()
 	update_spawn_weights(0.0)
 	_on_spawn_timeout()
+
 
 func start_next_event_timer():
 	var delay = randf_range(min_event_delay, max_event_delay)
@@ -187,7 +194,15 @@ func _on_spawn_timeout():
 		var wave_progress = 1.0 - (wave_timer.time_left / wave_settings.wave_duration)
 		var intensity = wave_curves[(current_wave - 1) % wave_curves.size()].sample(wave_progress)
 		var base_spawn_count = wave_settings.base_spawn_count
-		var spawn_count = base_spawn_count * (1 + intensity * 3)
+
+		# Уменьшаем количество врагов на первой волне
+		if current_wave == 1:
+			base_spawn_count = 1  # Минимальное количество врагов на первой волне
+			intensity *= 0.5  # Уменьшаем интенсивность спавна на первой волне
+
+		var wave_multiplier = 1.0 + (current_wave - 1) * 0.5  # Увеличиваем количество врагов на 50% за волну
+		var spawn_count = base_spawn_count * (1 + intensity * 3) * wave_multiplier
+
 		if active_events.has("single_type") && randf() < extra_spawn_chance:
 			spawn_count += 1
 		for i in range(spawn_count):
@@ -195,26 +210,35 @@ func _on_spawn_timeout():
 			spawn_enemy(enemy_scenes[selected_enemy_id], selected_enemy_id)
 	update_spawn_interval()
 
+
 func update_spawn_weights(wave_progress: float):
 	spawn_weights = {}
 	for enemy_id in enemies_data:
 		var enemy = enemies_data[enemy_id]
-		var difficulty = 1.0 + (wave_progress * enemy.difficulty_multiplier)
-		spawn_weights[enemy_id] = enemy.base_spawn_weight * difficulty
+		if current_wave >= enemy.first_wave:  # Проверяем, достигнута ли волна first_wave
+			var difficulty = 1.0 + (wave_progress * enemy.difficulty_multiplier)
+			spawn_weights[enemy_id] = enemy.base_spawn_weight * difficulty
 
 func get_weighted_random_enemy_id() -> String:
 	if active_events.has("single_type"):
 		return active_events["single_type"]["type"]
 	var total_weight = 0.0
+	var valid_enemies = {}
 	for enemy_id in spawn_weights:
-		total_weight += spawn_weights[enemy_id]
+		var enemy_data = enemies_data[enemy_id]
+		if current_wave >= enemy_data.first_wave:  # Проверяем, достигнута ли волна first_wave
+			valid_enemies[enemy_id] = spawn_weights[enemy_id]
+			total_weight += spawn_weights[enemy_id]
+	if valid_enemies.is_empty():
+		return "basic"
+
 	var random = randf_range(0, total_weight)
 	var current = 0.0
-	for enemy_id in spawn_weights:
-		current += spawn_weights[enemy_id]
+	for enemy_id in valid_enemies:
+		current += valid_enemies[enemy_id]
 		if random < current:
 			return enemy_id
-	return spawn_weights.keys()[0]
+	return valid_enemies.keys()[0]
 
 func spawn_enemy(enemy_scene: PackedScene, enemy_id: String):
 	var valid_spawnpoints = get_valid_spawnpoints()
@@ -225,6 +249,7 @@ func spawn_enemy(enemy_scene: PackedScene, enemy_id: String):
 	if spawnpoint and spawnpoint is Node2D:
 		var enemy_instance = enemy_scene.instantiate()
 		enemy_instance.enemy_type = enemy_id
+
 		enemy_instance.connect("died", _on_enemy_died.bind(enemy_instance))
 		add_child(enemy_instance)
 		enemy_instance.position = spawnpoint.global_position
@@ -331,3 +356,6 @@ func _on_lose_zone_body_entered(body: Node2D) -> void:
 			var heart_node = get_node_or_null(heart_to_remove)
 			if heart_node:
 				heart_node.queue_free()
+		active_enemies -= 1
+		if active_enemies <= 0 and not is_resting:
+			_on_wave_finished()
