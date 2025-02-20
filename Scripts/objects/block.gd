@@ -14,11 +14,11 @@ func _process(delta: float) -> void:
 		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
-		body.get_parent().attack(self)  # Вызываем метод атаки у врага
+		body.get_parent().attack(self)
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
-		body.get_parent().stop_attack(self)  # Вызываем метод атаки у врага
+		body.get_parent().stop_attack(self)
 
 func take_damage(amount: float) -> void:
 	if hp <= 0:

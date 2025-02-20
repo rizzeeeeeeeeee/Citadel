@@ -9,6 +9,7 @@ signal died
 @export var hp: float = 150.0
 @export var enemy_type: String
 @export var attack_speed: float = 1.0
+@export var coin_spawn_chance: float
 
 @onready var sprite: AnimatedSprite2D = $CharacterBody2D/Sprite2D
 @onready var collision_shape: CollisionShape2D = $CharacterBody2D/CollisionShape2D
@@ -22,6 +23,7 @@ var current_target: Node2D = null
 var is_attacking: bool = false
 var is_buff_immune: bool = false  
 var should_stop_attack: bool = false
+var attack_cooldown: float = 0.1
 
 var buff_data: Array = []
 
@@ -47,7 +49,11 @@ func attack(target: Node2D) -> void:
 
 	current_target = target
 	is_attacking = true 
-	should_stop_attack = false  # Сбрасываем флаг остановки атаки
+	should_stop_attack = false 
+
+	# Остановка движения на время атаки
+	set_process(false)  # Отключаем обработку движения
+	$CharacterBody2D.velocity = Vector2.ZERO  # Останавливаем движение
 
 	while current_target and not is_dead and not should_stop_attack:
 		if not is_instance_valid(current_target) or not current_target.has_method("take_damage"):
@@ -56,27 +62,38 @@ func attack(target: Node2D) -> void:
 		if current_target.hp <= 0:
 			break  
 
+		# Запуск анимации атаки
 		$CharacterBody2D/Sprite2D.play("attack")
 
+		# Нанесение урона
 		current_target.take_damage(25)
 
+		# Проверка на смерть персонажа или уничтожение цели
 		if is_dead or not is_instance_valid(current_target):
 			break
 
+		# Задержка между атаками
 		var timer = get_tree().create_timer(1.0 / attack_speed)
 		await timer.timeout
 
+		# Проверка на уничтожение цели после задержки
 		if not is_instance_valid(current_target) or current_target.hp <= 0:
 			break
 
+	# Завершение атаки
 	is_attacking = false
 	current_target = null
 
+	# Восстановление обработки движения
 	if not is_dead:
 		set_process(true)
 
 func stop_attack(target: Node2D) -> void:
-	should_stop_attack = true
+	if current_target == target:
+		should_stop_attack = true
+		var timer = get_tree().create_timer(attack_cooldown)
+		await timer.timeout
+		should_stop_attack = false
 
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):
@@ -320,4 +337,15 @@ func die():
 	if is_instance_valid(self):
 		await get_tree().create_timer(1.0).timeout
 		died.emit()
+		
+		# Проверяем шанс спавна монетки
+		if randf() * 100.0 <= coin_spawn_chance:
+			# Создаем экземпляр монетки
+			var coin_path = load("res://Scenes/obj/coin.tscn")
+			var coin_instance = coin_path.instantiate()
+
+			coin_instance.global_position = global_position
+
+			get_parent().add_child(coin_instance)
+		
 		queue_free()

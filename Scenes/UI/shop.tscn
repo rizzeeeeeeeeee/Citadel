@@ -8,3 +8,4 @@ process_mode = 3
 script = ExtResource("1_45wwk")
 
 [node name="Card Pack" parent="." instance=ExtResource("1_dr2c0")]
+z_index = 10

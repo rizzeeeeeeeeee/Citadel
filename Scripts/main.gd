@@ -7,6 +7,10 @@ extends Node2D
 @export var health: float = 4.0
 @export var health_icons: Array[NodePath]
 @export var wave_display: WaveCurveDisplay
+@export var max_events_per_wave: int = 1
+@export var extra_spawn_chance: float = 0.3
+@export var min_event_delay: float = 80.0
+@export var max_event_delay: float = 30.0
 
 @onready var energy_bar = $CanvasLayer/ProgressBar
 @onready var energy_label = $CanvasLayer/ProgressBar/Label
@@ -16,8 +20,11 @@ extends Node2D
 @onready var wave_bar = $Left_Tab/Wave/WaveBar
 @onready var shop = $Shop
 @onready var card_pile = $CanvasLayer/Retake/Cards
+@onready var countdown = $CanvasLayer/Countdown
+@onready var coin_count = $Left_Tab/Coin_Label
 
 var enemies_data: Dictionary
+var coins_int: int = 0
 var wave_settings: Dictionary
 var enemy_scenes: Dictionary = {}
 var current_wave: int = 0
@@ -26,11 +33,10 @@ var wave_timer: Timer
 var spawn_timer: Timer
 var spawn_weights: Dictionary
 var first_spawn: bool = true
-@export var max_events_per_wave: int = 1
-@export var extra_spawn_chance: float = 0.3
 var active_events: Dictionary = {}
 var dead_enemies: Array = []
 var active_enemies: int = 0
+var connected_coins = []
 enum EventType { CENTRAL_LANES, SINGLE_TYPE, RESURRECT }
 const EVENT_PROBABILITY = 0.6
 const RESURRECT_TIME_WINDOW = 10.0
@@ -39,8 +45,6 @@ const EVENT_DURATIONS = {
 	EventType.SINGLE_TYPE: 35.0,
 	EventType.RESURRECT: 20.0
 }
-@export var min_event_delay: float = 80.0
-@export var max_event_delay: float = 30.0
 var event_timer: Timer
 var available_events: Array
 
@@ -56,7 +60,8 @@ func _ready() -> void:
 	energy_bar.min_value = 0.0
 	energy_bar.value = energy
 	hand.card_dropped.connect(update_bar)
-	start_next_wave()
+	await get_tree().create_timer(3.0).timeout
+	start_next_wave() 
 
 func load_enemies_data():
 	var file = FileAccess.open("res://Other/enemies_data.json", FileAccess.READ)
@@ -113,11 +118,13 @@ func start_next_wave():
 
 
 func start_next_event_timer():
+	if current_wave <= 2:  # Не запускаем события на первой и второй волне
+		return
 	var delay = randf_range(min_event_delay, max_event_delay)
 	event_timer.start(delay)
 
 func _on_event_timer_timeout():
-	if is_resting:
+	if is_resting or current_wave <= 2:  # Не активируем события на первой и второй волне
 		return
 	if active_events.size() >= max_events_per_wave:
 		return
@@ -128,6 +135,8 @@ func _on_event_timer_timeout():
 		event_timer.stop()
 
 func activate_event(event_type: EventType):
+	if current_wave <= 2:  # Не активируем события на первой и второй волне
+		return
 	match event_type:
 		EventType.CENTRAL_LANES:
 			active_events["central_lanes"] = true
@@ -149,6 +158,8 @@ func activate_event(event_type: EventType):
 			start_event_timer(event_type)
 
 func start_event_timer(event_type: EventType):
+	if current_wave <= 2:  # Не запускаем таймер событий на первой и второй волне
+		return
 	var timer = Timer.new()
 	timer.wait_time = EVENT_DURATIONS[event_type]
 	timer.one_shot = true
@@ -209,7 +220,6 @@ func _on_spawn_timeout():
 			var selected_enemy_id = get_weighted_random_enemy_id()
 			spawn_enemy(enemy_scenes[selected_enemy_id], selected_enemy_id)
 	update_spawn_interval()
-
 
 func update_spawn_weights(wave_progress: float):
 	spawn_weights = {}
@@ -312,6 +322,7 @@ func _wait_for_all_enemies_defeated():
 		await get_tree().create_timer(0.5).timeout
 
 func _process(delta: float) -> void:
+	coin_update()
 	if health <= 0:
 		$CanvasLayer/Death.visible = true
 		get_tree().paused = true
@@ -359,3 +370,19 @@ func _on_lose_zone_body_entered(body: Node2D) -> void:
 		active_enemies -= 1
 		if active_enemies <= 0 and not is_resting:
 			_on_wave_finished()
+
+func coin_update():
+	var coins = get_tree().get_nodes_in_group("coins")
+	for coin in coins:
+		if not coin in connected_coins: 
+			coin.add_coin.connect(on_coin_collected)
+			connected_coins.append(coin) 
+	coin_count.text = str(coins_int)
+
+func on_coin_collected(coin_instance):
+	if coin_instance in connected_coins:
+		coins_int += 1
+		coin_count.text = str(coins_int)
+		coin_instance.remove_from_group("coins")
+		coin_instance.add_coin.disconnect(on_coin_collected)
+		connected_coins.erase(coin_instance)

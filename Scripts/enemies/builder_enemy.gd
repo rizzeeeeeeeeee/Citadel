@@ -23,6 +23,7 @@ var is_attacking: bool = false
 var build_timer: Timer
 var is_building: bool = false  # Флаг для отслеживания состояния строительства
 var should_stop_attack: bool = false
+var attack_cooldown: float = 0.1
 
 # Загрузка данных о врагах и баффах из JSON файлов
 var enemies_data: Dictionary = {}
@@ -38,7 +39,7 @@ func _ready():
 	
 	# Таймер для строительства
 	build_timer = Timer.new()
-	build_timer.wait_time = 6.0
+	build_timer.wait_time = 5.0
 	build_timer.one_shot = false
 	build_timer.timeout.connect(_on_build_timer_timeout)
 	add_child(build_timer)
@@ -166,7 +167,6 @@ func apply_random_buff():
 			print("Failed to load buff scene: ", buff["path"])
 	else:
 		print("No buff data available.")
-
 func attack(target: Node2D) -> void:
 	if is_dead or is_attacking:
 		return  
@@ -175,6 +175,10 @@ func attack(target: Node2D) -> void:
 	is_attacking = true 
 	should_stop_attack = false  # Сбрасываем флаг остановки атаки
 
+	# Остановка движения на время атаки
+	set_process(false)  # Отключаем обработку движения
+	$CharacterBody2D.velocity = Vector2.ZERO  # Останавливаем движение
+
 	while current_target and not is_dead and not should_stop_attack:
 		if not is_instance_valid(current_target) or not current_target.has_method("take_damage"):
 			break
@@ -182,27 +186,36 @@ func attack(target: Node2D) -> void:
 		if current_target.hp <= 0:
 			break  
 
+		# Запуск анимации атаки
 		$CharacterBody2D/Sprite2D.play("attack")
 
+		# Нанесение урона
 		current_target.take_damage(25)
 
 		if is_dead or not is_instance_valid(current_target):
 			break
 
+		# Задержка между атаками
 		var timer = get_tree().create_timer(1.0 / attack_speed)
 		await timer.timeout
 
 		if not is_instance_valid(current_target) or current_target.hp <= 0:
 			break
 
+	# Завершение атаки
 	is_attacking = false
 	current_target = null
 
+	# Восстановление обработки движения
 	if not is_dead:
 		set_process(true)
 
 func stop_attack(target: Node2D) -> void:
-	should_stop_attack = true
+	if current_target == target:
+		should_stop_attack = true
+		var timer = get_tree().create_timer(attack_cooldown)
+		await timer.timeout
+		should_stop_attack = false
 
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):

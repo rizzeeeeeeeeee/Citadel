@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgitdk7hsjmng"]
+[gd_scene load_steps=3 format=3 uid="uid://cgitdk7hsjmng"]
 
 [ext_resource type="Script" path="res://Scripts/ui/main_menu.gd" id="1_iab4p"]
+[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_74ccy"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -27,7 +28,9 @@ offset_right = 240.0
 offset_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_override_fonts/font = ExtResource("2_74ccy")
+theme_override_font_sizes/font_size = 72
+toggle_mode = true
 text = "Play
 "
 
@@ -37,15 +40,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -186.0
+offset_left = -175.0
 offset_top = 254.0
-offset_right = 293.0
+offset_right = 274.0
 offset_bottom = 390.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.781268, 0.781268)
+theme_override_fonts/font = ExtResource("2_74ccy")
 theme_override_font_sizes/font_size = 56
 text = "Exit"
+
+[node name="Label" type="Label" parent="Camera2D/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -408.0
+offset_top = 89.0
+offset_right = 399.0
+offset_bottom = 369.0
+grow_horizontal = 2
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 46
+theme_override_fonts/font = ExtResource("2_74ccy")
+theme_override_font_sizes/font_size = 100
+text = "CITADEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1674.0
+offset_top = -559.0
+offset_right = 1647.0
+offset_bottom = 577.0
+color = Color(0.144063, 0.144063, 0.144063, 1)
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/Exit" to="." method="_on_exit_pressed"]

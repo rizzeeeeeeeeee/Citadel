@@ -88,6 +88,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.get_parent().attack(self)  # Вызываем метод атаки у врага
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	await get_tree().create_timer(0.5).timeout
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
 		body.get_parent().stop_attack(self)  # Вызываем метод атаки у врага
 

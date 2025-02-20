@@ -23,6 +23,7 @@ var is_attacking: bool = false
 var is_buff_immune: bool = false  # Добавлено: флаг иммунитета к баффам
 var received_damage_timer: Timer = Timer.new()  # Таймер для отслеживания времени без получения урона
 var should_stop_attack: bool = false
+var attack_cooldown: float = 0.1
 
 # Загрузка данных о баффах из JSON файла
 var buff_data: Array = []
@@ -74,6 +75,7 @@ func attack(target: Node2D) -> void:
 	should_stop_attack = false  # Сбрасываем флаг остановки атаки
 
 	while current_target and not is_dead and not should_stop_attack:
+		_set_visible()
 		if not is_instance_valid(current_target) or not current_target.has_method("take_damage"):
 			break
 
@@ -81,7 +83,6 @@ func attack(target: Node2D) -> void:
 			break  
 
 		$CharacterBody2D/Sprite2D.play("attack")
-
 		current_target.take_damage(25)
 
 		if is_dead or not is_instance_valid(current_target):
@@ -100,7 +101,14 @@ func attack(target: Node2D) -> void:
 		set_process(true)
 
 func stop_attack(target: Node2D) -> void:
-	should_stop_attack = true
+	if current_target == target:
+		await get_tree().create_timer(1.0).timeout
+		set_invisible()
+		should_stop_attack = true
+		var timer = get_tree().create_timer(attack_cooldown)
+		await timer.timeout
+		should_stop_attack = false
+
 
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):

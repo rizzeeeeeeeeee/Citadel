@@ -27,8 +27,8 @@ signal card_dropped(value: float)
 @onready var no_energy_label = $"../CanvasLayer/No Energy"
 
 func _ready():
-	#load_json_data("user://run_cards_data.json", card_scenes)
-	load_json_data("res://Other/cards_data.json", card_scenes)
+	load_json_data("user://run_cards_data.json", card_scenes)
+	#load_json_data("res://Other/cards_data.json", card_scenes)
 	load_json_data("res://Other/obj_data.json", obj_scenes)
 	load_json_data("res://Other/prv_obj_data.json", preview_scenes)
 

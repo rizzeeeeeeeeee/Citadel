@@ -44,6 +44,7 @@ func _shoot() -> void:
 # Обработка столкновения с врагом
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
+		await get_tree().create_timer(0.2).timeout
 		body.get_parent().attack(self)  # Вызываем метод атаки у врага
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
