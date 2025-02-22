@@ -46,6 +46,7 @@ step_speed_variation = 30.0
 hp = 75.0
 enemy_type = "basic"
 attack_speed = 2.0
+coin_spawn_chance = 10.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy", "invisible_enemy"]]
 collision_layer = 2147484670

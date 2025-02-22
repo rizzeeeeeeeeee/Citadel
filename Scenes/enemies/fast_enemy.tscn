@@ -48,6 +48,7 @@ step_frequency = 0.4
 hp = 100.0
 enemy_type = "fast"
 attack_speed = 2.0
+coin_spawn_chance = 7.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670

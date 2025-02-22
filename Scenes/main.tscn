@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=41 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_rmctx"]
@@ -14,9 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
 [ext_resource type="Script" path="res://Scripts/ui/pause.gd" id="6_yjq5g"]
 [ext_resource type="Script" path="res://Scripts/ui/no_energy.gd" id="7_4f6uy"]
-[ext_resource type="Texture2D" uid="uid://cotsndyi5ae75" path="res://Scenes/enegry_buff.png" id="8_54r8o"]
-[ext_resource type="Texture2D" uid="uid://oug5vktk0mdw" path="res://Scenes/ban_invis.png" id="9_mepnh"]
-[ext_resource type="Texture2D" uid="uid://ckimis7iv6akp" path="res://Scenes/hand_plus.png" id="10_8njas"]
+[ext_resource type="Script" path="res://Scripts/ui/mod_zone.gd" id="10_jlo1q"]
 [ext_resource type="Script" path="res://Scripts/lose_zone.gd" id="11_ip45t"]
 [ext_resource type="Script" path="res://Scripts/ui/countdown.gd" id="12_6n2n3"]
 [ext_resource type="Script" path="res://Scripts/ui/wave_curve_display.gd" id="12_u45cj"]
@@ -121,14 +119,15 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="main" type="Node2D" node_paths=PackedStringArray("wave_display")]
+[node name="main" type="Node2D" node_paths=PackedStringArray("wave_display") groups=["main"]]
 script = ExtResource("1_rmctx")
 spawnpoints = Array[NodePath]([NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")])
 wave_curves = Array[Curve]([SubResource("Curve_taepo"), SubResource("Curve_p4cw6"), SubResource("Curve_u3cw4"), SubResource("Curve_qyfwg"), SubResource("Curve_i6jko"), SubResource("Curve_u6uxo"), SubResource("Curve_rxlnm"), SubResource("Curve_r4m1i"), SubResource("Curve_djvca")])
-energy = 3.0
-energy_rate = 0.3
+energy = 2.0
+energy_rate = 0.25
 health_icons = Array[NodePath]([NodePath("Left_Tab/Health/Heart1"), NodePath("Left_Tab/Health/Heart2"), NodePath("Left_Tab/Health/Heart3"), NodePath("Left_Tab/Health/Heart4")])
 wave_display = NodePath("Left_Tab/WaveDisplay")
+extra_spawn_chance = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -230,7 +229,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.3.3
+text = "v0.3.6
 "
 metadata/_edit_use_anchors_ = true
 
@@ -473,102 +472,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_4f6uy")
 
-[node name="Buff_Energy" type="TextureRect" parent="CanvasLayer"]
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -618.0
-offset_top = -74.0
-offset_right = -588.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2.36283, 2.36283)
-texture = ExtResource("8_54r8o")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Textures/UI/buffs/enegry_buff.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "c85ea3dde700e5800520cb2588df6d28"
-
-[node name="Ban_Invis" type="TextureRect" parent="CanvasLayer"]
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -705.0
-offset_top = -73.9999
-offset_right = -674.0
-offset_bottom = -43.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2.31047, 2.31047)
-texture = ExtResource("9_mepnh")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Textures/UI/buffs/ban_invis.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "f001e543cc4fd736258101746aeb7596"
-
-[node name="Hand_Plus" type="TextureRect" parent="CanvasLayer"]
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -531.0
-offset_top = -73.9999
-offset_right = -500.0
-offset_bottom = -43.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2.31047, 2.31047)
-texture = ExtResource("10_8njas")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {}
-}
-metadata/_aseprite_wizard_config_ = {
-"i_mode": 1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "",
-"slice": "",
-"source": "res://Textures/UI/buffs/hand_plus.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "713dc1da1ade28e933b4945fd37009a0"
-
 [node name="Countdown" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -577,6 +480,23 @@ offset_bottom = 40.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("12_6n2n3")
+
+[node name="ModZone" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -688.0
+offset_top = -65.0
+offset_right = -401.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+script = ExtResource("10_jlo1q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, 450)
@@ -1849,6 +1769,7 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "393c94b6306918ef5cd76a079a9792e8"
 
 [node name="Coin_Label" type="Label" parent="Left_Tab"]
+process_mode = 3
 offset_left = -784.0
 offset_top = -43.0
 offset_right = -748.0

@@ -126,6 +126,7 @@ script = ExtResource("1_gv2fn")
 base_speed = 30.0
 hp = 250.0
 enemy_type = "builder"
+coin_spawn_chance = 20.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670

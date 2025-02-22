@@ -23,7 +23,7 @@ var current_target: Node2D = null
 var is_attacking: bool = false
 var is_buff_immune: bool = false  
 var should_stop_attack: bool = false
-var attack_cooldown: float = 0.1
+var attack_cooldown: float = 0.5
 
 var buff_data: Array = []
 
@@ -337,10 +337,8 @@ func die():
 	if is_instance_valid(self):
 		await get_tree().create_timer(1.0).timeout
 		died.emit()
-		
-		# Проверяем шанс спавна монетки
+
 		if randf() * 100.0 <= coin_spawn_chance:
-			# Создаем экземпляр монетки
 			var coin_path = load("res://Scenes/obj/coin.tscn")
 			var coin_instance = coin_path.instantiate()
 

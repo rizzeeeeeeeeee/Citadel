@@ -10,13 +10,8 @@ var chosen_cards = []
 var tween: Tween
 var hover_offset : Vector2 = Vector2(0, -20) 
 
-# Веса для каждой редкости
-@export var rarity_weights = {
-	"common": 0,
-	"uncommon": 0,
-	"rare": 0,
-	"epic": 0
-}
+# Переменная для определения, нужно ли спавнить только карты класса epic
+@export var only_epic: bool = false
 
 func _ready() -> void:
 	original_position = sprite.position  
@@ -38,15 +33,25 @@ func _spawn_cards_for_selection() -> void:
 		printerr("Не удалось загрузить cards_data.json")
 		return
 
-	# Выбираем 3 случайные карты с учетом редкости
+	# Если only_epic = true, фильтруем карты, оставляя только epic
+	if only_epic:
+		cards_data = cards_data.filter(func(card): return card["rarity"] == "epic")
+
+	# Проверяем, есть ли карты с редкостью epic
+	if cards_data.size() == 0:
+		printerr("Нет карт с редкостью epic!")
+		return
+
+	# Выбираем 3 случайные карты из отфильтрованного списка
 	chosen_cards = []
 	while chosen_cards.size() < 3 and cards_data.size() > 0:
-		var random_card = _get_random_card_with_rarity()
+		var random_index = randi() % cards_data.size()
+		var random_card = cards_data[random_index]
 		chosen_cards.append(random_card)
-		cards_data.erase(random_card)
+		cards_data.remove_at(random_index)  # Удаляем выбранную карту, чтобы избежать дубликатов
 
 	# Спавним их в сцене
-	for i in range(3):
+	for i in range(chosen_cards.size()):
 		var card_data = chosen_cards[i]
 		var card_scene = load(card_data["path"]).instantiate()
 		card_scene.position = Vector2(i * 150, 0)  # Расставляем карты в ряд
@@ -80,21 +85,6 @@ func _spawn_cards_for_selection() -> void:
 	# Показываем контейнер и скрываем пак
 	selection_container.show()
 	pack_sprite.hide()
-
-func _get_random_card_with_rarity() -> Dictionary:
-	var total_weight = 0
-	for card in cards_data:
-		total_weight += rarity_weights[card["rarity"]]
-
-	var random_weight = randi() % total_weight
-	var current_weight = 0
-
-	for card in cards_data:
-		current_weight += rarity_weights[card["rarity"]]
-		if current_weight > random_weight:
-			return card
-
-	return cards_data[0] # Если что-то пошло не так, вернем первую карту
 
 func _on_card_selected(card: Node) -> void:
 	var hand = get_tree().get_first_node_in_group("hand")
@@ -139,4 +129,4 @@ func _on_area_2d_mouse_entered() -> void:
 	if tween:
 		tween.kill()  
 	tween = create_tween()
-	tween.tween_property(sprite, "position", original_position + hover_offset, 0.03)  
+	tween.tween_property(sprite, "position", original_position + hover_offset, 0.03)

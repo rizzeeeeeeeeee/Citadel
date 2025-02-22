@@ -1,25 +1,51 @@
 extends Node2D
 
 @onready var card_pack = $"Card Pack"
+var pending_card_pack: Node2D = null  
 signal shop_visible
+signal shop_invisible
+var mouse_in_buy_zone: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Подключаем сигнал, который будет срабатывать при исчезновении card_pack
 	card_pack.tree_exited.connect(_on_card_pack_exited)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-# Функция, которая вызывается, когда card_pack исчезает
 func _on_card_pack_exited():
-	# Создаем новый экземпляр card_pack
+	pending_card_pack = load("res://Scenes/UI/cards_pack.tscn").instantiate()
+	pending_card_pack.tree_exited.connect(_on_card_pack_exited)
+	$MainShop.visible = true
+	if not self.visible:
+		call_deferred("add_child", pending_card_pack)
+		card_pack = pending_card_pack
+		pending_card_pack = null  
+
+func spawn_default_card_pack():
+	var pack = load("res://Scenes/UI/cards_pack.tscn").instantiate()
+	call_deferred("add_child", pack)
+
+func spawn_epic_card_pack():
+	var pack = load("res://Scenes/UI/epic_pack.tscn").instantiate()
+	call_deferred("add_child", pack)
+
+func _on_button_pressed() -> void:
 	self.visible = false
+	$MainShop.visible = false
+
 	shop_visible.emit()
-	var new_card_pack = load("res://Scenes/UI/cards_pack.tscn").instantiate()
-	call_deferred("add_child", new_card_pack) 
-	# Подключаем сигнал для нового экземпляра
-	new_card_pack.tree_exited.connect(_on_card_pack_exited)
-	# Обновляем ссылку на card_pack
-	card_pack = new_card_pack
+	
+	if pending_card_pack:
+		call_deferred("add_child", pending_card_pack)
+		card_pack = pending_card_pack
+		pending_card_pack = null  
+
+func _on_buy_zone_mouse_entered() -> void:
+	mouse_in_buy_zone = true
+
+func _on_buy_zone_mouse_exited() -> void:
+	mouse_in_buy_zone = false
+
+func _on_refresh_pressed() -> void:
+	$MainShop/ModifierShop.display_random_modifiers()
+	$MainShop/PackShop.display_random_packs()

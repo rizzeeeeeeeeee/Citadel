@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3 uid="uid://ba6kh4sfry7jr"]
+
+[ext_resource type="Script" path="res://Scripts/ui/epic_pack.gd" id="1_6xt7y"]
+[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_0tim8"]
+[ext_resource type="Texture2D" uid="uid://cefm1dp1en15c" path="res://Scenes/coin.png" id="3_4txkc"]
+[ext_resource type="Texture2D" uid="uid://drm8tdbb1cnbi" path="res://Scenes/packs/cards_pack_epic.png" id="4_si57v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kbf0"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7rlo"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuadd"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdva"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxc7l"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(10, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ewva"]
+atlas = ExtResource("3_4txkc")
+region = Rect2(20, 10, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lkx2f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kbf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7rlo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuadd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxc7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ewva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kbf0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tm41"]
+size = Vector2(271.88, 438.634)
+
+[node name="Card Pack" type="Node2D" groups=["packs"]]
+z_index = 5
+script = ExtResource("1_6xt7y")
+value = 6
+
+[node name="Info" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+offset_left = -81.0
+offset_top = -333.0
+offset_right = 21.0
+offset_bottom = -197.0
+scale = Vector2(1.66053, 1.45346)
+color = Color(0.19, 0.19, 0.19, 0.741176)
+
+[node name="Label" type="Label" parent="Info"]
+offset_left = -6.62438
+offset_top = -2.06405
+offset_right = 107.376
+offset_bottom = 132.936
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("2_0tim8")
+theme_override_font_sizes/font_size = 19
+text = "
+
+EPIC 
+PACK"
+horizontal_alignment = 1
+
+[node name="LabelCoin" type="Label" parent="."]
+offset_left = -56.0
+offset_top = -174.0
+offset_right = 8.0
+offset_bottom = -129.0
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_0tim8")
+theme_override_font_sizes/font_size = 44
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Coin" type="AnimatedSprite2D" parent="LabelCoin"]
+texture_filter = 1
+position = Vector2(80, 22)
+scale = Vector2(4.53417, 4.53418)
+sprite_frames = SubResource("SpriteFrames_lkx2f")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/UI/coin.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "393c94b6306918ef5cd76a079a9792e8"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.83016, 2.83016)
+texture = ExtResource("4_si57v")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/cards_pack_epic.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7f163a4f737202092021000129c8b4e6"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+scale = Vector2(0.551713, 0.551713)
+shape = SubResource("RectangleShape2D_6tm41")
+
+[node name="Control" type="Node2D" parent="."]
+position = Vector2(-380, -161)
+scale = Vector2(1.90857, 1.95329)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -363.0
+offset_top = -310.0
+offset_right = 364.0
+offset_bottom = -173.0
+theme_override_constants/outline_size = 31
+theme_override_fonts/font = ExtResource("2_0tim8")
+theme_override_font_sizes/font_size = 100
+text = "GRAB CARDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

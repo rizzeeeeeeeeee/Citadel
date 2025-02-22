@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bou0mp776gl"]
+[gd_scene load_steps=5 format=3 uid="uid://bscowx0f0mcws"]
 
-[ext_resource type="Script" path="res://Scripts/ui/cards_pack.gd" id="1_27206"]
-[ext_resource type="Texture2D" uid="uid://ctsbprnb8tmud" path="res://Scenes/UI/cards_pack.png" id="1_y7ie8"]
-[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_b2bdx"]
+[ext_resource type="Script" path="res://Scripts/ui/cards_pack.gd" id="1_hrrbg"]
+[ext_resource type="Texture2D" uid="uid://b26kyvgk365du" path="res://Scenes/UI/cards_pack_epic.png" id="2_fariw"]
+[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_dwjkq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tm41"]
 size = Vector2(271.88, 438.634)
 
 [node name="Card Pack" type="Node2D"]
 z_index = 10
-script = ExtResource("1_27206")
+script = ExtResource("1_hrrbg")
 rarity_weights = {
-"common": 50,
-"epic": 5,
-"rare": 15,
-"uncommon": 35
+"common": 10,
+"epic": 70,
+"rare": 10,
+"uncommon": 10
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
 texture_filter = 1
 scale = Vector2(2.83016, 2.83016)
-texture = ExtResource("1_y7ie8")
+texture = ExtResource("2_fariw")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -35,9 +35,9 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "",
 "slice": "",
-"source": "res://Textures/UI/cards_pack.aseprite"
+"source": "res://Textures/UI/cards_pack_epic.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "4f86f229d70c6cd9d7229adf0fed1100"
+metadata/_aseprite_wizard_source_file_hash_ = "7f163a4f737202092021000129c8b4e6"
 
 [node name="Area2D" type="Area2D" parent="."]
 z_index = 10
@@ -61,7 +61,7 @@ offset_top = -310.0
 offset_right = 364.0
 offset_bottom = -173.0
 theme_override_constants/outline_size = 31
-theme_override_fonts/font = ExtResource("3_b2bdx")
+theme_override_fonts/font = ExtResource("3_dwjkq")
 theme_override_font_sizes/font_size = 100
 text = "GRAB CARDS"
 horizontal_alignment = 1

@@ -11,6 +11,7 @@ extends Node2D
 @export var extra_spawn_chance: float = 0.3
 @export var min_event_delay: float = 80.0
 @export var max_event_delay: float = 30.0
+@export var coins_int: int = 0
 
 @onready var energy_bar = $CanvasLayer/ProgressBar
 @onready var energy_label = $CanvasLayer/ProgressBar/Label
@@ -22,9 +23,10 @@ extends Node2D
 @onready var card_pile = $CanvasLayer/Retake/Cards
 @onready var countdown = $CanvasLayer/Countdown
 @onready var coin_count = $Left_Tab/Coin_Label
+@onready var mod_zone = $CanvasLayer/ModZone
 
 var enemies_data: Dictionary
-var coins_int: int = 0
+var banned_enemies: Array = []
 var wave_settings: Dictionary
 var enemy_scenes: Dictionary = {}
 var current_wave: int = 0
@@ -100,8 +102,8 @@ func start_next_wave():
 	available_events = EventType.values().duplicate()
 
 	var curve_index = (current_wave - 1) % wave_curves.size()
-	if current_wave == 1:  # Первая волна
-		curve_index = 2  # Используем третий Curve для первой волны
+	if current_wave == 1:  
+		curve_index = 2  
 	elif curve_index >= wave_curves.size():
 		curve_index = wave_curves.size() - 1
 
@@ -118,13 +120,13 @@ func start_next_wave():
 
 
 func start_next_event_timer():
-	if current_wave <= 2:  # Не запускаем события на первой и второй волне
+	if current_wave <= 2:  
 		return
 	var delay = randf_range(min_event_delay, max_event_delay)
 	event_timer.start(delay)
 
 func _on_event_timer_timeout():
-	if is_resting or current_wave <= 2:  # Не активируем события на первой и второй волне
+	if is_resting or current_wave <= 2: 
 		return
 	if active_events.size() >= max_events_per_wave:
 		return
@@ -135,7 +137,7 @@ func _on_event_timer_timeout():
 		event_timer.stop()
 
 func activate_event(event_type: EventType):
-	if current_wave <= 2:  # Не активируем события на первой и второй волне
+	if current_wave <= 2: 
 		return
 	match event_type:
 		EventType.CENTRAL_LANES:
@@ -158,7 +160,7 @@ func activate_event(event_type: EventType):
 			start_event_timer(event_type)
 
 func start_event_timer(event_type: EventType):
-	if current_wave <= 2:  # Не запускаем таймер событий на первой и второй волне
+	if current_wave <= 2:  
 		return
 	var timer = Timer.new()
 	timer.wait_time = EVENT_DURATIONS[event_type]
@@ -206,12 +208,11 @@ func _on_spawn_timeout():
 		var intensity = wave_curves[(current_wave - 1) % wave_curves.size()].sample(wave_progress)
 		var base_spawn_count = wave_settings.base_spawn_count
 
-		# Уменьшаем количество врагов на первой волне
 		if current_wave == 1:
-			base_spawn_count = 1  # Минимальное количество врагов на первой волне
-			intensity *= 0.5  # Уменьшаем интенсивность спавна на первой волне
+			base_spawn_count = 1 
+			intensity *= 0.5  
 
-		var wave_multiplier = 1.0 + (current_wave - 1) * 0.5  # Увеличиваем количество врагов на 50% за волну
+		var wave_multiplier = 1.0 + (current_wave - 1) * 0.5  
 		var spawn_count = base_spawn_count * (1 + intensity * 3) * wave_multiplier
 
 		if active_events.has("single_type") && randf() < extra_spawn_chance:
@@ -225,20 +226,41 @@ func update_spawn_weights(wave_progress: float):
 	spawn_weights = {}
 	for enemy_id in enemies_data:
 		var enemy = enemies_data[enemy_id]
-		if current_wave >= enemy.first_wave:  # Проверяем, достигнута ли волна first_wave
+		if current_wave >= enemy.first_wave: 
 			var difficulty = 1.0 + (wave_progress * enemy.difficulty_multiplier)
 			spawn_weights[enemy_id] = enemy.base_spawn_weight * difficulty
+
+func ban_enemy(enemy_id: String) -> void:
+	if enemy_id != "":
+		if not banned_enemies.has(enemy_id):
+			banned_enemies.append(enemy_id)
+			print("Враг с ID ", enemy_id, " запрещен для спавна.")
+	else:
+		print("Передан пустой ID, ничего не удаляется.")
+
+func unban_enemy(enemy_id: String) -> void:
+	if enemy_id != "":
+		if banned_enemies.has(enemy_id):
+			banned_enemies.erase(enemy_id)  
+			print("Враг с ID ", enemy_id, " снова разрешен для спавна.")
+		else:
+			print("Враг с ID ", enemy_id, " не был запрещен.")
+	else:
+		print("Передан пустой ID, ничего не изменяется.")
 
 func get_weighted_random_enemy_id() -> String:
 	if active_events.has("single_type"):
 		return active_events["single_type"]["type"]
+	
 	var total_weight = 0.0
 	var valid_enemies = {}
+	
 	for enemy_id in spawn_weights:
 		var enemy_data = enemies_data[enemy_id]
-		if current_wave >= enemy_data.first_wave:  # Проверяем, достигнута ли волна first_wave
+		if current_wave >= enemy_data.first_wave and not banned_enemies.has(enemy_id):  # Исключаем запрещенных врагов
 			valid_enemies[enemy_id] = spawn_weights[enemy_id]
 			total_weight += spawn_weights[enemy_id]
+	
 	if valid_enemies.is_empty():
 		return "basic"
 
@@ -306,6 +328,7 @@ func apply_resurrect_effect(enemy_instance):
 
 func _on_wave_finished():
 	is_resting = true
+	coin_count.text = str(coins_int)
 	print("Волна ", current_wave, " завершена. Отдых...")
 	spawn_timer.stop()
 	event_timer.stop()
@@ -314,8 +337,6 @@ func _on_wave_finished():
 	get_tree().paused = true
 	emit_signal("wave_cleared", current_wave)
 	shop.shop_visible.connect(toggle_pause)
-	await get_tree().create_timer(wave_settings.rest_time).timeout
-	start_next_wave()
 
 func _wait_for_all_enemies_defeated():
 	while active_enemies > 0:
@@ -323,6 +344,7 @@ func _wait_for_all_enemies_defeated():
 
 func _process(delta: float) -> void:
 	coin_update()
+	mod_update()
 	if health <= 0:
 		$CanvasLayer/Death.visible = true
 		get_tree().paused = true
@@ -342,6 +364,8 @@ func toggle_pause():
 	var tree = get_tree()
 	if tree:
 		tree.paused = not tree.paused
+		await get_tree().create_timer(wave_settings.rest_time).timeout
+		start_next_wave()
 
 func _connect_generator_signal(generator):
 	if not generator.energy_plus.is_connected(energy_plus):
@@ -386,3 +410,12 @@ func on_coin_collected(coin_instance):
 		coin_instance.remove_from_group("coins")
 		coin_instance.add_coin.disconnect(on_coin_collected)
 		connected_coins.erase(coin_instance)
+
+func mod_update():
+	for mod in get_tree().get_nodes_in_group("mods"):
+		if not mod.mod_purchased.is_connected(_on_mod_purchased):
+			mod.mod_purchased.connect(_on_mod_purchased)
+
+func _on_mod_purchased(modifier_id: int):
+	mod_zone.add_modifier(modifier_id)
+	coin_update()

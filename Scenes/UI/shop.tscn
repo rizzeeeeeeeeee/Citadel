@@ -1,11 +1,130 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3qijtii1jyvu"]
+[gd_scene load_steps=8 format=3 uid="uid://b3qijtii1jyvu"]
 
 [ext_resource type="Script" path="res://Scripts/ui/shop.gd" id="1_45wwk"]
 [ext_resource type="PackedScene" uid="uid://bou0mp776gl" path="res://Scenes/UI/cards_pack.tscn" id="1_dr2c0"]
+[ext_resource type="Texture2D" uid="uid://bqgyvg4hfaq43" path="res://Scenes/UI/shop_backplate.png" id="3_4tvca"]
+[ext_resource type="PackedScene" uid="uid://cvhum0m2lnl5m" path="res://Scenes/buffs/modifier_shop.tscn" id="3_gcw80"]
+[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="4_kqftt"]
+[ext_resource type="PackedScene" uid="uid://ccht0ggrh62q3" path="res://Scenes/packs/packs_shop.tscn" id="5_22n8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o80ni"]
+size = Vector2(880, 154)
 
 [node name="Shop" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_45wwk")
 
 [node name="Card Pack" parent="." instance=ExtResource("1_dr2c0")]
-z_index = 10
+position = Vector2(2, 52)
+
+[node name="MainShop" type="Node2D" parent="."]
+visible = false
+
+[node name="Mods" type="Label" parent="MainShop"]
+z_index = 2
+offset_left = -571.0
+offset_top = -98.0
+offset_right = -401.0
+offset_bottom = -71.0
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 26
+text = "MODIFIERS"
+
+[node name="Packs" type="Label" parent="MainShop"]
+z_index = 2
+offset_left = -71.0
+offset_top = -191.0
+offset_right = 82.0
+offset_bottom = -148.0
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 42
+text = "PACKS"
+
+[node name="ModifierShop" parent="MainShop" instance=ExtResource("3_gcw80")]
+z_index = 5
+position = Vector2(-571, -109)
+scale = Vector2(1.24, 1.2)
+
+[node name="PackShop" parent="MainShop" instance=ExtResource("5_22n8y")]
+position = Vector2(-108, -98)
+
+[node name="Button" type="Button" parent="MainShop"]
+z_index = 6
+offset_left = 327.0
+offset_top = 249.0
+offset_right = 581.0
+offset_bottom = 309.0
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 31
+text = "NEXT WAVE"
+
+[node name="Refresh" type="Button" parent="MainShop"]
+z_index = 6
+offset_left = 327.0
+offset_top = 177.0
+offset_right = 581.0
+offset_bottom = 237.0
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 31
+text = "REFRESH"
+
+[node name="Sprite2D" type="Sprite2D" parent="MainShop"]
+texture_filter = 1
+position = Vector2(3, -8.50002)
+scale = Vector2(13.1531, 12.807)
+texture = ExtResource("3_4tvca")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/shop_backplate.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "2628336e0ff0d7a4be0da6d432190df5"
+
+[node name="Shop" type="Label" parent="MainShop"]
+offset_left = -145.0
+offset_top = -358.0
+offset_right = 146.0
+offset_bottom = -257.0
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 100
+text = "SHOP"
+
+[node name="DragToBuy" type="Label" parent="MainShop"]
+offset_left = -583.0
+offset_top = 225.0
+offset_right = 216.0
+offset_bottom = 326.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.372549)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.0588235)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_font_sizes/font_size = 100
+text = "DRAG TO BUY"
+
+[node name="BuyZone" type="Area2D" parent="MainShop" groups=["buy_zone"]]
+process_mode = 3
+collision_layer = 4096
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainShop/BuyZone"]
+z_index = 5
+position = Vector2(-188, 273)
+shape = SubResource("RectangleShape2D_o80ni")
+
+[connection signal="pressed" from="MainShop/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MainShop/Refresh" to="." method="_on_refresh_pressed"]
+[connection signal="mouse_entered" from="MainShop/BuyZone" to="." method="_on_buy_zone_mouse_entered"]
+[connection signal="mouse_exited" from="MainShop/BuyZone" to="." method="_on_buy_zone_mouse_exited"]

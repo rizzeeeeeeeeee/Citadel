@@ -9,6 +9,7 @@ signal died
 @export var hp: float = 150.0
 @export var enemy_type: String
 @export var attack_speed: float = 1.0
+@export var coin_spawn_chance: float
 
 @onready var sprite: AnimatedSprite2D = $CharacterBody2D/Sprite2D
 @onready var collision_shape: CollisionShape2D = $CharacterBody2D/CollisionShape2D
@@ -23,7 +24,7 @@ var is_attacking: bool = false
 var is_buff_immune: bool = false  # Добавлено: флаг иммунитета к баффам
 var received_damage_timer: Timer = Timer.new()  # Таймер для отслеживания времени без получения урона
 var should_stop_attack: bool = false
-var attack_cooldown: float = 0.1
+var attack_cooldown: float = 0.5
 
 # Загрузка данных о баффах из JSON файла
 var buff_data: Array = []
@@ -366,6 +367,13 @@ func die():
 	if is_instance_valid(self):
 		await get_tree().create_timer(1.0).timeout
 		died.emit()
+		if randf() * 100.0 <= coin_spawn_chance:
+			var coin_path = load("res://Scenes/obj/coin.tscn")
+			var coin_instance = coin_path.instantiate()
+
+			coin_instance.global_position = global_position
+
+			get_parent().add_child(coin_instance)
 		queue_free()
 
 func _on_received_damage_timeout():

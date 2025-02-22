@@ -1,0 +1,29 @@
+[
+    {
+        "name": "energy_buff",
+        "id" : "1",
+        "value": "3",
+        "energy_multiplier": "2",
+        "hand_capacity": "0",
+        "enemy_id": "",
+        "path": "res://Scenes/buffs/energy_buff.tscn"
+    },
+    {
+        "name": "hand_upgrade",
+        "id" : "2",
+        "value": "3",
+        "energy_multiplier": "1",
+        "hand_capacity": "1",
+        "enemy_id": "",
+        "path": "res://Scenes/buffs/hand_buff.tscn"
+    },
+    {
+        "name": "ban_invisible",
+        "id" : "3",
+        "value": "12",
+        "energy_multiplier": "1",
+        "hand_capacity": "0",
+        "enemy_id": "invisible",
+        "path": "res://Scenes/buffs/inv_ban_buff.tscn"
+    }
+]

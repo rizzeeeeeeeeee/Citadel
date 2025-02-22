@@ -47,6 +47,7 @@ step_frequency = 0.5
 hp = 600.0
 enemy_type = "tank"
 attack_speed = 0.5
+coin_spawn_chance = 20.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
 collision_layer = 2147484670

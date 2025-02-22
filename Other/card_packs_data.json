@@ -1,0 +1,10 @@
+[
+    {
+        "name": "default_pack",
+        "path": "res://Scenes/packs/default_pack.tscn"
+    },
+    {
+        "name": "epic_pack",
+        "path": "res://Scenes/packs/epic_pack.tscn"
+    }
+]
