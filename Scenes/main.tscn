@@ -123,8 +123,8 @@ animations = [{
 script = ExtResource("1_rmctx")
 spawnpoints = Array[NodePath]([NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")])
 wave_curves = Array[Curve]([SubResource("Curve_taepo"), SubResource("Curve_p4cw6"), SubResource("Curve_u3cw4"), SubResource("Curve_qyfwg"), SubResource("Curve_i6jko"), SubResource("Curve_u6uxo"), SubResource("Curve_rxlnm"), SubResource("Curve_r4m1i"), SubResource("Curve_djvca")])
-energy = 2.0
-energy_rate = 0.25
+energy = 3.0
+energy_rate = 0.3
 health_icons = Array[NodePath]([NodePath("Left_Tab/Health/Heart1"), NodePath("Left_Tab/Health/Heart2"), NodePath("Left_Tab/Health/Heart3"), NodePath("Left_Tab/Health/Heart4")])
 wave_display = NodePath("Left_Tab/WaveDisplay")
 extra_spawn_chance = 0.2
@@ -229,7 +229,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.3.6
+text = "v0.3.7
 "
 metadata/_edit_use_anchors_ = true
 
@@ -481,7 +481,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("12_6n2n3")
 
-[node name="ModZone" type="Control" parent="CanvasLayer"]
+[node name="ModZone" type="Control" parent="CanvasLayer" groups=["mod_zone"]]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 7

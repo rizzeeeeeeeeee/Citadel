@@ -9,6 +9,7 @@ var hover_offset : Vector2 = Vector2(0, -5)
 var drag_offset : Vector2
 var in_buy_zone : bool = false  
 var can_drag : bool = true
+var has_spawned : bool = false
 
 func _ready():
 	original_position = self.position  
@@ -52,6 +53,7 @@ func _input(event: InputEvent) -> void:
 				main.coins_int -= value
 				main.coin_update()
 				shop.get_parent().get_parent().spawn_epic_card_pack()
+				has_spawned = true
 				queue_free() 
 			else:
 				position = original_position  

@@ -77,6 +77,7 @@ scale = Vector2(1.66053, 1.45346)
 color = Color(0.19, 0.19, 0.19, 0.741176)
 
 [node name="Label" type="Label" parent="Info"]
+layout_mode = 0
 offset_left = -6.62438
 offset_top = -2.06405
 offset_right = 107.376

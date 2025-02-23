@@ -26,6 +26,12 @@ func load_modifiers():
 		print("Failed to open JSON file.")
 
 func add_modifier(modifier_id: int):
+	# Проверяем, что модификатор уже не добавлен
+	#for modifier in selected_modifiers:
+	#	if modifier["id"] == str(modifier_id):
+	#		print("Modifier already added:", modifier["name"])
+	#		return
+
 	if selected_modifiers.size() >= 3:
 		print("Cannot add more than 3 modifiers.")
 		return
@@ -48,8 +54,7 @@ func instantiate_modifier_scene(modifier):
 		if modifier_scene:
 			var modifier_instance = modifier_scene.instantiate()
 			add_child(modifier_instance)
-			
-			# Подключаем сигнал mod_deleted к функции удаления
+
 			if modifier_instance.has_signal("mod_deleted"):
 				modifier_instance.mod_deleted.connect(_on_modifier_deleted)
 			
@@ -82,10 +87,9 @@ func apply_modifier_effects(modifier):
 		print("Coins deducted: ", cost)
 
 func remove_modifier(modifier_instance):
-	# Ищем модификатор в списке selected_modifiers
 	for i in range(selected_modifiers.size()):
 		var modifier = selected_modifiers[i]
-		if modifier["id"] == str(modifier_instance.id):  # Сравниваем по id
+		if modifier["id"] == str(modifier_instance.id):
 			remove_modifier_effects(modifier)
 			selected_modifiers.remove_at(i)
 			update_modifier_positions()
@@ -106,6 +110,7 @@ func remove_modifier_effects(modifier):
 	if modifier.has("value"):
 		var cost = int(modifier["value"])
 		get_parent().get_parent().coins_int += cost 
+		get_parent().get_parent().coin_update()
 		print("Coins refunded: ", cost)
 
 func _on_modifier_deleted(modifier_instance):

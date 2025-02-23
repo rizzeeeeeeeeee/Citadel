@@ -39,10 +39,11 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "4f86f229d70c6cd9d7229adf0fed1100"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
 z_index = 10
+scale = Vector2(0.353337, 0.353337)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 z_index = 10
 position = Vector2(1, 0)
 scale = Vector2(0.551713, 0.551713)
@@ -67,6 +68,6 @@ text = "GRAB CARDS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="input_event" from="Sprite2D/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_exited"]

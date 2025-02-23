@@ -49,3 +49,4 @@ func _on_buy_zone_mouse_exited() -> void:
 func _on_refresh_pressed() -> void:
 	$MainShop/ModifierShop.display_random_modifiers()
 	$MainShop/PackShop.display_random_packs()
+	mouse_in_buy_zone = false

@@ -118,7 +118,6 @@ func start_next_wave():
 	update_spawn_weights(0.0)
 	_on_spawn_timeout()
 
-
 func start_next_event_timer():
 	if current_wave <= 2:  
 		return
@@ -210,7 +209,7 @@ func _on_spawn_timeout():
 
 		if current_wave == 1:
 			base_spawn_count = 1 
-			intensity *= 0.5  
+			intensity *= 0.2  
 
 		var wave_multiplier = 1.0 + (current_wave - 1) * 0.5  
 		var spawn_count = base_spawn_count * (1 + intensity * 3) * wave_multiplier

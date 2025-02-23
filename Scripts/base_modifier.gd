@@ -13,6 +13,7 @@ var hover_offset : Vector2 = Vector2(0, -5)
 var drag_offset : Vector2
 var in_buy_zone : bool = false  
 var can_drag : bool = true
+var is_purchased : bool = false  
 
 func _ready():
 	original_position = self.position  
@@ -46,17 +47,30 @@ func _on_area_2d_input_event(viewport, event: InputEvent, shape_idx: int) -> voi
 func _input(event: InputEvent) -> void:
 	var shop = get_tree().get_first_node_in_group("buy_zone")
 	var main = get_tree().get_first_node_in_group("main")
+	var mod_zone = get_tree().get_first_node_in_group("mod_zone")
 	if dragging:
 		if event is InputEventMouseMotion:
 			$Info.visible = false
 			global_position = event.global_position + drag_offset
+			
 		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			dragging = false
-			if shop.get_parent().get_parent().mouse_in_buy_zone and main.coins_int >= value: 
-				mod_purchased.emit(id)  
-				queue_free() 
-			else:
-				position = original_position  
+
+			if not is_purchased:
+				if shop and is_instance_valid(shop) and shop.get_parent().get_parent().mouse_in_buy_zone and mod_zone.selected_modifiers.size() < 3:
+					if main and main.coins_int >= value:
+						print("Purchasing modifier with ID:", id)
+						is_purchased = true
+						mod_purchased.emit(id)
+						#main.coins_int -= value
+						main.coin_update()
+						queue_free() 
+					else:
+						print("Not enough coins to buy modifier with ID:", id)
+						position = original_position
+				else:
+					print("Modifier not in buy zone with ID:", id)
+					position = original_position
 
 func change_status():
 	$Button.visible = true

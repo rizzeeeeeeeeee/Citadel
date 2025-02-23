@@ -28,6 +28,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		_spawn_cards_for_selection()
 
 func _spawn_cards_for_selection() -> void:
+	$Sprite2D/Area2D/CollisionShape2D.set_deferred("disabled", true)
 	# Загружаем JSON с картами
 	var file := FileAccess.open("res://Other/cards_data.json", FileAccess.READ)
 	if file:
@@ -44,6 +45,11 @@ func _spawn_cards_for_selection() -> void:
 		var random_card = _get_random_card_with_rarity()
 		chosen_cards.append(random_card)
 		cards_data.erase(random_card)
+
+	# Проверяем, что выбрано ровно 3 карты
+	if chosen_cards.size() != 3:
+		printerr("Ошибка: выбрано %d карт вместо 3" % chosen_cards.size())
+		return
 
 	# Спавним их в сцене
 	for i in range(3):

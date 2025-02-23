@@ -42,6 +42,6 @@ func load_and_display_pack(pack: Dictionary, index: int):
 			var pack_instance = pack_scene.instantiate()
 			add_child(pack_instance)
 			pack_instance.scale = Vector2(0.65, 0.65)
-			var position = Vector2(110 * index, 100)  # Позиция рассчитывается на основе индекса
+			var position = Vector2(110 * index, 100) 
 			pack_instance.position = position
 			pack_instance.set_original_position(position)
