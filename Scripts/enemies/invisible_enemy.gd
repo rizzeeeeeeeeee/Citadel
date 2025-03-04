@@ -19,6 +19,7 @@ var original_scale: Vector2
 var is_dead: bool = false
 var current_tween: Tween = null
 var poison_timer: Timer
+var spike_timer: Timer
 var current_target: Node2D = null
 var is_attacking: bool = false
 var is_buff_immune: bool = false  # Добавлено: флаг иммунитета к баффам
@@ -36,7 +37,11 @@ func _ready():
 	poison_timer.one_shot = false
 	poison_timer.timeout.connect(_on_poison_timer_timeout)
 	add_child(poison_timer)
-	
+	spike_timer = Timer.new()
+	spike_timer.wait_time = 2.0
+	spike_timer.one_shot = false
+	spike_timer.timeout.connect(_on_spike_timer_timeout)
+	add_child(spike_timer)
 	received_damage_timer.wait_time = 1.0
 	received_damage_timer.one_shot = true
 	received_damage_timer.timeout.connect(_on_received_damage_timeout)
@@ -129,6 +134,11 @@ func _on_node_added(node: Node):
 		node.lightning_attack.connect(on_tesla_attack)
 	elif node.is_in_group("bolt"):
 		node.deal_damage.connect(bolt_damage)
+	elif node.is_in_group("nuke"):
+		node.deal_damage.connect(mine_damage)
+	elif node.is_in_group("spike"):
+		node.inside.connect(on_spike_entered)
+		node.outside.connect(on_spike_exited)
 
 func load_buff_data():
 	var file = FileAccess.open("res://Other/buff_data.json", FileAccess.READ)
@@ -216,6 +226,15 @@ func connect_signals():
 	var bolts = get_tree().get_nodes_in_group("bolt")
 	for bolt in bolts:
 		bolt.deal_damage.connect(bolt_damage)
+		
+	var nukes = get_tree().get_nodes_in_group("nuke")
+	for nuke in nukes:
+		nuke.deal_damage.connect(mine_damage)
+	
+	var spikes = get_tree().get_nodes_in_group("spike")
+	for spike in spikes:
+		spike.inside.connect(on_spike_entered)
+		spike.outside.connect(on_spike_exited)
 
 func bolt_damage(victim: Node2D):
 	if victim == self:
@@ -243,6 +262,21 @@ func on_poison_exited(victim: Node2D):
 
 func _on_poison_timer_timeout():
 	take_damage(20)
+
+func on_spike_entered(victim: Node2D):
+	if victim == self:
+		spike_timer.start()
+		await get_tree().create_timer(0.5).timeout
+		_set_visible()
+
+func on_spike_exited(victim: Node2D):
+	if victim == self:
+		spike_timer.stop()
+		await get_tree().create_timer(0.5).timeout
+		set_invisible()
+
+func _on_spike_timer_timeout():
+	take_damage(15)
 
 func bullet_damage(victim: Node2D):
 	if victim == self:
@@ -319,6 +353,8 @@ func take_damage(amount: float):
 
 	# Новый Tween с параллельными анимациями
 	current_tween = create_tween().set_parallel(true)
+	SoundManager.play_random_hit_sound()
+	SoundManager.set_volume(0.15)
 
 	# Эффекты
 	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
@@ -343,6 +379,8 @@ func take_bolt_damage(amount: float):
 		current_tween = null
 
 	current_tween = create_tween().set_parallel(true)
+	SoundManager.play_random_hit_sound()
+	SoundManager.set_volume(0.15)
 
 	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
 	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)

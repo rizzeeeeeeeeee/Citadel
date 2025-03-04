@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://blwu38aekjfpi"]
+
+[ext_resource type="Script" uid="uid://cnjolu8m06vuq" path="res://Scripts/objects/nuke.gd" id="1_q7pga"]
+[ext_resource type="AudioStream" uid="uid://3elbilho36bp" path="res://Sounds/Objects/Nuke/nuke.mp3" id="2_jdiqk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kg8b"]
+radius = 1141.42
+
+[node name="Nuke" type="Node2D" groups=["nuke"]]
+z_index = 10
+script = ExtResource("1_q7pga")
+
+[node name="Nuke" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1, 18)
+stream = ExtResource("2_jdiqk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6kg8b")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

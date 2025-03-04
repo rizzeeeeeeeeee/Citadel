@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba3ig5redj5p4"]
+
+[ext_resource type="Script" uid="uid://br5o56nrww77d" path="res://Scripts/objects/spike.gd" id="1_ugq6i"]
+[ext_resource type="Texture2D" uid="uid://l1woahoeq2fb" path="res://Scenes/obj/spike.png" id="3_nvdxo"]
+[ext_resource type="PackedScene" uid="uid://eqw4x8skdnmv" path="res://Scenes/obj/placement.tscn" id="4_1yjo7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pnw3"]
+atlas = ExtResource("3_nvdxo")
+region = Rect2(0, 0, 24, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d4laj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pnw3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrt8"]
+size = Vector2(86, 107)
+
+[node name="Node2D" type="Node2D" groups=["objects", "spike"]]
+script = ExtResource("1_ugq6i")
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(2, 0)
+scale = Vector2(4.74, 4.74)
+sprite_frames = SubResource("SpriteFrames_d4laj")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/spike.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "a0c46fce9c58756214ed60a9ce4e531e"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_umrt8")
+
+[node name="Node2D" parent="." instance=ExtResource("4_1yjo7")]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

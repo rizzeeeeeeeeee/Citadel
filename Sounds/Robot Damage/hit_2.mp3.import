@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cy7bb4k5wiwx0"
+path="res://.godot/imported/hit_2.mp3-bdc880484f0666db06d3ddc6e254811a.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Robot Damage/hit_2.mp3"
+dest_files=["res://.godot/imported/hit_2.mp3-bdc880484f0666db06d3ddc6e254811a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

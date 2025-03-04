@@ -13,6 +13,7 @@ var has_spawned : bool = false
 
 func _ready():
 	original_position = self.position  
+	has_spawned = false
 
 func set_original_position(new_position: Vector2) -> void:
 	original_position = new_position

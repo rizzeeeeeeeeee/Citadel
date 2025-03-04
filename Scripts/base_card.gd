@@ -4,7 +4,6 @@ signal card_drag_started
 signal card_drag_ended
 signal card_clicked
 
-
 var original_position : Vector2
 var hover_offset : Vector2 = Vector2(0, -20) 
 var dragging : bool = false  
@@ -39,6 +38,8 @@ func _on_texture_rect_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		emit_signal("card_clicked")
+		SoundManager.play_take_card_sound()
+		SoundManager.set_volume(0.05)
 		dragging = true
 		drag_offset = global_position - event.global_position
 		emit_signal("card_drag_started")

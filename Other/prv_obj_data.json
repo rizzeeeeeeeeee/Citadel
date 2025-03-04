@@ -48,5 +48,35 @@
 		"name": "enade",
 		"id": 10,
 		"path":  "res://Scenes/obj/preview/enade_object.tscn"
+	},
+	{
+		"name": "crossbow",
+		"id": 11,
+		"path":  "res://Scenes/obj/preview/crossbow_object.tscn"
+	},
+	{
+		"name": "block",
+		"id": 12,
+		"path":  "res://Scenes/obj/preview/block_object.tscn"
+	},
+	{
+		"name": "nuke",
+		"id": 13,
+		"path":  "res://Scenes/obj/preview/nuke_object.tscn"
+	},
+	{
+		"name": "spike",
+		"id": 14,
+		"path":  "res://Scenes/obj/preview/spike_object.tscn"
+	},
+	{
+		"name": "burst",
+		"id": 15,
+		"path":  "res://Scenes/obj/preview/burst_object.tscn"
+	},
+	{
+		"name": "shotgun",
+		"id": 16,
+		"path":  "res://Scenes/obj/preview/shotgun_object.tscn"
 	}
 ]

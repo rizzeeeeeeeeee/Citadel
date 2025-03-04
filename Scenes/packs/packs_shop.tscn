@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccht0ggrh62q3"]
 
-[ext_resource type="Script" path="res://Scripts/ui/packs_shop.gd" id="1_sw4dh"]
+[ext_resource type="Script" uid="uid://s2o2bpygdpx0" path="res://Scripts/ui/packs_shop.gd" id="1_sw4dh"]
 
 [node name="PackShop" type="Node2D"]
 process_mode = 3

@@ -78,8 +78,10 @@ func apply_modifier_effects(modifier):
 		var energy_multiplier = float(modifier["energy_multiplier"])
 		var hand_capacity = float(modifier["hand_capacity"])
 		var enemy_id = modifier["enemy_id"]
+		var enegry_back_mod = int(modifier["enegry_back"])
 		get_parent().get_parent().energy_rate *= energy_multiplier
 		get_tree().get_first_node_in_group("hand").max_card_count += hand_capacity
+		get_tree().get_first_node_in_group("hand").energy_back += enegry_back_mod
 		get_parent().get_parent().ban_enemy(enemy_id)
 	if modifier.has("value"):
 		var cost = int(modifier["value"])
@@ -95,7 +97,6 @@ func remove_modifier(modifier_instance):
 			update_modifier_positions()
 			print("Modifier removed: ", modifier["name"])
 			return
-	
 	print("Modifier not found: ", modifier_instance.id)
 
 func remove_modifier_effects(modifier):
@@ -103,8 +104,10 @@ func remove_modifier_effects(modifier):
 		var energy_multiplier = float(modifier["energy_multiplier"])
 		var hand_capacity = float(modifier["hand_capacity"])
 		var enemy_id = modifier["enemy_id"]
+		var enegry_back_mod = int(modifier["enegry_back"])
 		get_parent().get_parent().energy_rate /= energy_multiplier
 		get_tree().get_first_node_in_group("hand").max_card_count -= hand_capacity
+		get_tree().get_first_node_in_group("hand").energy_back -= enegry_back_mod
 		get_parent().get_parent().unban_enemy(enemy_id)
 		print("Energy multiplier removed: ", energy_multiplier)
 	if modifier.has("value"):

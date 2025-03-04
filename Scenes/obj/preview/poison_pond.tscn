@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://du8p7gsh1te3n"]
 
-[ext_resource type="Script" path="res://Scripts/objects/poison_pond.gd" id="1_kru5w"]
+[ext_resource type="Script" uid="uid://cxq5waaksc5d4" path="res://Scripts/objects/poison_pond.gd" id="1_kru5w"]
 [ext_resource type="Texture2D" uid="uid://cxpqd3uqjhnsa" path="res://Scenes/obj/poison_pond.png" id="1_rvhm3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ui3r6"]

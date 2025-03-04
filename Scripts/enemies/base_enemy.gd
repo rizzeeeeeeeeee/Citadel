@@ -19,6 +19,7 @@ var original_scale: Vector2
 var is_dead: bool = false
 var current_tween: Tween = null
 var poison_timer: Timer
+var spike_timer: Timer
 var current_target: Node2D = null
 var is_attacking: bool = false
 var is_buff_immune: bool = false  
@@ -26,6 +27,13 @@ var should_stop_attack: bool = false
 var attack_cooldown: float = 0.5
 
 var buff_data: Array = []
+var audio_pool: Array[AudioStreamPlayer] = []
+const AUDIO_POOL_SIZE: int = 1  # Только один звук одновременно
+var hit_sounds: Array[AudioStream] = [
+	preload("res://Sounds/Robot Damage/hit_1.mp3"),
+	preload("res://Sounds/Robot Damage/hit_2.mp3"),
+	preload("res://Sounds/Robot Damage/hit_3.mp3")
+]
 
 func _ready():
 	original_scale = sprite.scale
@@ -34,11 +42,37 @@ func _ready():
 	poison_timer.one_shot = false
 	poison_timer.timeout.connect(_on_poison_timer_timeout)
 	add_child(poison_timer)
+	spike_timer = Timer.new()
+	spike_timer.wait_time = 2.0
+	spike_timer.one_shot = false
+	spike_timer.timeout.connect(_on_spike_timer_timeout)
+	add_child(spike_timer)
 	load_buff_data()
 	if randi() % 4 == 0:
 		apply_random_buff()
 	connect_signals()
 	get_tree().node_added.connect(_on_node_added)
+	initialize_audio_pool()  # Инициализация пула звуков
+
+func initialize_audio_pool():
+	for i in range(AUDIO_POOL_SIZE):
+		var audio_player = AudioStreamPlayer.new()
+		add_child(audio_player)
+		audio_pool.append(audio_player)
+
+func play_sound():
+	if audio_pool.size() == 0:
+		return
+
+	# Выбираем случайный звук из hit_sounds
+	var random_sound = hit_sounds[randi() % hit_sounds.size()]
+
+	# Используем первый доступный аудиоплеер
+	var player = audio_pool[0]
+	if player.playing:
+		player.stop()  # Останавливаем текущий звук, если он играет
+	player.stream = random_sound
+	player.play()
 
 func set_buff_immune(value: bool):
 	is_buff_immune = value
@@ -98,6 +132,8 @@ func stop_attack(target: Node2D) -> void:
 func _on_node_added(node: Node):
 	if node.is_in_group("bullet"):
 		node.deal_damage.connect(bullet_damage)
+	elif node.is_in_group("burst"):
+		node.deal_damage.connect(burst_damage)
 	elif node.is_in_group("mine"):
 		node.on_mine_step.connect(mine_damage)
 	elif node.is_in_group("expl"):
@@ -113,6 +149,11 @@ func _on_node_added(node: Node):
 		node.lightning_attack.connect(on_tesla_attack)
 	elif node.is_in_group("bolt"):
 		node.deal_damage.connect(bolt_damage)
+	elif node.is_in_group("nuke"):
+		node.deal_damage.connect(mine_damage)
+	elif node.is_in_group("spike"):
+		node.inside.connect(on_spike_entered)
+		node.outside.connect(on_spike_exited)
 
 func load_buff_data():
 	var file = FileAccess.open("res://Other/buff_data.json", FileAccess.READ)
@@ -171,7 +212,11 @@ func connect_signals():
 	var bullets = get_tree().get_nodes_in_group("bullet")
 	for bullet in bullets:
 		bullet.deal_damage.connect(bullet_damage)
-
+	
+	var bursts = get_tree().get_nodes_in_group("burst")
+	for burst in bursts:
+		burst.deal_damage.connect(burst_damage)
+	
 	var mines = get_tree().get_nodes_in_group("mine")
 	for mine in mines:
 		mine.on_mine_step.connect(mine_damage)
@@ -200,6 +245,15 @@ func connect_signals():
 	var bolts = get_tree().get_nodes_in_group("bolt")
 	for bolt in bolts:
 		bolt.deal_damage.connect(bolt_damage)
+		
+	var nukes = get_tree().get_nodes_in_group("nuke")
+	for nuke in nukes:
+		nuke.deal_damage.connect(mine_damage)
+		
+	var spikes = get_tree().get_nodes_in_group("spike")
+	for spike in spikes:
+		spike.inside.connect(on_spike_entered)
+		spike.outside.connect(on_spike_exited)
 
 func bolt_damage(victim: Node2D):
 	if victim == self:
@@ -224,9 +278,24 @@ func on_poison_exited(victim: Node2D):
 func _on_poison_timer_timeout():
 	take_damage(20)
 
+func on_spike_entered(victim: Node2D):
+	if victim == self:
+		spike_timer.start()
+
+func on_spike_exited(victim: Node2D):
+	if victim == self:
+		spike_timer.stop()
+
+func _on_spike_timer_timeout():
+	take_damage(15)
+
 func bullet_damage(victim: Node2D):
 	if victim == self:
 		take_damage(25)
+
+func burst_damage(victim: Node2D):
+	if victim == self:
+		take_damage(5)
 
 func explosion_damage(victim: Node2D):
 	if victim == self:
@@ -242,7 +311,7 @@ func blast_damage(victim: Node2D):
 
 func mine_damage(victim: Node2D):
 	if victim == self:
-		take_damage(999)
+		take_damage(9999)
 
 func take_electric_damage(amount: float, freeze_time: float = 0.0):
 	if is_dead:
@@ -290,13 +359,14 @@ func take_bolt_damage(amount: float):
 		current_tween = null
 
 	current_tween = create_tween().set_parallel(true)
+	SoundManager.play_random_hit_sound()
+	SoundManager.set_volume(0.15)
 
 	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
 	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)
 	
 	var original_pos = position
 	current_tween.tween_property(self, "position", original_pos + Vector2(0, -50), 0.2)
-	#current_tween.tween_property(self, "position", original_pos, 0.2).set_delay(0.1)
 
 func take_damage(amount: float):
 	if is_dead:
@@ -313,6 +383,8 @@ func take_damage(amount: float):
 		current_tween = null
 
 	current_tween = create_tween().set_parallel(true)
+	SoundManager.play_random_hit_sound()
+	SoundManager.set_volume(0.15)
 
 	current_tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5), 0.1)
 	current_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4).set_delay(0.1)

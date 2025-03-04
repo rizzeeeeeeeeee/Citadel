@@ -7,7 +7,6 @@ var drag_offset : Vector2
 signal remover_drag_started
 signal remover_drag_ended
 
-
 func _ready():
 	var sprite = $"."
 	original_position = sprite.position  

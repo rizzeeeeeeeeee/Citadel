@@ -12,6 +12,7 @@ var _can_shoot: bool = true
 var hp: float = 100.0
 
 func _ready() -> void:
+	SoundManager.play_placement_sound()
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = 1.0 / fire_rate
 	_fire_timer.one_shot = false
@@ -36,6 +37,7 @@ func _process(delta: float) -> void:
 func _shoot() -> void:
 	$TextureRect.play("default")
 	await get_tree().create_timer(1.3).timeout
+	SoundManager.play_railgun_sound()
 	var bullet = bullet_scene.instantiate()
 	if bullet and muzzle:
 		bullet.position = muzzle.position

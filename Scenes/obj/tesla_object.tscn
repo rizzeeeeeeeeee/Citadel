@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bindnwiq447dd"]
+[gd_scene load_steps=13 format=3 uid="uid://bindnwiq447dd"]
 
 [ext_resource type="Texture2D" uid="uid://dfc1yf08r3m43" path="res://Scenes/obj/tesla.png" id="1_q8v2m"]
-[ext_resource type="Script" path="res://Scripts/objects/tesla.gd" id="1_rqgs6"]
+[ext_resource type="Script" uid="uid://b6qm5rjphd7pt" path="res://Scripts/objects/tesla.gd" id="1_rqgs6"]
 [ext_resource type="PackedScene" uid="uid://dfxtdg3glvlwb" path="res://Scenes/projct/lightning.tscn" id="2_llaxf"]
 [ext_resource type="Texture2D" uid="uid://caubtybyhoe51" path="res://Scenes/obj/tesla_area.png" id="2_q4j0o"]
+[ext_resource type="PackedScene" uid="uid://eqw4x8skdnmv" path="res://Scenes/obj/placement.tscn" id="5_wlx8c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o542i"]
 atlas = ExtResource("1_q8v2m")
@@ -52,6 +53,7 @@ script = ExtResource("1_rqgs6")
 lightning = ExtResource("2_llaxf")
 
 [node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 position = Vector2(1.19209e-07, -1.19209e-07)
 scale = Vector2(4.74, 4.74)
@@ -117,6 +119,8 @@ offset_left = -19.0
 offset_top = -75.0
 offset_right = 21.0
 offset_bottom = -52.0
+
+[node name="Node2D" parent="." instance=ExtResource("5_wlx8c")]
 
 [connection signal="body_entered" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="TextureRect/Attack Area" to="." method="_on_attack_area_body_exited"]

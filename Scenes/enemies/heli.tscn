@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://buwrvfnk3a8x2"]
+
+[ext_resource type="Script" uid="uid://dxhht1r650ojc" path="res://Scripts/enemies/base_enemy.gd" id="1_fqfbv"]
+[ext_resource type="Texture2D" uid="uid://vxhnn4udy14v" path="res://Scenes/enemies/heli_1.png" id="2_fqfbv"]
+[ext_resource type="Texture2D" uid="uid://c2p0dwckej0si" path="res://Scenes/enemies/heli_2.png" id="3_rtpwu"]
+[ext_resource type="AudioStream" uid="uid://c7v5tpgc78hwo" path="res://Sounds/Robot Damage/hit_1.mp3" id="3_yyk7n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtpwu"]
+atlas = ExtResource("2_fqfbv")
+region = Rect2(0, 0, 29, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyk7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtpwu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
+size = Vector2(1.41414, 1.53535)
+
+[node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_fqfbv")
+base_speed = 14.0
+step_speed_variation = 4.0
+step_frequency = 0.5
+hp = 600.0
+enemy_type = "tank"
+attack_speed = 0.5
+coin_spawn_chance = 20.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+collision_layer = 2147484670
+collision_mask = 2147484670
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(3.57208, 3.57208)
+sprite_frames = SubResource("SpriteFrames_yyk7n")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Enemies/heli_1.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "7388522ef8d3032dc3e2893564edbaae"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(49.5, 49.5)
+shape = SubResource("RectangleShape2D_yhtg3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(-45, 0)
+scale = Vector2(3.52288, 3.52288)
+texture = ExtResource("3_rtpwu")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Enemies/heli_2.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "fc1048cb288225def624f295ae1fc9c5"
+
+[node name="Sprite2D3" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(46, -1)
+scale = Vector2(3.52288, 3.52288)
+texture = ExtResource("3_rtpwu")
+flip_h = true
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Enemies/heli_2.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "fc1048cb288225def624f295ae1fc9c5"
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yyk7n")
+volume_db = -17.0

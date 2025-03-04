@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmcr8s1j2414u"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_h41u2"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_h41u2"]
 [ext_resource type="Texture2D" uid="uid://crv6lgx3okw4f" path="res://Scenes/cards/tesla.png" id="2_y3rew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

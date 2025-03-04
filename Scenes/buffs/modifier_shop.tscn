@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvhum0m2lnl5m"]
 
-[ext_resource type="Script" path="res://Scripts/ui/modifier_shop.gd" id="1_st2yc"]
+[ext_resource type="Script" uid="uid://d4c0e1lfoad2u" path="res://Scripts/ui/modifier_shop.gd" id="1_st2yc"]
 
 [node name="ModifierShop" type="Node2D"]
 process_mode = 3

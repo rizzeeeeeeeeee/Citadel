@@ -58,5 +58,25 @@
 		"name": "block",
 		"id": 12,
 		"path":  "res://Scenes/obj/block_object.tscn"
+	},
+	{
+		"name": "nuke",
+		"id": 13,
+		"path":  "res://Scenes/obj/nuke_object.tscn"
+	},
+	{
+		"name": "spike",
+		"id": 14,
+		"path":  "res://Scenes/obj/spike_object.tscn"
+	},
+	{
+		"name": "burst",
+		"id": 15,
+		"path":  "res://Scenes/obj/burst_object.tscn"
+	},
+	{
+		"name": "shotgun",
+		"id": 16,
+		"path":  "res://Scenes/obj/shotgun_object.tscn"
 	}
 ]

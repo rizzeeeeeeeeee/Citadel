@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dfpfsvojoof3s"]
 
 [ext_resource type="Texture2D" uid="uid://dymywmcaod4oj" path="res://Scenes/buffs/enegry_buff.png" id="1_6o5uu"]
-[ext_resource type="Script" path="res://Scripts/base_modifier.gd" id="1_8k31m"]
+[ext_resource type="Script" uid="uid://cnqpkijd5pm6u" path="res://Scripts/base_modifier.gd" id="1_8k31m"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_ghk52"]
 [ext_resource type="Texture2D" uid="uid://cefm1dp1en15c" path="res://Scenes/coin.png" id="3_mf6co"]
 
@@ -64,7 +64,7 @@ size = Vector2(56, 56)
 [node name="EnegryBuff" type="Node2D" groups=["mods"]]
 script = ExtResource("1_8k31m")
 id = 1
-value = 3
+value = 5
 
 [node name="Label" type="Label" parent="."]
 offset_left = -24.0
@@ -74,7 +74,7 @@ offset_bottom = -35.0
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_ghk52")
 theme_override_font_sizes/font_size = 25
-text = "3"
+text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -130,18 +130,18 @@ shape = SubResource("RectangleShape2D_3d20d")
 
 [node name="Info" type="ColorRect" parent="."]
 visible = false
-offset_left = -51.0
+offset_left = -57.0
 offset_top = -172.0
-offset_right = 51.0
+offset_right = 59.0
 offset_bottom = -36.0
 color = Color(0.19, 0.19, 0.19, 0.741176)
 
 [node name="Label" type="Label" parent="Info"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 99.0
-offset_bottom = 137.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 116.0
+offset_bottom = 135.0
 theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("2_ghk52")
 theme_override_font_sizes/font_size = 13
@@ -151,7 +151,7 @@ Increase
 energy
 rate
 
-x2 current"
+x1.5 current"
 
 [node name="Button" type="Button" parent="."]
 visible = false

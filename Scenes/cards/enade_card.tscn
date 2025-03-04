@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://t5byytv7nlwt"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_wol3e"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_wol3e"]
 [ext_resource type="Texture2D" uid="uid://3imui0n3f3a8" path="res://Scenes/cards/enade.png" id="2_ka47g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1w2cbdt18qcs"]
+
+[ext_resource type="Texture2D" uid="uid://0y7vh2fxx3xf" path="res://Scenes/obj/preview/spike.png" id="1_qallu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5jag"]
+atlas = ExtResource("1_qallu")
+region = Rect2(0, 0, 24, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tv8y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5jag")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(2, 0)
+scale = Vector2(4.06131, 4.06131)
+sprite_frames = SubResource("SpriteFrames_tv8y6")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/spike.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "a0c46fce9c58756214ed60a9ce4e531e"

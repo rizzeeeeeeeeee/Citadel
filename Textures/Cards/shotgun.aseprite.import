@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bydw00r1twd2v"
+path="res://.godot/imported/shotgun.aseprite-0e61d5ebc2e7bb2bd09442b60f7480bd.res"
+
+[deps]
+
+source_file="res://Textures/Cards/shotgun.aseprite"
+dest_files=["res://.godot/imported/shotgun.aseprite-0e61d5ebc2e7bb2bd09442b60f7480bd.res"]
+
+[params]
+

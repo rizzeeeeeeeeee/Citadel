@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://tmf5ylo8aw6b"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_8apct"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_8apct"]
 [ext_resource type="Texture2D" uid="uid://b64e8lbjbgdw4" path="res://Scenes/cards/railgun.png" id="2_lgf0h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

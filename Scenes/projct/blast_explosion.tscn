@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwartymfmphx5"]
 
 [ext_resource type="Texture2D" uid="uid://c0dcldpriyjha" path="res://Scenes/projct/blast_explosion.png" id="1_fhy47"]
-[ext_resource type="Script" path="res://Scripts/proj/blast_explosion.gd" id="1_k2iqq"]
+[ext_resource type="Script" uid="uid://baxbpivcb75ib" path="res://Scripts/proj/blast_explosion.gd" id="1_k2iqq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2ryw"]
 size = Vector2(67, 130.5)

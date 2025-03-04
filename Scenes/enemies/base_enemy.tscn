@@ -1,35 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqvrv8o4gqh5g"]
+[gd_scene load_steps=8 format=3 uid="uid://bqvrv8o4gqh5g"]
 
-[ext_resource type="Script" path="res://Scripts/enemies/base_enemy.gd" id="1_g3myx"]
+[ext_resource type="Script" uid="uid://dxhht1r650ojc" path="res://Scripts/enemies/base_enemy.gd" id="1_g3myx"]
 [ext_resource type="Texture2D" uid="uid://2prnd3b7fgju" path="res://Scenes/enemies/robot.png" id="2_miaol"]
+[ext_resource type="AudioStream" uid="uid://c7v5tpgc78hwo" path="res://Sounds/Robot Damage/hit_1.mp3" id="3_kmm44"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_36tny"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hdm5"]
 atlas = ExtResource("2_miaol")
 region = Rect2(0, 0, 40, 25)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jaau5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_frhdl"]
 atlas = ExtResource("2_miaol")
 region = Rect2(40, 0, 40, 25)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_61a80"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_konvh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_36tny")
+"texture": SubResource("AtlasTexture_6hdm5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jaau5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_36tny")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_36tny")
+"texture": SubResource("AtlasTexture_frhdl")
 }],
 "loop": true,
 "name": &"default",
@@ -40,20 +30,20 @@ animations = [{
 size = Vector2(1.25253, 1.21212)
 
 [node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+position = Vector2(1, 0)
 script = ExtResource("1_g3myx")
 enemy_type = "basic"
 coin_spawn_chance = 8.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
-collision_layer = 2147484670
-collision_mask = 2147484670
+collision_layer = 2147485694
+collision_mask = 2147485694
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(2, 0)
 scale = Vector2(2.67972, 2.67972)
-sprite_frames = SubResource("SpriteFrames_61a80")
-animation = &"attack"
+sprite_frames = SubResource("SpriteFrames_konvh")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -67,9 +57,13 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Enemies/robot.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "a1e02bfc9c16e7c56e3c95fb1e36dc5b"
+metadata/_aseprite_wizard_source_file_hash_ = "b1e2877567df6b89f2cd1ed6a4bf1e9d"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -2)
 scale = Vector2(49.5, 49.5)
 shape = SubResource("RectangleShape2D_yhtg3")
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kmm44")
+volume_db = -17.0

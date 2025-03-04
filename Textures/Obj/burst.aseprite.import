@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dg3jjyjq2qet0"
+path="res://.godot/imported/burst.aseprite-1703047f97eb04b4529429ade825ad8d.res"
+
+[deps]
+
+source_file="res://Textures/Obj/burst.aseprite"
+dest_files=["res://.godot/imported/burst.aseprite-1703047f97eb04b4529429ade825ad8d.res"]
+
+[params]
+

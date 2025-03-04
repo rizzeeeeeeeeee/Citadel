@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://brf1jj13o0c37"]
 
-[ext_resource type="Script" path="res://Scripts/proj/mine_explosion.gd" id="1_16a2v"]
+[ext_resource type="Script" uid="uid://tlx6ngtduspk" path="res://Scripts/proj/mine_explosion.gd" id="1_16a2v"]
 [ext_resource type="Texture2D" uid="uid://dkwwh0j6i6ul5" path="res://Scenes/projct/mine_explosion.png" id="2_s7njn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyb4b"]

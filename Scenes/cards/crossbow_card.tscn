@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bma1atne3yemo"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_875xj"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_875xj"]
 [ext_resource type="Texture2D" uid="uid://cox38q6a3o1s1" path="res://Scenes/cards/crossbow.png" id="2_2eptj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

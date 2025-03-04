@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsurwo3o8trss"]
 
-[ext_resource type="Script" path="res://Scripts/objects/poison.gd" id="1_e5yuh"]
-[ext_resource type="PackedScene" uid="uid://du8p7gsh1te3n" path="res://Scenes/obj/poison_pond.tscn" id="2_5e5em"]
+[ext_resource type="Script" uid="uid://bflkhvhw73mar" path="res://Scripts/objects/poison.gd" id="1_e5yuh"]
+[ext_resource type="PackedScene" uid="uid://du8p7gsh1te3n" path="res://Scenes/obj/preview/poison_pond.tscn" id="2_5e5em"]
 [ext_resource type="Texture2D" uid="uid://bmxevpmd4ohsm" path="res://Scenes/obj/poison.png" id="3_3bq6d"]
 
 [node name="Node2D" type="Node2D"]

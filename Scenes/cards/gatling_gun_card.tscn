@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://787h4oobmsps"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_pdv0s"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_pdv0s"]
 [ext_resource type="Texture2D" uid="uid://cwxrpchte3wpd" path="res://Scenes/cards/gatling_gun.png" id="2_wmvsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

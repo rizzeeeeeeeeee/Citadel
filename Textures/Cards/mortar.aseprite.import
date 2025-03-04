@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://css5mt0432tio"
+path="res://.godot/imported/mortar.aseprite-90da3ece979677faae904c3bc4879210.res"
+
+[deps]
+
+source_file="res://Textures/Cards/mortar.aseprite"
+dest_files=["res://.godot/imported/mortar.aseprite-90da3ece979677faae904c3bc4879210.res"]
+
+[params]
+

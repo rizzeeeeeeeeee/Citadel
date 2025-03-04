@@ -19,11 +19,23 @@ func load_packs():
 	else:
 		print("File not found")
 
+func first_display():
+	randomize() 
+	for i in range(3):
+		if packs.size() > 0:
+			var random_index = randi() % packs.size()
+			var pack = packs[random_index]
+			load_and_display_pack(pack, i) 
+		else:
+			print("No packs available")
+
 func display_random_packs():
 	for child in get_children():
-		if child.is_in_group("packs"):  
+		if child.is_in_group("packs"):
 			child.queue_free()
-
+	
+	await get_tree().process_frame
+	
 	randomize() 
 	for i in range(3):
 		if packs.size() > 0:

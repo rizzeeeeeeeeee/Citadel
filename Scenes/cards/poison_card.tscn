@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://com8bx8r16gc2"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_kepi1"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_kepi1"]
 [ext_resource type="Texture2D" uid="uid://dwprcndc1hwrx" path="res://Scenes/cards/poison.png" id="2_xvvui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

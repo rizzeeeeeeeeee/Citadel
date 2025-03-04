@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ceiik8fkdtb8g"
+path="res://.godot/imported/cashback.aseprite-88ae419ef100ca88efde9877c4b01bf6.res"
+
+[deps]
+
+source_file="res://Textures/UI/buffs/cashback.aseprite"
+dest_files=["res://.godot/imported/cashback.aseprite-88ae419ef100ca88efde9877c4b01bf6.res"]
+
+[params]
+

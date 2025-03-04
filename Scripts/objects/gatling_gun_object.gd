@@ -12,6 +12,7 @@ var _can_shoot: bool = true
 var hp: float = 150
 
 func _ready() -> void:
+	SoundManager.play_placement_sound()
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = 1.0 / fire_rate
 	_fire_timer.one_shot = false
@@ -35,6 +36,8 @@ func _process(delta: float) -> void:
 		
 func _shoot() -> void:
 	$TextureRect.play("shoot")
+	SoundManager.play_gatling_sound()
+	SoundManager.set_volume(0.05)
 	var bullet = bullet_scene.instantiate()
 	await get_tree().create_timer(0.1).timeout
 	if bullet and muzzle:

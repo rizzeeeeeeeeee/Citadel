@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfxtdg3glvlwb"]
 
 [ext_resource type="Texture2D" uid="uid://bsnregtwg4ua4" path="res://Scenes/projct/ligtning.png" id="1_38mcj"]
-[ext_resource type="Script" path="res://Scripts/objects/lightning.gd" id="1_jfki0"]
+[ext_resource type="Script" uid="uid://bhv5lgt7lpggw" path="res://Scripts/objects/lightning.gd" id="1_jfki0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bk3hg"]
 atlas = ExtResource("1_38mcj")

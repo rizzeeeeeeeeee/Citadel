@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://1abmwr0gy1ay"]
 
 [ext_resource type="Texture2D" uid="uid://b5smlcgidfuyg" path="res://Scenes/enemies/shield.png" id="1_ij7b0"]
-[ext_resource type="Script" path="res://Scripts/buffs/shield.gd" id="1_kci4f"]
+[ext_resource type="Script" uid="uid://30vm2u4lplgv" path="res://Scripts/buffs/shield.gd" id="1_kci4f"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_kci4f")

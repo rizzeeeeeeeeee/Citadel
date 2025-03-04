@@ -52,5 +52,5 @@ func _process(delta: float) -> void:
 		
 		# Если таймер взрыва истек, удаляем взрыв и гранату
 		if explosion_timer <= 0:
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.2).timeout
 			queue_free()

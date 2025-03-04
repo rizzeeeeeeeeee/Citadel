@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://0rd4helcqppx"]
+
+[ext_resource type="Texture2D" uid="uid://bxn6uvwo03f0y" path="res://Scenes/obj/crossbow.png" id="1_r1mh7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ombqd"]
+atlas = ExtResource("1_r1mh7")
+region = Rect2(0, 0, 66, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mf0i"]
+atlas = ExtResource("1_r1mh7")
+region = Rect2(66, 0, 66, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ati0r"]
+atlas = ExtResource("1_r1mh7")
+region = Rect2(132, 0, 66, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omtdf"]
+atlas = ExtResource("1_r1mh7")
+region = Rect2(0, 44, 66, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltt0o"]
+atlas = ExtResource("1_r1mh7")
+region = Rect2(66, 44, 66, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l4ytm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ombqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mf0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ati0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omtdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltt0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ombqd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(54, -10)
+scale = Vector2(5.63884, 5.63884)
+sprite_frames = SubResource("SpriteFrames_l4ytm")
+frame = 5
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/crossbow.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "4c65526565ac3d55796862e42097c0f3"

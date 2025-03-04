@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cjf64icssp5u5"
+path="res://.godot/imported/mortar_ball.aseprite-823fd3e83b7770e6ef912ab431cb2eda.res"
+
+[deps]
+
+source_file="res://Textures/mortar_ball.aseprite"
+dest_files=["res://.godot/imported/mortar_ball.aseprite-823fd3e83b7770e6ef912ab431cb2eda.res"]
+
+[params]
+

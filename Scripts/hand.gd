@@ -18,7 +18,8 @@ var spawned_objects: Dictionary = {}
 var card_positions: Dictionary = {}
 var remover_dragging: bool = false
 var active_zones_remover: Array = []
-var preview_objects: Dictionary = {}  # Для хранения превью объектов
+var preview_objects: Dictionary = {}  
+var energy_back: int = 0
 
 signal card_dropped(value: float)
 
@@ -27,8 +28,8 @@ signal card_dropped(value: float)
 @onready var no_energy_label = $"../CanvasLayer/No Energy"
 
 func _ready():
-	load_json_data("user://run_cards_data.json", card_scenes)
-	#load_json_data("res://Other/cards_data.json", card_scenes)
+	load_json_data("user://run_cards_data.json", card_scenes) #RUN
+	#load_json_data("res://Other/cards_data.json", card_scenes) #DEBUG
 	load_json_data("res://Other/obj_data.json", obj_scenes)
 	load_json_data("res://Other/prv_obj_data.json", preview_scenes)
 
@@ -289,6 +290,8 @@ func _on_remover_drag_started():
 func _on_remover_drag_ended():
 	remover_dragging = false
 	if active_zones_remover.size() == 1:
+		if energy_back > 0:
+			get_parent().energy += energy_back
 		var zone_id = active_zones_remover[0]
 		if spawned_objects[zone_id] != null:
 			spawned_objects[zone_id].queue_free()

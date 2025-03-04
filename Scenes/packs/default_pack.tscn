@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b0bmgek7qaeir"]
 
-[ext_resource type="Script" path="res://Scripts/ui/default_pack.gd" id="1_7roty"]
+[ext_resource type="Script" uid="uid://lpfk0lklkiwp" path="res://Scripts/ui/default_pack.gd" id="1_7roty"]
 [ext_resource type="Texture2D" uid="uid://ctsbprnb8tmud" path="res://Scenes/UI/cards_pack.png" id="1_t3cn2"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_f8083"]
 [ext_resource type="Texture2D" uid="uid://cefm1dp1en15c" path="res://Scenes/coin.png" id="3_xedqo"]
@@ -61,7 +61,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tm41"]
 size = Vector2(271.88, 438.634)
 
-[node name="Card Pack" type="Node2D"]
+[node name="Card Pack" type="Node2D" groups=["packs"]]
 z_index = 5
 script = ExtResource("1_7roty")
 value = 2

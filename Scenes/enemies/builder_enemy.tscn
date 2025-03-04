@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bti47k12514ll"]
 
-[ext_resource type="Script" path="res://Scripts/enemies/builder_enemy.gd" id="1_gv2fn"]
+[ext_resource type="Script" uid="uid://bi86w336o5jt" path="res://Scripts/enemies/builder_enemy.gd" id="1_gv2fn"]
 [ext_resource type="Texture2D" uid="uid://bbippu2imvlbr" path="res://Scenes/enemies/builder.png" id="2_6dd32"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arxa0"]
@@ -129,8 +129,8 @@ enemy_type = "builder"
 coin_spawn_chance = 20.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
-collision_layer = 2147484670
-collision_mask = 2147484670
+collision_layer = 2147485694
+collision_mask = 2147485694
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1

@@ -11,6 +11,7 @@ var _is_timer_active: bool = false
 var hp: float = 150.0
 
 func _ready() -> void:
+	SoundManager.play_placement_sound()
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = 1.0 / fire_rate
 	_fire_timer.one_shot = false

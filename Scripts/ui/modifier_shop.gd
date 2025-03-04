@@ -30,11 +30,10 @@ func first_display():
 func display_random_modifiers():
 	for child in get_children():
 		if child.is_in_group("mods"):
-			# Отключаем старые обработчики сигналов
-			if child.has_signal("mod_purchased"):
-				child.mod_purchased.disconnect(_on_mod_purchased)
-			if child.has_signal("mod_deleted"):
-				child.mod_deleted.disconnect(_on_mod_deleted)
+			#if child.has_signal("mod_purchased"):
+			#	child.mod_purchased.disconnect(_on_mod_purchased)
+			#if child.has_signal("mod_deleted"):
+			#	child.mod_deleted.disconnect(_on_mod_deleted)
 			child.queue_free()
 	for i in range(modifier_positions.size()):
 		if modifiers.size() == 0:

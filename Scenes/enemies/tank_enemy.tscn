@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cypxixor7iey3"]
+[gd_scene load_steps=8 format=3 uid="uid://cypxixor7iey3"]
 
-[ext_resource type="Script" path="res://Scripts/enemies/base_enemy.gd" id="1_2khsf"]
+[ext_resource type="Script" uid="uid://dxhht1r650ojc" path="res://Scripts/enemies/base_enemy.gd" id="1_2khsf"]
 [ext_resource type="Texture2D" uid="uid://djxi0xt30ao6c" path="res://Scenes/enemies/tank.png" id="2_eq6cx"]
+[ext_resource type="AudioStream" uid="uid://c7v5tpgc78hwo" path="res://Sounds/Robot Damage/hit_1.mp3" id="3_rab0i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvovt"]
 atlas = ExtResource("2_eq6cx")
@@ -77,3 +78,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "90fb7ef0b8b2c1eeef156d6d8edbfefb"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(49.5, 49.5)
 shape = SubResource("RectangleShape2D_yhtg3")
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rab0i")
+volume_db = -17.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b378qdmjolp7s"]
 
-[ext_resource type="Script" path="res://Scripts/proj/bullet.gd" id="1_2x65x"]
+[ext_resource type="Script" uid="uid://d0gmgo63wsmwi" path="res://Scripts/proj/bullet.gd" id="1_2x65x"]
 [ext_resource type="Texture2D" uid="uid://b7r2f2uf2om67" path="res://Scenes/projct/bolt.png" id="2_al4rb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ikwa"]

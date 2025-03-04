@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjd8j35dmswt6"]
+
+[ext_resource type="Texture2D" uid="uid://c21o48gsmjnjx" path="res://Scenes/obj/preview/nuke.png" id="1_2tob4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdcsm"]
+atlas = ExtResource("1_2tob4")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pnkwa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdcsm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(4.06131, 4.06131)
+sprite_frames = SubResource("SpriteFrames_pnkwa")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/nuke.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "5c763a499d53c0104993d3938110ab4a"

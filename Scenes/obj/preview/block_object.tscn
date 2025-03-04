@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://wp2v3dcv11ac"]
+
+[ext_resource type="Texture2D" uid="uid://bxoek7jlhiytf" path="res://Scenes/obj/preview/block.png" id="1_3ik4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wffl2"]
+atlas = ExtResource("1_3ik4n")
+region = Rect2(0, 0, 33, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqh5x"]
+atlas = ExtResource("1_3ik4n")
+region = Rect2(33, 0, 33, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6drg"]
+atlas = ExtResource("1_3ik4n")
+region = Rect2(0, 19, 33, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b6aik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wffl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqh5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6drg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(4.89902, 4.89902)
+sprite_frames = SubResource("SpriteFrames_b6aik")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/block.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "d97b7421f09ad32513d69d0a15ea2925"

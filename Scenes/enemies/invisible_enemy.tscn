@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5goorfpw7jhq"]
 
-[ext_resource type="Script" path="res://Scripts/enemies/invisible_enemy.gd" id="1_0uk51"]
+[ext_resource type="Script" uid="uid://dml2lade55k2a" path="res://Scripts/enemies/invisible_enemy.gd" id="1_0uk51"]
 [ext_resource type="Texture2D" uid="uid://by2kn1k7fb0gr" path="res://Scenes/enemies/invisible.png" id="2_ek7rh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5u4gs"]
@@ -49,8 +49,8 @@ attack_speed = 2.0
 coin_spawn_chance = 10.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy", "invisible_enemy"]]
-collision_layer = 2147484670
-collision_mask = 2147484670
+collision_layer = 2147485694
+collision_mask = 2147485694
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1

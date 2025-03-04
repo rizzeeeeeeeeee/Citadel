@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfylgx21gqcdf"]
 
-[ext_resource type="Script" path="res://Scripts/base_card.gd" id="1_6h5ix"]
+[ext_resource type="Script" uid="uid://bjo7uqs1io84p" path="res://Scripts/base_card.gd" id="1_6h5ix"]
 [ext_resource type="Texture2D" uid="uid://cfjbxqxw85ol6" path="res://Scenes/cards/grenade.png" id="2_0mlv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk1my"]

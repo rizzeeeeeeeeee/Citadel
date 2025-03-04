@@ -7,6 +7,9 @@ var local_energy: float = 0.0
 var local_energy_rate: float = 5.0
 var hp : float = 50.0
 
+func _ready() -> void:
+	SoundManager.play_placement_sound()
+
 func _process(delta: float) -> void:
 	local_energy = clamp(local_energy + local_energy_rate * delta, 0.0, 100.0)
 	local_enegy_bar.value = local_energy

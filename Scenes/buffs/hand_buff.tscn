@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cuviytn2mro2l"]
 
-[ext_resource type="Script" path="res://Scripts/base_modifier.gd" id="1_hwb0e"]
+[ext_resource type="Script" uid="uid://cnqpkijd5pm6u" path="res://Scripts/base_modifier.gd" id="1_hwb0e"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_khn44"]
 [ext_resource type="Texture2D" uid="uid://cefm1dp1en15c" path="res://Scenes/coin.png" id="3_kahhk"]
 [ext_resource type="Texture2D" uid="uid://dd4owka4dvqkv" path="res://Scenes/buffs/hand_plus.png" id="4_xvlfn"]

@@ -4,6 +4,9 @@ extends Node2D
 
 var hp: float = 500
 
+func _ready() -> void:
+	SoundManager.play_placement_sound()
+
 func _process(delta: float) -> void:
 	if hp <= 500:
 		$TextureRect.play("full")

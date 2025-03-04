@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgitdk7hsjmng"]
 
-[ext_resource type="Script" path="res://Scripts/ui/main_menu.gd" id="1_iab4p"]
+[ext_resource type="Script" uid="uid://u1r7d8vf2764" path="res://Scripts/ui/main_menu.gd" id="1_iab4p"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_74ccy"]
 
 [node name="Menu" type="Control"]
@@ -17,16 +17,13 @@ script = ExtResource("1_iab4p")
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="Play" type="Button" parent="Camera2D/CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -239.0
-offset_top = 23.0
-offset_right = 240.0
-offset_bottom = 159.0
-grow_horizontal = 2
+offset_left = 88.0
+offset_top = -48.0
+offset_right = 567.0
+offset_bottom = 88.0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_74ccy")
 theme_override_font_sizes/font_size = 72
@@ -35,16 +32,13 @@ text = "Play
 "
 
 [node name="Exit" type="Button" parent="Camera2D/CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = 254.0
-offset_right = 274.0
-offset_bottom = 390.0
-grow_horizontal = 2
+offset_left = 88.0
+offset_top = 212.0
+offset_right = 537.0
+offset_bottom = 348.0
 grow_vertical = 2
 scale = Vector2(0.781268, 0.781268)
 theme_override_fonts/font = ExtResource("2_74ccy")
@@ -55,11 +49,12 @@ text = "Exit"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -408.0
-offset_top = 89.0
-offset_right = 399.0
-offset_bottom = 369.0
+offset_left = -622.0
+offset_top = 9.0
+offset_right = 185.0
+offset_bottom = 289.0
 grow_horizontal = 2
+scale = Vector2(1.5802, 1.5802)
 theme_override_constants/line_spacing = 0
 theme_override_constants/outline_size = 46
 theme_override_fonts/font = ExtResource("2_74ccy")

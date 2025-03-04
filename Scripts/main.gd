@@ -209,7 +209,7 @@ func _on_spawn_timeout():
 
 		if current_wave == 1:
 			base_spawn_count = 1 
-			intensity *= 0.2  
+			intensity *= 0.25  
 
 		var wave_multiplier = 1.0 + (current_wave - 1) * 0.5  
 		var spawn_count = base_spawn_count * (1 + intensity * 3) * wave_multiplier

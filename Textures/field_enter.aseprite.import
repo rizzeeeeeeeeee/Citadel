@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ksc6e1khfbe2"
+path="res://.godot/imported/field_enter.aseprite-d237b6851dffebc4165399806fbead49.res"
+
+[deps]
+
+source_file="res://Textures/field_enter.aseprite"
+dest_files=["res://.godot/imported/field_enter.aseprite-d237b6851dffebc4165399806fbead49.res"]
+
+[params]
+

@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://big8m8fuemghe"]
+
+[ext_resource type="Texture2D" uid="uid://bdx6vegybq5i2" path="res://Scenes/obj/preview/burst.png" id="1_h81b5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0c4l"]
+atlas = ExtResource("1_h81b5")
+region = Rect2(0, 0, 23, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oy7rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0c4l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+scale = Vector2(4.24522, 4.24522)
+sprite_frames = SubResource("SpriteFrames_oy7rl")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/burst.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f9966f78332437e8287a5dc415707c51"

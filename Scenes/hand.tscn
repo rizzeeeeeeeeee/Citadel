@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bv1o4nqd0t1dv"]
 
-[ext_resource type="Script" path="res://Scripts/hand.gd" id="1_wkme5"]
+[ext_resource type="Script" uid="uid://idfg174ae7xr" path="res://Scripts/hand.gd" id="1_wkme5"]
 
 [node name="Hand" type="Node2D"]
 scale = Vector2(1.2, 1.2)

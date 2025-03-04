@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv0o1ya6b4gq"]
+
+[ext_resource type="Texture2D" uid="uid://bk2t1wfu7vlyf" path="res://Scenes/obj/shotgun.png" id="1_2xny6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pigwx"]
+atlas = ExtResource("1_2xny6")
+region = Rect2(0, 0, 15, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0jah"]
+atlas = ExtResource("1_2xny6")
+region = Rect2(15, 0, 15, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbw4t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pigwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0jah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pigwx")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["objects"]]
+
+[node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(4.74, 4.74)
+sprite_frames = SubResource("SpriteFrames_wbw4t")
+animation = &"shoot"
+frame = 2
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/shotgun.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "e8a20b37aeee9201343f2bf38a646d96"

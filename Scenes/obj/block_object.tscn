@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://63k178q15ss"]
+[gd_scene load_steps=9 format=3 uid="uid://63k178q15ss"]
 
-[ext_resource type="Script" path="res://Scripts/objects/block.gd" id="1_t1cpf"]
+[ext_resource type="Script" uid="uid://bqp3hen822d86" path="res://Scripts/objects/block.gd" id="1_t1cpf"]
+[ext_resource type="PackedScene" uid="uid://eqw4x8skdnmv" path="res://Scenes/obj/placement.tscn" id="3_leldd"]
 [ext_resource type="Texture2D" uid="uid://b6qx24kf4i3ux" path="res://Scenes/obj/block.png" id="3_unf0y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hevmt"]
@@ -49,6 +50,7 @@ size = Vector2(86, 90)
 script = ExtResource("1_t1cpf")
 
 [node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 position = Vector2(-2, 0)
 scale = Vector2(4.74, 4.74)
@@ -76,6 +78,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_umrt8")
+
+[node name="Node2D" parent="." instance=ExtResource("3_leldd")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

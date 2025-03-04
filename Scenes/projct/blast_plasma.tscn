@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://ud33kavdlvrf"]
 
 [ext_resource type="Texture2D" uid="uid://d4fgwgqxr3206" path="res://Scenes/projct/blast_projectile.png" id="1_fofpd"]
-[ext_resource type="Script" path="res://Scripts/proj/blast_plasma.gd" id="1_sg4xc"]
+[ext_resource type="Script" uid="uid://belbyii65x75s" path="res://Scripts/proj/blast_plasma.gd" id="1_sg4xc"]
 [ext_resource type="PackedScene" uid="uid://cwartymfmphx5" path="res://Scenes/projct/blast_explosion.tscn" id="2_myi30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md542"]
-size = Vector2(97, 95)
+size = Vector2(44, 50)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_sg4xc")

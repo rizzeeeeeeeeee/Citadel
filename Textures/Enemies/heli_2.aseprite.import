@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ffc0nknrmneh"
+path="res://.godot/imported/heli_2.aseprite-c9310848b27b70ee48ed8821e494bf57.res"
+
+[deps]
+
+source_file="res://Textures/Enemies/heli_2.aseprite"
+dest_files=["res://.godot/imported/heli_2.aseprite-c9310848b27b70ee48ed8821e494bf57.res"]
+
+[params]
+

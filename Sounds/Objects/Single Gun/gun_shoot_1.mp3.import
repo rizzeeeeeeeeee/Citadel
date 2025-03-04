@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dt33irxwicneo"
+path="res://.godot/imported/gun_shoot_1.mp3-c299f529916cfdd99a8b5a464e65870b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Objects/Single Gun/gun_shoot_1.mp3"
+dest_files=["res://.godot/imported/gun_shoot_1.mp3-c299f529916cfdd99a8b5a464e65870b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

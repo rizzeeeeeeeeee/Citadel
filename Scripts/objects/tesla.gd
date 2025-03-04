@@ -10,6 +10,7 @@ var hp: float = 200.0  # Здоровье Теслы
 var attack_timer: Timer  # Таймер для периодической атаки
 
 func _ready():
+	SoundManager.play_placement_sound()
 	# Создаем таймер для периодической атаки
 	attack_timer = Timer.new()
 	attack_timer.wait_time = attack_interval

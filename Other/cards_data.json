@@ -82,5 +82,33 @@
 		"path":  "res://Scenes/cards/block_card.tscn",
 		"value": 2,
 		"rarity": "uncommon"
+	},
+	{
+		"name": "nuke",
+		"id": 13,
+		"path":  "res://Scenes/cards/nuke_card.tscn",
+		"value": 10,
+		"rarity": "epic"
+	},
+	{
+		"name": "spike",
+		"id": 14,
+		"path":  "res://Scenes/cards/spike_card.tscn",
+		"value": 2,
+		"rarity": "uncommon"
+	},
+	{
+		"name": "burst",
+		"id": 15,
+		"path":  "res://Scenes/cards/burst_card.tscn",
+		"value": 4,
+		"rarity": "rare"
+	},
+	{
+		"name": "shotgun",
+		"id": 16,
+		"path":  "res://Scenes/cards/shotgun_card.tscn",
+		"value": 5,
+		"rarity": "uncommon"
 	}
 ]

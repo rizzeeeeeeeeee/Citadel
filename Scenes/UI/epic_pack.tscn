@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bscowx0f0mcws"]
 
-[ext_resource type="Script" path="res://Scripts/ui/cards_pack.gd" id="1_hrrbg"]
+[ext_resource type="Script" uid="uid://xuy3u0f1cofc" path="res://Scripts/ui/cards_pack.gd" id="1_hrrbg"]
 [ext_resource type="Texture2D" uid="uid://b26kyvgk365du" path="res://Scenes/UI/cards_pack_epic.png" id="2_fariw"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_dwjkq"]
 

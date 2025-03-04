@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3qaf0qvq6god"]
 
-[ext_resource type="Script" path="res://Scripts/ui/cards_pile.gd" id="1_7a23i"]
+[ext_resource type="Script" uid="uid://dt7s08ul5cjrp" path="res://Scripts/ui/cards_pile.gd" id="1_7a23i"]
 [ext_resource type="Texture2D" uid="uid://8r4u7dbohwrl" path="res://Scenes/card_back.png" id="1_r5wg7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1bi"]
@@ -163,9 +163,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6htn"]
 _data = {
-"RESET": SubResource("Animation_psro3"),
-"mouse_enter": SubResource("Animation_4wwg3"),
-"mouse_exit": SubResource("Animation_8e8qj")
+&"RESET": SubResource("Animation_psro3"),
+&"mouse_enter": SubResource("Animation_4wwg3"),
+&"mouse_exit": SubResource("Animation_8e8qj")
 }
 
 [node name="Cards" type="Node2D"]

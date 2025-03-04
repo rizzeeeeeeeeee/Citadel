@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://eqw4x8skdnmv"]
+
+[ext_resource type="Texture2D" uid="uid://diusettqsbrkb" path="res://Scenes/obj/placement.png" id="1_2r1vn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m1t1"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkf7a"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqvdf"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eks4o"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga753"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f772q"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fillq"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4gxb"]
+atlas = ExtResource("1_2r1vn")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_35wxr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m1t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkf7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqvdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eks4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga753")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f772q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fillq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4gxb")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 5)
+scale = Vector2(7.35049, 7.35049)
+sprite_frames = SubResource("SpriteFrames_35wxr")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/Obj/placement.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "08066ad63c3c70a2adffe2c5337f91ee"

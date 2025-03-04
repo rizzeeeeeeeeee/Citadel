@@ -17,6 +17,7 @@ var current_body: Node2D = null
 var is_body_alive: bool = true
 
 func _ready() -> void:
+	SoundManager.play_placement_sound()
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = 1.0 / fire_rate
 	_fire_timer.one_shot = false
@@ -40,6 +41,8 @@ func _process(delta: float) -> void:
 
 func _shoot() -> void:
 	$TextureRect.play("shoot")
+	SoundManager.play_random_gun_sound()
+	SoundManager.set_volume(0.2)
 	var bullet = bullet_scene.instantiate()
 	await get_tree().create_timer(0.1).timeout
 	if bullet and muzzle:
@@ -49,7 +52,7 @@ func _shoot() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):
 		await get_tree().create_timer(0.2).timeout
-		body.get_parent().attack(self)  # Вызываем метод атаки у врага
+		body.get_parent().attack(self) 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("enemy") or body.is_in_group("invisible_enemy"):

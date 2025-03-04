@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bafi4k3p5bpf7"]
+[gd_scene load_steps=21 format=3 uid="uid://bafi4k3p5bpf7"]
 
 [ext_resource type="Texture2D" uid="uid://b0a8tubqftuw7" path="res://Scenes/obj/railgun.png" id="1_a65ni"]
-[ext_resource type="Script" path="res://Scripts/objects/railgun.gd" id="1_s15py"]
+[ext_resource type="Script" uid="uid://b3ttbamxvwtfu" path="res://Scripts/objects/railgun.gd" id="1_s15py"]
 [ext_resource type="PackedScene" uid="uid://ce68tadvqiwrk" path="res://Scenes/projct/ray.tscn" id="2_08qkh"]
+[ext_resource type="PackedScene" uid="uid://eqw4x8skdnmv" path="res://Scenes/obj/placement.tscn" id="4_521s3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sslt3"]
 atlas = ExtResource("1_a65ni")
@@ -137,6 +138,7 @@ bullet_scene = ExtResource("2_08qkh")
 fire_rate = 0.2
 
 [node name="TextureRect" type="AnimatedSprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 position = Vector2(-2, 0)
 scale = Vector2(3.97892, 3.97892)
@@ -174,6 +176,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_umrt8")
+
+[node name="Node2D" parent="." instance=ExtResource("4_521s3")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

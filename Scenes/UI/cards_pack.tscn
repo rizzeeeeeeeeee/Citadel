@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bou0mp776gl"]
 
-[ext_resource type="Script" path="res://Scripts/ui/cards_pack.gd" id="1_27206"]
+[ext_resource type="Script" uid="uid://xuy3u0f1cofc" path="res://Scripts/ui/cards_pack.gd" id="1_27206"]
 [ext_resource type="Texture2D" uid="uid://ctsbprnb8tmud" path="res://Scenes/UI/cards_pack.png" id="1_y7ie8"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_b2bdx"]
 

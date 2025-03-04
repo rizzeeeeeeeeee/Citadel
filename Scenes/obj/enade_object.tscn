@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2v1quy4aax7o"]
 
-[ext_resource type="Script" path="res://Scripts/objects/enade.gd" id="1_nglpl"]
+[ext_resource type="Script" uid="uid://bru474i3ufiog" path="res://Scripts/objects/enade.gd" id="1_nglpl"]
 [ext_resource type="PackedScene" uid="uid://dfxtdg3glvlwb" path="res://Scenes/projct/lightning.tscn" id="2_3hb4v"]
 [ext_resource type="Texture2D" uid="uid://b88xsx34j76c0" path="res://Scenes/obj/enade.png" id="3_aftqw"]
 

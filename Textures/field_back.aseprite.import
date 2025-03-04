@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c2hlbduyjyxyq"
+path="res://.godot/imported/field_back.aseprite-dfe18d0b6276c8c1d06d14437146f63d.res"
+
+[deps]
+
+source_file="res://Textures/field_back.aseprite"
+dest_files=["res://.godot/imported/field_back.aseprite-dfe18d0b6276c8c1d06d14437146f63d.res"]
+
+[params]
+
