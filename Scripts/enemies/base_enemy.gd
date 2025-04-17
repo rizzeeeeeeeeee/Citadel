@@ -154,6 +154,8 @@ func _on_node_added(node: Node):
 	elif node.is_in_group("spike"):
 		node.inside.connect(on_spike_entered)
 		node.outside.connect(on_spike_exited)
+	elif node.is_in_group("orbital"):
+		node.deal_damage.connect(explosion_damage)
 
 func load_buff_data():
 	var file = FileAccess.open("res://Other/buff_data.json", FileAccess.READ)
@@ -254,7 +256,11 @@ func connect_signals():
 	for spike in spikes:
 		spike.inside.connect(on_spike_entered)
 		spike.outside.connect(on_spike_exited)
-
+	
+	var orbitals = get_tree().get_nodes_in_group("orbital")
+	for orbital in orbitals:
+		orbital.deal_damage.connect(explosion_damage)
+	
 func bolt_damage(victim: Node2D):
 	if victim == self:
 		take_bolt_damage(40)

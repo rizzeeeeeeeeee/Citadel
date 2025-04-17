@@ -78,5 +78,10 @@
 		"name": "shotgun",
 		"id": 16,
 		"path":  "res://Scenes/obj/shotgun_object.tscn"
+	},
+	{
+		"name": "orbital",
+		"id": 17,
+		"path":  "res://Scenes/obj/orbital_object.tscn"
 	}
 ]

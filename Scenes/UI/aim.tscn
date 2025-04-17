@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmbxdpsxfaemo"]
+
+[ext_resource type="Script" uid="uid://bw7ixb77rtc7h" path="res://Scripts/ui/aim.gd" id="1_hgqjt"]
+[ext_resource type="Texture2D" uid="uid://cenws86xyurmq" path="res://Scenes/UI/aim.png" id="1_j5y3h"]
+
+[node name="Aim" type="Node2D"]
+script = ExtResource("1_hgqjt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+texture_filter = 1
+scale = Vector2(6.36783, 6.36783)
+texture = ExtResource("1_j5y3h")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/aim.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "866002e46caa4a5df1f87751acb456d0"

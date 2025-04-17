@@ -110,5 +110,12 @@
 		"path":  "res://Scenes/cards/shotgun_card.tscn",
 		"value": 5,
 		"rarity": "uncommon"
+	},
+	{
+		"name": "orbital",
+		"id": 17,
+		"path":  "res://Scenes/cards/orbital_card.tscn",
+		"value": 5,
+		"rarity": "uncommon"
 	}
 ]
