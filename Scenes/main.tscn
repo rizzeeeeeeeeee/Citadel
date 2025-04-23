@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=43 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" uid="uid://cmc8n7k3as6pq" path="res://Scripts/main.gd" id="1_rmctx"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="5_qj1ro"]
 [ext_resource type="PackedScene" uid="uid://c3qaf0qvq6god" path="res://Scenes/UI/cards_pile.tscn" id="5_uygol"]
 [ext_resource type="Texture2D" uid="uid://bqj1aqqlbvo7y" path="res://Scenes/heart.png" id="5_vx4ei"]
+[ext_resource type="FontFile" uid="uid://d1hcfvg423pmf" path="res://Fonts/CyberpunkCraftpixPixel.ttf" id="6_ee4r6"]
 [ext_resource type="Texture2D" uid="uid://bactcefs2mhil" path="res://Scenes/energy_back.png" id="6_mmadu"]
 [ext_resource type="Script" uid="uid://c4hy3arjj32ut" path="res://Scripts/ui/pause.gd" id="6_yjq5g"]
 [ext_resource type="Script" uid="uid://bmcnofidrpnfi" path="res://Scripts/ui/no_energy.gd" id="7_4f6uy"]
@@ -244,8 +245,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.4.0
-"
+text = "v0.4.2"
 metadata/_edit_use_anchors_ = true
 
 [node name="Retake" type="Button" parent="CanvasLayer"]
@@ -260,7 +260,9 @@ offset_right = 625.0
 offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_qj1ro")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_ee4r6")
+theme_override_font_sizes/font_size = 25
 action_mode = 0
 text = "RETAKE"
 metadata/_edit_use_anchors_ = true
@@ -271,11 +273,11 @@ position = Vector2(93, 120)
 
 [node name="Label" type="Label" parent="CanvasLayer/Retake"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 1.16216
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 2.27027
 offset_left = 100.0
 offset_top = -41.0
 offset_right = 160.0
@@ -294,7 +296,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Retake/Label"]
 texture_filter = 1
-position = Vector2(86.1394, 41.1971)
+position = Vector2(88.012, 31.8341)
 scale = Vector2(1.90357, 1.90357)
 texture = ExtResource("4_xgyrk")
 metadata/_aseprite_wizard_interface_config_ = {
@@ -1914,7 +1916,7 @@ offset_top = 617.0
 offset_right = -734.0
 offset_bottom = 642.0
 theme_override_constants/outline_size = 11
-theme_override_fonts/font = ExtResource("5_qj1ro")
+theme_override_fonts/font = ExtResource("6_ee4r6")
 theme_override_font_sizes/font_size = 25
 text = "EVENT"
 
@@ -1936,7 +1938,7 @@ offset_top = 44.0
 offset_right = -657.0
 offset_bottom = 111.0
 theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("5_qj1ro")
+theme_override_fonts/font = ExtResource("6_ee4r6")
 theme_override_font_sizes/font_size = 33
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1948,6 +1950,9 @@ offset_left = 14.0
 offset_top = 72.0
 offset_right = 220.0
 offset_bottom = 99.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_ee4r6")
+theme_override_font_sizes/font_size = 22
 
 [node name="WaveDisplay" type="Control" parent="Left_Tab"]
 layout_mode = 3

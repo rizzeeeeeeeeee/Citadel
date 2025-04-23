@@ -4,118 +4,169 @@
 		"id": 1,
 		"path":  "res://Scenes/cards/single_gun_card.tscn",
 		"value": 3,
-		"rarity": "common"
+		"rarity": "common",
+		"dscr": "gun",
+		"video": "",
+		"texture_path": "res://Scenes/cards/single_gun.png"
 	},
 	{
 		"name": "generator",
 		"id": 2,
 		"path":  "res://Scenes/cards/generator_card.tscn",
 		"value": 5,
-		"rarity": "rare"
+		"rarity": "rare",
+		"dscr": "generator",
+		"video": "",
+		"texture_path": "res://Scenes/cards/generator.png"
 	},
 	{
 		"name": "gatling_gun",
 		"id": 3,
 		"path":  "res://Scenes/cards/gatling_gun_card.tscn",
 		"value": 6,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "gatling gun",
+		"video": "",
+		"texture_path": "res://Scenes/cards/gatling_gun.png"
 	},
 	{
 		"name": "grenade",
 		"id": 4,
 		"path":  "res://Scenes/cards/grenade_card.tscn",
 		"value": 2,
-		"rarity": "common"
+		"rarity": "common",
+		"dscr": "grenade",
+		"video": "",
+		"texture_path": "res://Scenes/cards/grenade.png"
 	},
 	{
 		"name": "mine",
 		"id": 5,
 		"path":  "res://Scenes/cards/mine_card.tscn",
 		"value": 3,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "mine",
+		"video": "",
+		"texture_path": "res://Scenes/cards/mine.png"
 	},
 	{
 		"name": "railgun",
 		"id": 6,
 		"path":  "res://Scenes/cards/railgun_card.tscn",
 		"value": 4,
-		"rarity": "rare"
+		"rarity": "rare",
+		"dscr": "railgun",
+		"video": "",
+		"texture_path": "res://Scenes/cards/railgun.png"
 	},
 	{
 		"name": "blast",
 		"id": 7,
 		"path":  "res://Scenes/cards/blast_card.tscn",
 		"value": 7,
-		"rarity": "epic"
+		"rarity": "epic",
+		"dscr": "blast",
+		"video": "",
+		"texture_path": "res://Scenes/cards/blast.png"
 	},
 	{
 		"name": "poison",
 		"id": 8,
 		"path":  "res://Scenes/cards/poison_card.tscn",
 		"value": 2,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "poison",
+		"video": "",
+		"texture_path": "res://Scenes/cards/poison.png"
 	},
 	{
 		"name": "tesla",
 		"id": 9,
 		"path":  "res://Scenes/cards/tesla_card.tscn",
 		"value": 5,
-		"rarity": "epic"
+		"rarity": "epic",
+		"dscr": "tesla",
+		"video": "",
+		"texture_path": "res://Scenes/cards/tesla.png"
 	},
 	{
 		"name": "enade",
 		"id": 10,
 		"path":  "res://Scenes/cards/enade_card.tscn",
 		"value": 1,
-		"rarity": "common"
+		"rarity": "common",
+		"dscr": "enade",
+		"video": "",
+		"texture_path": "res://Scenes/cards/enade.png"
 	},
 	{
 		"name": "crossbow",
 		"id": 11,
 		"path":  "res://Scenes/cards/crossbow_card.tscn",
 		"value": 4,
-		"rarity": "epic"
+		"rarity": "epic",
+		"dscr": "crossbow",
+		"video": "",
+		"texture_path": "res://Scenes/cards/crossbow.png"
 	},
 	{
 		"name": "block",
 		"id": 12,
 		"path":  "res://Scenes/cards/block_card.tscn",
 		"value": 2,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "block",
+		"video": "",
+		"texture_path": "res://Scenes/cards/block.png"
 	},
 	{
 		"name": "nuke",
 		"id": 13,
 		"path":  "res://Scenes/cards/nuke_card.tscn",
 		"value": 10,
-		"rarity": "epic"
+		"rarity": "epic",
+		"dscr": "nuke",
+		"video": "",
+		"texture_path": "res://Scenes/cards/nuke.png"
 	},
 	{
 		"name": "spike",
 		"id": 14,
 		"path":  "res://Scenes/cards/spike_card.tscn",
 		"value": 2,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "spike",
+		"video": "",
+		"texture_path": "res://Scenes/cards/spike.png"
 	},
 	{
 		"name": "burst",
 		"id": 15,
 		"path":  "res://Scenes/cards/burst_card.tscn",
 		"value": 4,
-		"rarity": "rare"
+		"rarity": "rare",
+		"dscr": "burst",
+		"video": "",
+		"texture_path": "res://Scenes/cards/burst.png"
 	},
 	{
 		"name": "shotgun",
 		"id": 16,
 		"path":  "res://Scenes/cards/shotgun_card.tscn",
 		"value": 5,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "shotgun",
+		"video": "",
+		"texture_path": "res://Scenes/cards/shotgun.png"
 	},
 	{
 		"name": "orbital",
 		"id": 17,
 		"path":  "res://Scenes/cards/orbital_card.tscn",
 		"value": 5,
-		"rarity": "uncommon"
+		"rarity": "uncommon",
+		"dscr": "orbital",
+		"video": "",
+		"texture_path": "res://Scenes/cards/orbital.png"
 	}
 ]

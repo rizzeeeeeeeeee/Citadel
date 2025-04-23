@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=3 uid="uid://wooci3hq1ryf"]
+
+[ext_resource type="Script" uid="uid://57flunr7kpkf" path="res://Scripts/ui/info_tab.gd" id="1_eruap"]
+[ext_resource type="Texture2D" uid="uid://bcgjwc85pdkxg" path="res://Scenes/energy.png" id="1_fkqw7"]
+[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_88hym"]
+
+[node name="InfoTab" type="Node2D"]
+script = ExtResource("1_eruap")
+
+[node name="Backplate" type="Node2D" parent="."]
+position = Vector2(0, 154)
+scale = Vector2(6.56, 6.56)
+
+[node name="Card" type="ColorRect" parent="Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -77.0
+offset_right = -22.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost" type="ColorRect" parent="Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = 12.0
+offset_right = -22.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Energy" type="Sprite2D" parent="Backplate/Cost"]
+texture_filter = 1
+position = Vector2(61.9024, 7.51219)
+scale = Vector2(0.249199, 0.254479)
+texture = ExtResource("1_fkqw7")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/energy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "40c6687cdb047140f6db12a782aa29f1"
+
+[node name="Video" type="ColorRect" parent="Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -77.0
+offset_right = 59.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.44238, 1.63556)
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="ColorRect" parent="Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.9878
+offset_top = -6.09756
+offset_right = 93.0122
+offset_bottom = 52.9024
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.555208)
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Info" type="Node2D" parent="."]
+
+[node name="Rarity" type="Label" parent="Info"]
+offset_left = -594.0
+offset_top = 251.0
+offset_right = -339.0
+offset_bottom = 318.0
+theme_override_constants/outline_size = 19
+theme_override_fonts/font = ExtResource("2_88hym")
+theme_override_font_sizes/font_size = 50
+text = "common"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Number" type="Label" parent="Info"]
+offset_left = -290.0
+offset_top = 249.0
+offset_right = -241.0
+offset_bottom = 317.0
+theme_override_constants/outline_size = 22
+theme_override_fonts/font = ExtResource("2_88hym")
+theme_override_font_sizes/font_size = 67
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="Label" parent="Info"]
+offset_left = -95.0
+offset_top = 128.0
+offset_right = 571.0
+offset_bottom = 302.0
+theme_override_constants/outline_size = 19
+theme_override_fonts/font = ExtResource("2_88hym")
+theme_override_font_sizes/font_size = 38
+text = "gggg"
+metadata/_edit_use_anchors_ = true

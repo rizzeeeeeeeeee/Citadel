@@ -1,15 +1,17 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqvrv8o4gqh5g"]
 
 [ext_resource type="Script" uid="uid://dxhht1r650ojc" path="res://Scripts/enemies/base_enemy.gd" id="1_g3myx"]
-[ext_resource type="Texture2D" uid="uid://2prnd3b7fgju" path="res://Scenes/enemies/robot.png" id="2_miaol"]
 [ext_resource type="AudioStream" uid="uid://c7v5tpgc78hwo" path="res://Sounds/Robot Damage/hit_1.mp3" id="3_kmm44"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bepip"]
+load_path = "res://.godot/imported/robot.png-39be424ea2dd3af7b4a649ec335b37a1.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6hdm5"]
-atlas = ExtResource("2_miaol")
+atlas = SubResource("CompressedTexture2D_bepip")
 region = Rect2(0, 0, 40, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_frhdl"]
-atlas = ExtResource("2_miaol")
+atlas = SubResource("CompressedTexture2D_bepip")
 region = Rect2(40, 0, 40, 25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_konvh"]
@@ -20,10 +22,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_frhdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hdm5")
 }],
-"loop": true,
-"name": &"default",
-"speed": 10.0
+"loop": false,
+"name": &"attack",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
@@ -36,14 +41,18 @@ enemy_type = "basic"
 coin_spawn_chance = 8.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+position = Vector2(-1, 0)
 collision_layer = 2147485694
 collision_mask = 2147485694
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-position = Vector2(2, 0)
+position = Vector2(1.19209e-07, 0)
 scale = Vector2(2.67972, 2.67972)
 sprite_frames = SubResource("SpriteFrames_konvh")
+animation = &"attack"
+frame = 2
+frame_progress = 1.0
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -57,13 +66,14 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Textures/Enemies/robot.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "b1e2877567df6b89f2cd1ed6a4bf1e9d"
+metadata/_aseprite_wizard_source_file_hash_ = "ba58f58a86af4e08d201b5344cff7263"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, -2)
+position = Vector2(0, -1)
 scale = Vector2(49.5, 49.5)
 shape = SubResource("RectangleShape2D_yhtg3")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-1, -1)
 stream = ExtResource("3_kmm44")
 volume_db = -17.0

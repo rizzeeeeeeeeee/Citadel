@@ -38,5 +38,15 @@
         "enemy_id": "",
         "enegry_back": "1",
         "path": "res://Scenes/buffs/cashback_buff.tscn"
+    },
+    {
+        "name": "hand_upgrade2",
+        "id" : "5",
+        "value": "5",
+        "energy_multiplier": "1",
+        "hand_capacity": "2",
+        "enemy_id": "",
+        "enegry_back": "0",
+        "path": "res://Scenes/buffs/hand_buff2.tscn"
     }
 ]

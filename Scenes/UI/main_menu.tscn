@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgitdk7hsjmng"]
+[gd_scene load_steps=9 format=3 uid="uid://cgitdk7hsjmng"]
 
 [ext_resource type="Script" uid="uid://u1r7d8vf2764" path="res://Scripts/ui/main_menu.gd" id="1_iab4p"]
+[ext_resource type="FontFile" uid="uid://d1hcfvg423pmf" path="res://Fonts/CyberpunkCraftpixPixel.ttf" id="2_4pqbp"]
 [ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_74ccy"]
+[ext_resource type="Script" uid="uid://lfd2k64hr5au" path="res://Scripts/ui/main_menu_info.gd" id="3_o14dv"]
+[ext_resource type="Texture2D" uid="uid://bcgjwc85pdkxg" path="res://Scenes/energy.png" id="4_u7lva"]
+[ext_resource type="Texture2D" uid="uid://bm2l1j6bl0sa8" path="res://Textures/UI/right.png" id="5_k33u3"]
+[ext_resource type="Texture2D" uid="uid://dwprcndc1hwrx" path="res://Scenes/cards/poison.png" id="6_4pqbp"]
+[ext_resource type="Texture2D" uid="uid://c8yg48b5y5a0t" path="res://Textures/UI/left.png" id="6_lrjdf"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -14,62 +20,339 @@ script = ExtResource("1_iab4p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+[node name="Menu" type="CanvasLayer" parent="Camera2D"]
 
-[node name="Play" type="Button" parent="Camera2D/CanvasLayer"]
-anchors_preset = 4
+[node name="Play" type="Button" parent="Camera2D/Menu"]
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 88.0
-offset_top = -48.0
-offset_right = 567.0
-offset_bottom = 88.0
+offset_left = -151.0
+offset_top = -166.0
+offset_right = 152.0
+offset_bottom = -82.0
+grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_74ccy")
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_4pqbp")
 theme_override_font_sizes/font_size = 72
 toggle_mode = true
 text = "Play
 "
 
-[node name="Exit" type="Button" parent="Camera2D/CanvasLayer"]
-anchors_preset = 4
+[node name="Info" type="Button" parent="Camera2D/Menu"]
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 88.0
-offset_top = 212.0
-offset_right = 537.0
-offset_bottom = 348.0
+offset_left = -267.0
+offset_top = -20.0
+offset_right = 336.0
+offset_bottom = 81.0
+grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.781268, 0.781268)
-theme_override_fonts/font = ExtResource("2_74ccy")
+scale = Vector2(0.890066, 0.890066)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 80
+toggle_mode = true
+text = "Collection"
+
+[node name="Exit" type="Button" parent="Camera2D/Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -100.0
+offset_right = 119.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.905885, 0.905885)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_4pqbp")
 theme_override_font_sizes/font_size = 56
 text = "Exit"
 
-[node name="Label" type="Label" parent="Camera2D/CanvasLayer"]
+[node name="Label" type="Label" parent="Camera2D/Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -622.0
-offset_top = 9.0
-offset_right = 185.0
-offset_bottom = 289.0
+offset_left = -343.0
+offset_top = 19.0
+offset_right = 111.0
+offset_bottom = 124.0
 grow_horizontal = 2
 scale = Vector2(1.5802, 1.5802)
 theme_override_constants/line_spacing = 0
-theme_override_constants/outline_size = 46
-theme_override_fonts/font = ExtResource("2_74ccy")
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = ExtResource("2_4pqbp")
 theme_override_font_sizes/font_size = 100
 text = "CITADEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Info" type="CanvasLayer" parent="Camera2D"]
+visible = false
+
+[node name="Control" type="Control" parent="Camera2D/Info"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainInfo" type="Node2D" parent="Camera2D/Info/Control"]
+position = Vector2(-816, 57)
+script = ExtResource("3_o14dv")
+
+[node name="Control" type="Control" parent="Camera2D/Info/Control/MainInfo"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1313.0
+offset_bottom = 467.0
+
+[node name="InfoTab" type="Node2D" parent="Camera2D/Info/Control/MainInfo"]
+position = Vector2(1125, -57)
+
+[node name="Backplate" type="Node2D" parent="Camera2D/Info/Control/MainInfo/InfoTab"]
+position = Vector2(0, 154)
+scale = Vector2(6.56, 6.56)
+
+[node name="Card" type="ColorRect" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -77.0
+offset_right = -22.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost" type="ColorRect" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = 12.0
+offset_right = -22.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Energy" type="Sprite2D" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate/Cost"]
+texture_filter = 1
+position = Vector2(66.1707, 7.51219)
+scale = Vector2(0.249199, 0.254479)
+texture = ExtResource("4_u7lva")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/UI/energy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "40c6687cdb047140f6db12a782aa29f1"
+
+[node name="Video" type="ColorRect" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -77.0
+offset_right = 59.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.44238, 1.63556)
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="ColorRect" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.9878
+offset_top = -6.09756
+offset_right = 93.0122
+offset_bottom = 52.9024
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.555208)
+color = Color(0, 0, 0, 0.352941)
+metadata/_edit_use_anchors_ = true
+
+[node name="Type" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate"]
+offset_left = 16.9207
+offset_top = -91.0061
+offset_right = 324.921
+offset_bottom = -2.0061
+scale = Vector2(0.146341, 0.146341)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 84
+text = "CARDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Sprite2D" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate/Type"]
+position = Vector2(504.167, 47.9167)
+scale = Vector2(1.82292, 1.82292)
+texture = ExtResource("5_k33u3")
+
+[node name="Label" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate/Type/Right"]
+offset_left = -37.7143
+offset_top = -12.0
+offset_right = 2.28571
+offset_bottom = 14.0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 24
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Left" type="Sprite2D" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate/Type"]
+position = Vector2(-222.917, 46.875)
+scale = Vector2(1.87025, 1.87025)
+texture = ExtResource("6_lrjdf")
+
+[node name="Label" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Backplate/Type/Left"]
+offset_left = 2.78479
+offset_top = -11.6963
+offset_right = 42.7848
+offset_bottom = 14.3037
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 24
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Node2D" parent="Camera2D/Info/Control/MainInfo/InfoTab"]
+
+[node name="Rarity" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Info"]
+offset_left = -588.0
+offset_top = 252.0
+offset_right = -297.0
+offset_bottom = 319.0
+theme_override_constants/outline_size = 19
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 50
+text = "uncommon"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Number" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Info"]
+offset_left = -300.0
+offset_top = 249.0
+offset_right = -203.0
+offset_bottom = 317.0
+theme_override_constants/outline_size = 22
+theme_override_fonts/font = ExtResource("2_74ccy")
+theme_override_font_sizes/font_size = 67
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="Label" parent="Camera2D/Info/Control/MainInfo/InfoTab/Info"]
+offset_left = -95.0
+offset_top = 128.0
+offset_right = 571.0
+offset_bottom = 302.0
+theme_override_constants/outline_size = 19
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 38
+text = "gggg"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/Info/Control/MainInfo/InfoTab/Info"]
+texture_filter = 1
+offset_left = -550.0
+offset_top = -314.0
+offset_right = -450.0
+offset_bottom = -171.0
+scale = Vector2(3.44, 3.44)
+texture = ExtResource("6_4pqbp")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Textures/Cards/poison.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "854f342a220db21dc40f0819ae196b0d"
+metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Button" parent="Camera2D/Info"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 731.0
+offset_top = 442.0
+offset_right = 969.0
+offset_bottom = 514.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.781268, 0.781268)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_4pqbp")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -1674.0
-offset_top = -559.0
-offset_right = 1647.0
-offset_bottom = 577.0
+offset_left = -1652.0
+offset_top = -548.0
+offset_right = 1669.0
+offset_bottom = 588.0
 color = Color(0.144063, 0.144063, 0.144063, 1)
 
-[connection signal="pressed" from="Camera2D/CanvasLayer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Camera2D/Menu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Camera2D/Menu/Info" to="." method="_on_info_pressed"]
+[connection signal="pressed" from="Camera2D/Menu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Camera2D/Info/Back" to="." method="_on_back_pressed"]

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bxbyc1yovm61t" path="res://Scripts/ui/shop.gd" id="1_45wwk"]
 [ext_resource type="PackedScene" uid="uid://bou0mp776gl" path="res://Scenes/UI/cards_pack.tscn" id="1_dr2c0"]
 [ext_resource type="Texture2D" uid="uid://bqgyvg4hfaq43" path="res://Scenes/UI/shop_backplate.png" id="3_4tvca"]
+[ext_resource type="FontFile" uid="uid://d1hcfvg423pmf" path="res://Fonts/CyberpunkCraftpixPixel.ttf" id="3_4vyng"]
 [ext_resource type="PackedScene" uid="uid://cvhum0m2lnl5m" path="res://Scenes/buffs/modifier_shop.tscn" id="3_gcw80"]
-[ext_resource type="FontFile" uid="uid://c4vcsi1ny25xd" path="res://Fonts/MegamaxJonathanToo-YqOq2.ttf" id="4_kqftt"]
 [ext_resource type="PackedScene" uid="uid://ccht0ggrh62q3" path="res://Scenes/packs/packs_shop.tscn" id="5_22n8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o80ni"]
@@ -22,23 +22,23 @@ visible = false
 
 [node name="Mods" type="Label" parent="MainShop"]
 z_index = 2
-offset_left = -571.0
+offset_left = -549.0
 offset_top = -98.0
-offset_right = -401.0
-offset_bottom = -71.0
+offset_right = -402.0
+offset_bottom = -70.0
 theme_override_constants/outline_size = 9
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 26
 text = "MODIFIERS"
 
 [node name="Packs" type="Label" parent="MainShop"]
 z_index = 2
-offset_left = -71.0
+offset_left = -74.0
 offset_top = -191.0
-offset_right = 82.0
-offset_bottom = -148.0
+offset_right = 79.0
+offset_bottom = -146.0
 theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 42
 text = "PACKS"
 
@@ -56,7 +56,8 @@ offset_left = 327.0
 offset_top = 249.0
 offset_right = 581.0
 offset_bottom = 309.0
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 31
 text = "NEXT WAVE"
 
@@ -66,13 +67,14 @@ offset_left = 327.0
 offset_top = 177.0
 offset_right = 581.0
 offset_bottom = 237.0
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 31
 text = "REFRESH"
 
 [node name="Sprite2D" type="Sprite2D" parent="MainShop"]
 texture_filter = 1
-position = Vector2(3, -8.50002)
+position = Vector2(-7, -8)
 scale = Vector2(13.1531, 12.807)
 texture = ExtResource("3_4tvca")
 metadata/_aseprite_wizard_interface_config_ = {
@@ -93,12 +95,12 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "2628336e0ff0d7a4be0da6d432190df5"
 
 [node name="Shop" type="Label" parent="MainShop"]
-offset_left = -145.0
+offset_left = -139.0
 offset_top = -358.0
-offset_right = 146.0
-offset_bottom = -257.0
+offset_right = 152.0
+offset_bottom = -253.0
 theme_override_constants/outline_size = 25
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 100
 text = "SHOP"
 
@@ -110,7 +112,7 @@ offset_bottom = 326.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.372549)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.0588235)
 theme_override_constants/outline_size = 21
-theme_override_fonts/font = ExtResource("4_kqftt")
+theme_override_fonts/font = ExtResource("3_4vyng")
 theme_override_font_sizes/font_size = 100
 text = "DRAG TO BUY"
 

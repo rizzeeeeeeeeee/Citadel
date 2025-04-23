@@ -17,7 +17,7 @@ func create_countdown_label():
 	countdown_label = Label.new()
 	
 	# Настройка шрифта
-	var font = load("res://Fonts/MegamaxJonathanToo-YqOq2.ttf")  # Укажите путь к шрифту
+	var font = load("res://Fonts/CyberpunkCraftpixPixel.ttf")  # Укажите путь к шрифту
 	if font:
 		countdown_label.add_theme_font_override("font", font)
 		countdown_label.add_theme_font_size_override("font_size", 200)

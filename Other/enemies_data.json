@@ -1,7 +1,7 @@
 {
 	"wave_settings": {
 		"base_spawn_count": 1,
-		"wave_duration": 160,
+		"wave_duration": 5,
 		"rest_time": 6
 	},
 	"enemies": {

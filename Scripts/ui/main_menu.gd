@@ -6,6 +6,13 @@ func _ready() -> void:
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
+func _on_info_pressed() -> void:
+	$Camera2D/Menu.hide()
+	$Camera2D/Info.show()
+
+func _on_back_pressed() -> void:
+	$Camera2D/Menu.show()
+	$Camera2D/Info.hide()
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
