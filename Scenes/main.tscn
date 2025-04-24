@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://djr5ldwqi06s2"]
+[gd_scene load_steps=61 format=3 uid="uid://djr5ldwqi06s2"]
 
 [ext_resource type="PackedScene" uid="uid://bv1o4nqd0t1dv" path="res://Scenes/hand.tscn" id="1_8gmms"]
 [ext_resource type="Script" uid="uid://cmc8n7k3as6pq" path="res://Scripts/main.gd" id="1_rmctx"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://dy837l8b1j2td" path="res://Scenes/field_back.png" id="14_6g6dd"]
 [ext_resource type="PackedScene" uid="uid://b3qijtii1jyvu" path="res://Scenes/UI/shop.tscn" id="16_p6w3f"]
 [ext_resource type="Texture2D" uid="uid://cefm1dp1en15c" path="res://Scenes/coin.png" id="21_2lu01"]
+[ext_resource type="FontFile" uid="uid://dw33loi8vb0wo" path="res://Fonts/Clock.ttf" id="21_gt3je"]
+[ext_resource type="Texture2D" uid="uid://c5aeyn2cxo226" path="res://Scenes/day_night.png" id="24_3pmx8"]
 
 [sub_resource type="Curve" id="Curve_taepo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.228814, 0.131868), -0.887218, -0.887218, 0, 0, Vector2(0.59322, 0.362637), 3.89011, 3.89011, 0, 0, Vector2(0.779661, 0.637363), -3.89011, -3.89011, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -134,6 +136,151 @@ func _process(delta: float) -> void:
 	pass
 "
 
+[sub_resource type="Gradient" id="Gradient_3pmx8"]
+colors = PackedColorArray(0, 0, 0, 1, 0.813257, 0.813258, 0.813258, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u50mg"]
+gradient = SubResource("Gradient_3pmx8")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.949772, 0.890411)
+
+[sub_resource type="Gradient" id="Gradient_gt3je"]
+colors = PackedColorArray(0.66, 0.1188, 0.1188, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3pmx8"]
+gradient = SubResource("Gradient_gt3je")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.497717, 0.515982)
+fill_to = Vector2(0.86758, 0.840183)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vcvc"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(100, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k868"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueoa1"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w6v2"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgmd"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u50mg"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pmx8"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpc6h"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kltya"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e08e2"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neg2b"]
+atlas = ExtResource("24_3pmx8")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7k868"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vcvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k868")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ueoa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1w6v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u50mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vcvc")
+}],
+"loop": false,
+"name": &"day",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vcvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pmx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpc6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kltya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e08e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neg2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vcvc")
+}],
+"loop": false,
+"name": &"night",
+"speed": 5.0
+}]
+
 [node name="main" type="Node2D" node_paths=PackedStringArray("wave_display") groups=["main"]]
 script = ExtResource("1_rmctx")
 spawnpoints = Array[NodePath]([NodePath("SpawnPoints/Spawn1"), NodePath("SpawnPoints/Spawn2"), NodePath("SpawnPoints/Spawn3"), NodePath("SpawnPoints/Spawn4"), NodePath("SpawnPoints/Spawn5"), NodePath("SpawnPoints/Spawn6"), NodePath("SpawnPoints/Spawn7"), NodePath("SpawnPoints/Spawn8"), NodePath("SpawnPoints/Spawn9"), NodePath("SpawnPoints/Spawn10")])
@@ -245,7 +392,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "v0.4.2"
+text = "v0.4.3"
 metadata/_edit_use_anchors_ = true
 
 [node name="Retake" type="Button" parent="CanvasLayer"]
@@ -493,7 +640,8 @@ script = ExtResource("7_4f6uy")
 [node name="Countdown" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 24.0
+offset_right = 64.0
 offset_bottom = 40.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -1694,8 +1842,8 @@ texture = SubResource("CanvasTexture_253w4")
 [node name="FieldBack" type="Sprite2D" parent="TestFeld"]
 z_index = -20
 texture_filter = 1
-position = Vector2(-1.58284, 3.44828)
-scale = Vector2(16.4719, 6.36074)
+position = Vector2(-0.118531, -57.8249)
+scale = Vector2(6.40278, 7.80902)
 texture = ExtResource("14_6g6dd")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
@@ -1715,6 +1863,7 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "afa0a1ae781d2eaeab1c44b1d597eb0c"
 
 [node name="SpawnPoints" type="Node2D" parent="."]
+position = Vector2(0, -89)
 
 [node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(-552, -22)
@@ -1932,11 +2081,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Clock" type="Label" parent="Left_Tab"]
+offset_left = -889.0
+offset_top = 127.0
+offset_right = -689.0
+offset_bottom = 185.0
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("21_gt3je")
+theme_override_font_sizes/font_size = 50
+text = "12:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Wave" type="Label" parent="Left_Tab"]
-offset_left = -896.0
-offset_top = 44.0
-offset_right = -657.0
-offset_bottom = 111.0
+offset_left = -902.0
+offset_top = 54.0
+offset_right = -663.0
+offset_bottom = 121.0
 theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("6_ee4r6")
 theme_override_font_sizes/font_size = 33
@@ -1945,22 +2106,30 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="WaveBar" type="ProgressBar" parent="Left_Tab/Wave"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 72.0
-offset_right = 220.0
-offset_bottom = 99.0
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0125523
+anchor_top = 2.20896
+anchor_right = -0.0125523
+anchor_bottom = 2.31343
+offset_left = 21.0
+offset_top = 10.0
+offset_right = 227.0
+offset_bottom = 37.0
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("6_ee4r6")
 theme_override_font_sizes/font_size = 22
+metadata/_edit_use_anchors_ = true
 
 [node name="WaveDisplay" type="Control" parent="Left_Tab"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -873.0
-offset_top = 166.0
-offset_right = -681.0
-offset_bottom = 295.0
+offset_left = -866.0
+offset_top = 197.0
+offset_right = -674.0
+offset_bottom = 326.0
+scale = Vector2(0.888484, 0.854683)
 script = ExtResource("12_u45cj")
 metadata/_edit_use_anchors_ = true
 
@@ -1973,6 +2142,60 @@ script = SubResource("GDScript_a5uus")
 [node name="Shop" parent="." instance=ExtResource("16_p6w3f")]
 visible = false
 position = Vector2(-3, 395)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Moon" type="PointLight2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(900, -570)
+scale = Vector2(4.87214, 8.9128)
+energy = 0.76
+blend_mode = 1
+shadow_color = Color(0, 0, 0, 0.556863)
+shadow_filter = 1
+shadow_filter_smooth = 2.6
+texture = SubResource("GradientTexture2D_u50mg")
+height = 1024.0
+
+[node name="Sun" type="PointLight2D" parent="."]
+process_mode = 3
+position = Vector2(436, -254)
+scale = Vector2(2.20729, 2.98543)
+energy = 1.07
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_3pmx8")
+height = 1024.0
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+position = Vector2(0, -263)
+energy = 0.58
+blend_mode = 1
+
+[node name="DayNight" type="AnimatedSprite2D" parent="."]
+process_mode = 3
+texture_filter = 1
+position = Vector2(7, 205)
+scale = Vector2(3.43097, 3.43097)
+sprite_frames = SubResource("SpriteFrames_7k868")
+animation = &"night"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://Textures/UI/day_night.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "3771487d8a98ba8273e794393f3dc04a"
 
 [connection signal="value_changed" from="CanvasLayer/ProgressBar" to="Hand" method="_on_progress_bar_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Retake" to="." method="_on_retake_pressed"]

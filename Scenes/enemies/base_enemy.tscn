@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqvrv8o4gqh5g"]
+[gd_scene load_steps=9 format=3 uid="uid://bqvrv8o4gqh5g"]
 
 [ext_resource type="Script" uid="uid://dxhht1r650ojc" path="res://Scripts/enemies/base_enemy.gd" id="1_g3myx"]
 [ext_resource type="AudioStream" uid="uid://c7v5tpgc78hwo" path="res://Sounds/Robot Damage/hit_1.mp3" id="3_kmm44"]
@@ -33,6 +33,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhtg3"]
 size = Vector2(1.25253, 1.21212)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bepip"]
+polygon = PackedVector2Array(-40, -23, -12, -33, 11, -33, 38, -27, 51, -10, 51, 28, 41, 28, 32, 23, 11, 28, -8, 28, -18, 23, -31, 23, -37, 28, -51, 28, -51, -7)
 
 [node name="BaseEnemy" type="Node2D" groups=["enemy"]]
 position = Vector2(1, 0)
@@ -72,6 +75,10 @@ metadata/_aseprite_wizard_source_file_hash_ = "ba58f58a86af4e08d201b5344cff7263"
 position = Vector2(0, -1)
 scale = Vector2(49.5, 49.5)
 shape = SubResource("RectangleShape2D_yhtg3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="CharacterBody2D"]
+position = Vector2(1, 0)
+occluder = SubResource("OccluderPolygon2D_bepip")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-1, -1)

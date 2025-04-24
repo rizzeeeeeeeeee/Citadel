@@ -12,6 +12,7 @@ size = Vector2(880, 154)
 
 [node name="Shop" type="Node2D"]
 process_mode = 3
+light_mask = 2
 script = ExtResource("1_45wwk")
 
 [node name="Card Pack" parent="." instance=ExtResource("1_dr2c0")]

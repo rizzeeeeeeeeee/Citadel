@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cxuyqvqqba8w0"
+path="res://.godot/imported/day_night.aseprite-813cd91060dfabbe0e7da69d311a414b.res"
+
+[deps]
+
+source_file="res://Textures/UI/day_night.aseprite"
+dest_files=["res://.godot/imported/day_night.aseprite-813cd91060dfabbe0e7da69d311a414b.res"]
+
+[params]
+

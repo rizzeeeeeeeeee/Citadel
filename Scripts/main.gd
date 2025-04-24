@@ -24,6 +24,9 @@ extends Node2D
 @onready var countdown = $CanvasLayer/Countdown
 @onready var coin_count = $Left_Tab/Coin_Label
 @onready var mod_zone = $CanvasLayer/ModZone
+@onready var time_label = $Left_Tab/Clock
+@onready var sun = $Sun
+@onready var moon = $Moon
 
 var enemies_data: Dictionary
 var banned_enemies: Array = []
@@ -39,7 +42,14 @@ var active_events: Dictionary = {}
 var dead_enemies: Array = []
 var active_enemies: int = 0
 var connected_coins = []
+var day_night_transition_duration: float = 6.0  # Длительность перехода день-ночь в секундах
+var day_night_tween: Tween  # Будем создавать твин динамически
+var is_day_time: bool = true  # Флаг для определения дня/ночи
+var total_game_time: float = 0.0  # Общее игровое время в секундах
+var next_day_time: bool = true
+
 enum EventType { CENTRAL_LANES, SINGLE_TYPE, RESURRECT }
+
 const EVENT_PROBABILITY = 0.6
 const RESURRECT_TIME_WINDOW = 10.0
 const EVENT_DURATIONS = {
@@ -62,6 +72,16 @@ func _ready() -> void:
 	energy_bar.min_value = 0.0
 	energy_bar.value = energy
 	hand.card_dropped.connect(update_bar)
+	 # Инициализация солнца и луны
+	sun.visible = true
+	moon.visible = false
+	sun.modulate.a = 1.0
+	moon.modulate.a = 0.0
+	
+	# Создаем твин для анимации дня и ночи
+	day_night_tween = create_tween()
+	day_night_tween.set_parallel(true)  # Параллельные анимации
+	
 	await get_tree().create_timer(3.0).timeout
 	start_next_wave() 
 
@@ -101,6 +121,14 @@ func start_next_wave():
 	dead_enemies.clear()
 	available_events = EventType.values().duplicate()
 
+	var new_day_time = current_wave % 2 != 0
+	
+	is_day_time = new_day_time
+	
+	# Устанавливаем длительность волны в зависимости от времени суток
+	var wave_duration = wave_settings.wave_day_duration if is_day_time else wave_settings.wave_night_duration
+	wave_timer.wait_time = wave_duration
+	
 	var curve_index = (current_wave - 1) % wave_curves.size()
 	if current_wave == 1:  
 		curve_index = 2  
@@ -110,13 +138,65 @@ func start_next_wave():
 	if wave_display:
 		wave_display.setup(wave_curves[curve_index])
 	print("Начало волны ", current_wave)
-	wave_label.text = "Wave " + str(current_wave)
-	wave_bar.max_value = wave_settings.wave_duration
+	wave_label.text = ("Day " if is_day_time else "Night ") + str((current_wave + 1) / 2)
+	wave_bar.max_value = wave_duration
 	wave_bar.value = 0
-	wave_timer.start(wave_settings.wave_duration)
+	wave_timer.start(wave_duration)
 	start_next_event_timer()
 	update_spawn_weights(0.0)
 	_on_spawn_timeout()
+
+func animate_day_night_transition(to_day: bool):
+	# Удаляем старый твин, если он есть
+	if day_night_tween:
+		day_night_tween.kill()
+	
+	# Создаем новый твин
+	day_night_tween = create_tween()
+	day_night_tween.set_parallel(true)
+	
+	if to_day:
+		# Переход от ночи к дню
+		sun.visible = true
+		day_night_tween.tween_property(sun, "modulate:a", 1.0, day_night_transition_duration)
+		day_night_tween.tween_property(moon, "modulate:a", 0.0, day_night_transition_duration)
+	else:
+		# Переход от дня к ночи
+		moon.visible = true
+		day_night_tween.tween_property(sun, "modulate:a", 0.0, day_night_transition_duration)
+		day_night_tween.tween_property(moon, "modulate:a", 1.0, day_night_transition_duration)
+	
+	# После завершения анимации скрываем неактивный объект
+	day_night_tween.tween_callback(func(): 
+		if to_day: 
+			moon.visible = false
+		else: 
+			sun.visible = false
+	).set_delay(day_night_transition_duration)
+
+func update_time_label():
+	# Общее игровое время в секундах
+	total_game_time += get_process_delta_time()
+	
+	# Рассчитываем текущий час (4:00 - 12:00 для дня, 6:00 - 12:00 для ночи)
+	var current_hour: float
+	var wave_progress = 1.0 - (wave_timer.time_left / wave_timer.wait_time)
+	
+	if is_day_time:
+		# День: 8 часов (с 4:00 до 12:00)
+		current_hour = 4.0 + wave_progress * 8.0
+	else:
+		# Ночь: 6 часов (с 6:00 до 2:00)
+		current_hour = 6.0 + wave_progress * 8.0
+	
+	# Преобразуем в 12-часовой формат
+	var hour_12 = int(current_hour) % 12
+	if hour_12 == 0:
+		hour_12 = 12
+	
+	var minutes = int((current_hour - floor(current_hour)) * 60)
+	
+	time_label.text = "%02d:%02d" % [hour_12, minutes]
 
 func start_next_event_timer():
 	if current_wave <= 2:  
@@ -187,7 +267,7 @@ func _on_event_timeout(event_type: EventType):
 func update_spawn_interval():
 	var curve_index = (current_wave - 1) % wave_curves.size()
 	var current_curve = wave_curves[curve_index]
-	var wave_progress = 1.0 - (wave_timer.time_left / wave_settings.wave_duration)
+	var wave_progress = 1.0 - (wave_timer.time_left / wave_timer.wait_time)
 	var intensity = current_curve.sample(wave_progress)
 	var min_interval = 0.5
 	var max_interval = 10.0
@@ -203,7 +283,7 @@ func _on_spawn_timeout():
 		spawn_enemy(enemy_scenes["basic"], "basic")
 		first_spawn = false
 	else:
-		var wave_progress = 1.0 - (wave_timer.time_left / wave_settings.wave_duration)
+		var wave_progress = 1.0 - (wave_timer.time_left / wave_timer.wait_time)
 		var intensity = wave_curves[(current_wave - 1) % wave_curves.size()].sample(wave_progress)
 		var base_spawn_count = wave_settings.base_spawn_count
 
@@ -256,7 +336,7 @@ func get_weighted_random_enemy_id() -> String:
 	
 	for enemy_id in spawn_weights:
 		var enemy_data = enemies_data[enemy_id]
-		if current_wave >= enemy_data.first_wave and not banned_enemies.has(enemy_id):  # Исключаем запрещенных врагов
+		if current_wave >= enemy_data.first_wave and not banned_enemies.has(enemy_id):
 			valid_enemies[enemy_id] = spawn_weights[enemy_id]
 			total_weight += spawn_weights[enemy_id]
 	
@@ -342,6 +422,7 @@ func _wait_for_all_enemies_defeated():
 		await get_tree().create_timer(0.5).timeout
 
 func _process(delta: float) -> void:
+	update_time_label()  # Обновляем время каждый кадр
 	coin_update()
 	mod_update()
 	if health <= 0:
@@ -354,8 +435,8 @@ func _process(delta: float) -> void:
 	energy_bar.value = energy
 	energy_label.text = str(int(energy))
 	if not is_resting:
-		var wave_progress = 1.0 - (wave_timer.time_left / wave_settings.wave_duration)
-		wave_bar.value = wave_settings.wave_duration - wave_timer.time_left
+		var wave_progress = 1.0 - (wave_timer.time_left / wave_timer.wait_time)
+		wave_bar.value = wave_timer.wait_time - wave_timer.time_left
 		if wave_display:
 			wave_display.update_progress(wave_progress)
 
@@ -363,6 +444,15 @@ func toggle_pause():
 	var tree = get_tree()
 	if tree:
 		tree.paused = not tree.paused
+		 # Определяем время суток для следующей волны
+		next_day_time = (current_wave + 1) % 2 != 0
+		if is_day_time:
+			$DayNight.play("night")
+		else:
+			$DayNight.play("day")
+		# Запускаем анимацию перехода, если время суток изменится
+		if next_day_time != is_day_time:
+			animate_day_night_transition(next_day_time)
 		await get_tree().create_timer(wave_settings.rest_time).timeout
 		start_next_wave()
 
